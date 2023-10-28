@@ -1,4 +1,4 @@
-package interface_adapter;
+package src.interface_adapter;
 
 public class UserListViewModel {
 }

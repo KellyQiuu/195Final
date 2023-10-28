@@ -1,4 +1,4 @@
-package view;
+package src.view;
 
 import interface_adapter.UserListViewModel;
 

@@ -1,4 +1,4 @@
-package use_case;
+package src.use_case;
 
 import entity.User;
 

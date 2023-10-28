@@ -1,4 +1,4 @@
-package app;
+package src.app;
 
 import data_access.FileUserDataAccessObject;
 import entity.User;

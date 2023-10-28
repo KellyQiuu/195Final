@@ -1,4 +1,4 @@
-package use_case;
+package src.use_case;
 
 import data_access.FileUserDataAccessObject;
 import entity.User;
