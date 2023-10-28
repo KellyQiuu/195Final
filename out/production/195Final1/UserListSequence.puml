@@ -1,0 +1,13 @@
+Sequence Diagram: Fetch User List
+
+1. UserListView -> UserListController: requestUserList()
+2. UserListController -> UserListInteractor (UserListInputBoundary): getUserList(inputData)
+3. UserListInteractor -> FileUserDataAccessObject (or InMemoryUserDataAccessObject) (UserListDataAccessInterface): getAllUsers()
+4. FileUserDataAccessObject -> UserListInteractor: return userList
+5. UserListInteractor -> UserListPresenter (UserListOutputBoundary): presentUserList(outputData)
+6. UserListPresenter -> UserListViewModel: transformToViewModel(userList)
+7. UserListViewModel -> UserListPresenter: return transformedData
+8. UserListPresenter -> UserListView: displayUserList(viewModel)
+
+End
+
