@@ -1,4 +1,5 @@
-package src.entity;
+package entity;
+import java.util.List;
 
 import java.util.ArrayList;
 
@@ -6,40 +7,48 @@ import java.util.ArrayList;
  * This entity User is a class that represent the User in this program.
  */
 
-public class User {
-    private final String username;
+
+
+public class User implements UserInterface{
+
+    private final String name;
     private final String password;
+    private final String ID;
+    private final String Email;
+    private final List<String> Courses;
 
-    private final String email;
-
-    private ArrayList<String> course_list;
-
-    /**
-     * @param username   the username of the new user
-     * @param password   the password of the new user
-     * @param email  the email of the new user
-     * @param courseList  an ArrayList of course of the new user
-     */
-
-
-    protected User(String username, String password, String email, ArrayList<String> courseList) {
-        this.username = username;
+    User(String name, String password, String ID, String Email,ArrayList<String> courses){
+        this.name = name;
         this.password = password;
-        this.email = email;
-        this.course_list = courseList;
+        this.ID = ID;
+        this.Email = Email;
+        this.Courses = courses; // Sign up use case will handle this and create user objects.
+        // we can expect Ye Ziyi to pass in the ArrayList when cosntructing users
     }
 
-    public String getUsername() {
-        return username;
+    @Override
+    public String getName() {
+        return name;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
-    public String getEmail(){
-        return email;
+
+    @Override
+    public String getID() {
+        return ID;
     }
-    public ArrayList<String> getCourse_list(){
-        return course_list;
+
+    @Override
+    public String getEmail() {
+        return Email;
+    }
+
+    @Override
+    public List<String> getCourses() {
+        return Courses;
     }
 }
+

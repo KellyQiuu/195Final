@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="63571737-bbad-4af7-b6b9-3b02514506b4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/195Final1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/195Final1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserListSequence.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserListSequence.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserListSequence.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserListSequence.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/UserListUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/UserListUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/FileUserDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/FileUserDataAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/InMemoryUserDataAccessObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/InMemoryUserDataAccessObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/MatchedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/MatchedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/UserListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/UserListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/UserListPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/UserListPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/UserListState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/UserListState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/UserListViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/UserListViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/UserListDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/UserListDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/UserListInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/UserListInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/UserListInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/UserListInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/UserListInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/UserListInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/UserListOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/UserListOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/UserListOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/UserListOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/UserListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/UserListView.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2XMyPJmPQ8sDeBN47n3m22LXhNg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore_missing_gitignore": "true",
+    "last_opened_file_path": "/Users/rogersyang/Library/CloudStorage/OneDrive-UniversityofToronto/University of Toronto/UofT Year 3/UofT 2023 F/CSC207/195Final"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="63571737-bbad-4af7-b6b9-3b02514506b4" name="Changes" comment="" />
+      <created>1698453217736</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698453217736</updated>
+      <workItem from="1698453218904" duration="161000" />
+    </task>
+    <servers />
+  </component>
+</project>
