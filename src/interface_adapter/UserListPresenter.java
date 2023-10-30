@@ -1,4 +1,11 @@
-package src.interface_adapter;
+package interface_adapter;
 
-public class UserListPresenter {
+import src.use_case.UserListOutputData;
+import use_case.UserListOutputBoundary;
+
+public class UserListPresenter implements UserListOutputBoundary {
+    @Override
+    public void prepareSuccessView(UserListOutputData clear) {
+
+    }
 }

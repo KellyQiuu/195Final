@@ -1,5 +1,9 @@
-package src.use_case;
+package use_case;
+
+import entity.User;
+
+import java.util.List;
 
 public interface UserListInputBoundary {
-    void execute();
+    List<User> execute();
 }
