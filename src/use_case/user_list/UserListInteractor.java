@@ -1,7 +1,8 @@
-package use_case;
+package use_case.user_list;
 import java.util.*;
 
 import entity.User;
+import use_case.user_list.UserListInputBoundary;
 
 
 public class UserListInteractor implements UserListInputBoundary {

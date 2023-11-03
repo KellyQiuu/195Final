@@ -1,5 +1,4 @@
-package use_case;
-import src.use_case.UserListOutputData;
+package use_case.user_list;
 
 public interface UserListOutputBoundary {
     void prepareSuccessView(UserListOutputData clear);
