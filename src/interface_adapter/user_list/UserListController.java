@@ -1,6 +1,6 @@
-package src.interface_adapter;
+package interface_adapter.user_list;
 
-import use_case.UserListInputBoundary;
+import use_case.user_list.UserListInputBoundary;
 
 public class UserListController {
     final UserListInputBoundary userListInteractor;
