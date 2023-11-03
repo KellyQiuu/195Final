@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * This entity User is a class that represent the User in this program.
  */
 
-
 public class User implements UserInterface{
 
     private final String name;
@@ -15,8 +14,6 @@ public class User implements UserInterface{
     private final String id;
     private final String email;
     private final List<String> courses;
-
-
 
     User(String name, String password, String id, String Email, ArrayList<String> courses){
         this.name = name;
@@ -38,7 +35,7 @@ public class User implements UserInterface{
     }
 
     @Override
-    public String getID() {
+    public String getId() {
         return id;
     }
 

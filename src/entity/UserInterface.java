@@ -9,7 +9,7 @@ public interface UserInterface {
 
     String getPassword();
 
-    String getID();
+    String getId();
 
     String getEmail();
 
