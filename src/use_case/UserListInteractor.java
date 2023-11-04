@@ -23,7 +23,7 @@ public class UserListInteractor implements UserListInputBoundary {
         // this means the map gets updated per login.
         Map<User, Integer> userSimilarityScore = new HashMap<>();
         for(User u:allUsers){
-            if (!u.getID().equals(currentUser.getID())) {
+            if (!u.getId().equals(currentUser.getId())) {
                 int similarity = calculateSimilarity(currentUser, u);
                 userSimilarityScore.put(u, similarity);
         }    }
