@@ -8,7 +8,10 @@ import java.util.List;
  */
 
 public class UserFactory {
-    public User creatUser(String username, String password, String id, String email, ArrayList<String> courses){
+    public User creatUser(String username,
+                          String password, String id,
+                          String email,
+                          ArrayList<String> courses){
         return new User(username, password, id, email, courses);
     }
 }

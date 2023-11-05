@@ -10,10 +10,10 @@ import java.beans.PropertyChangeListener;
 
 public class UserListView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "User List";
-    private final ViewModel userListViewModel;
+    private final ViewModel userViewModel;
 
     public UserListView(UserListViewModel userListViewModel) {
-        this.userListViewModel = userListViewModel;
+        this.userViewModel = userListViewModel;
     }
 
     @Override
