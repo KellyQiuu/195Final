@@ -11,6 +11,12 @@ import java.beans.PropertyChangeListener;
 public class ProfileView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "profile";
 
+    // private final ProfileViewModel profileViewModel;
+
+    // Display current info of user.
+
+    // Modify Button? Save Button?
+
 
 
     @Override
