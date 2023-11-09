@@ -1,7 +1,7 @@
 package data_access;
 
 import entity.User;
-import use_case.SignupUserAccessInterface;
+import use_case.signup.SignupUserAccessInterface;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,6 +37,12 @@ public class UserDataAccessObject implements SignupUserAccessInterface {
 
         }
 
+    }
+
+    @Override
+    // TODO: 11/8/2023 use api?
+    public boolean checkValidEmail(String username) {
+        return false;
     }
 
     @Override
