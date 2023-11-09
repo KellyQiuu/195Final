@@ -2,15 +2,20 @@ package use_case.user_list;
 import java.util.*;
 
 import entity.User;
-import use_case.user_list.UserListInputBoundary;
+import use_case.UserListOutputBoundary;
 
 
 public class UserListInteractor implements UserListInputBoundary {
-    private final List<User> allUsers;
-    private User currentUser;
 
-    public UserListInteractor(List<User> allUsers) {
-        this.allUsers = allUsers;
+    private User currentUser;
+    final UserListDataAccessInterface userDataAccessObject;
+    final UserListOutputBoundary userListPresenter;
+
+    public UserListInteractor(
+                              UserListDataAccessInterface userDataAccessObject,
+                              UserListOutputBoundary userListPresenter) {
+        this.userDataAccessObject = userDataAccessObject;
+        this.userListPresenter = userListPresenter;
         this.currentUser = null;
 
     }
@@ -22,8 +27,9 @@ public class UserListInteractor implements UserListInputBoundary {
     public List<User> execute() {
         // I will add to the map everytime the usecase is executed, and I would not store this anywhere
         // this means the map gets updated per login.
+
         Map<User, Integer> userSimilarityScore = new HashMap<>();
-        for(User u:allUsers){
+        for(User u:userDataAccessObject.getAllUsers()){
             if (!u.getId().equals(currentUser.getId())) {
                 int similarity = calculateSimilarity(currentUser, u);
                 userSimilarityScore.put(u, similarity);
@@ -39,6 +45,7 @@ public class UserListInteractor implements UserListInputBoundary {
     private int calculateSimilarity(User currentUser, User u) {
         // for now define the score as the number of common courses that two users both take.
         Set<String> commonCourses = new HashSet<>(currentUser.getCourses());
+        //TODO: put this in DAO
         commonCourses.retainAll(u.getCourses()); // keep only the courses that the other user also take
         return commonCourses.size();
 
