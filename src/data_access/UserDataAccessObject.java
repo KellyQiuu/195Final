@@ -1,7 +1,9 @@
 package data_access;
 
 import entity.User;
+import entity.UserFactory;
 import use_case.signup.SignupUserAccessInterface;
+import use_case.user_list.UserListDataAccessInterface;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,14 +11,20 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 
-public class UserDataAccessObject implements SignupUserAccessInterface {
+public class UserDataAccessObject implements SignupUserAccessInterface, UserListDataAccessInterface {
 
     private final String filePath;
-    private final Map<String, String> usersDataMap;
+    private final Map<String, String> usersDataMap;//should we refactor the name to "authentication"? since this is username+password
+
+    //TODO:(Kelly)This needs to have String:User map.( For latter extensions and for Usecase Data Access).I would need to
+    // Add one for now. Please see if changes needed for this added accounts attribute.
+
+    private final ArrayList<User> allUsers = new ArrayList<>();
 
     public UserDataAccessObject() throws IOException {
         this.filePath = "./src/main/data_access/users.csv";
         this.usersDataMap = new HashMap<>();
+
         loadUsersFromFile();
     }
 
@@ -33,6 +41,13 @@ public class UserDataAccessObject implements SignupUserAccessInterface {
             String[] p = line.split(",");
             if (p.length >= 2) {
                 usersDataMap.put(p[0], p[1]);
+                //(Kelly): populating also the Account attribute here
+                ArrayList<String> courses = new ArrayList<>();
+                //TODO: Please edit the creation of this courses Arraylist after changing the File format, including
+                // email, courses info in the file.
+                //create user object from the information stored in the file, put them in the allUsers list.
+                User user = UserFactory.creatUser(p[0],p[1],p[2],p[3],courses);
+                allUsers.add(user);
             }
 
         }
@@ -62,6 +77,11 @@ public class UserDataAccessObject implements SignupUserAccessInterface {
             throw new RuntimeException("Error writing to users file", e);
         }
     }
+    // by Kelly: for UserList Interactor.
+    @Override
+    public ArrayList<User> getAllUsers() {
 
+        return allUsers;
+    }
 }
 
