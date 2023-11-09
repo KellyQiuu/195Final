@@ -42,7 +42,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
             if (p.length >= 2) {
                 usersDataMap.put(p[0], p[1]);
                 //(Kelly): populating also the Account attribute here
-                ArrayList<String> courses = new ArrayList<>();
+                ArrayList<String> courses = turnCoursesIntoList(p[4]);
                 //TODO: Please edit the creation of this courses Arraylist after changing the File format, including
                 // email, courses info in the file.
                 //create user object from the information stored in the file, put them in the allUsers list.
@@ -52,6 +52,12 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
         }
 
+    }
+
+    private ArrayList<String> turnCoursesIntoList(String s) {
+        //TODO:(ye) please implement this. This should be able to turn the String we get from the file into an ArrayList
+        // of Strings. each String is a course name.
+        return null;
     }
 
     @Override
@@ -69,7 +75,8 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     public void save(User user) {
         usersDataMap.put(user.getName(), user.getPassword());
         // Step 2: Append the new user's data to the CSV file
-        String userData = user.getName() + "," + user.getPassword() + "\n"; // Format the user data for CSV
+        String userData = user.getName() + "," + user.getPassword()+ "," + user.getId()+ "," + user.storeCourses()+
+                "," + user.getEmail()+ "\n"; // Format the user data for CSV
 
         try {
             Files.write(Paths.get(filePath), userData.getBytes(), StandardOpenOption.APPEND); // Append to the CSV file
@@ -77,9 +84,10 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
             throw new RuntimeException("Error writing to users file", e);
         }
     }
+
     // by Kelly: for UserList Interactor.
     @Override
-    public ArrayList<User> getAllUsers() {
+    public ArrayList<User> getAllUsers() {// by Kelly: for UserList Interactor.
 
         return allUsers;
     }
