@@ -49,5 +49,10 @@ public class User implements UserInterface{
     public List<String> getCourses() {
         return courses;
     }
+
+    public String storeCourses() {
+        return null;
+        //TODO: implement this
+    }
 }
 

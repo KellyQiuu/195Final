@@ -45,7 +45,6 @@ public class UserListInteractor implements UserListInputBoundary {
     private int calculateSimilarity(User currentUser, User u) {
         // for now define the score as the number of common courses that two users both take.
         Set<String> commonCourses = new HashSet<>(currentUser.getCourses());
-        //TODO: put this in DAO
         commonCourses.retainAll(u.getCourses()); // keep only the courses that the other user also take
         return commonCourses.size();
 
