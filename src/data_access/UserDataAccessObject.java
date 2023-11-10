@@ -2,6 +2,7 @@ package data_access;
 
 import entity.User;
 import entity.UserFactory;
+import use_case.profile.ProfileDataAccessInterface;
 import use_case.signup.SignupUserAccessInterface;
 import use_case.user_list.UserListDataAccessInterface;
 
@@ -11,7 +12,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 
-public class UserDataAccessObject implements SignupUserAccessInterface, UserListDataAccessInterface {
+public class UserDataAccessObject implements SignupUserAccessInterface, UserListDataAccessInterface, ProfileDataAccessInterface {
 
     private final String filePath;
     private final Map<String, String> usersDataMap;//should we refactor the name to "authentication"? since this is username+password
@@ -90,6 +91,20 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     public ArrayList<User> getAllUsers() {// by Kelly: for UserList Interactor.
 
         return allUsers;
+    }
+
+    // Get the current user object.
+    @Override
+    public User getUser(String username) {
+        User user = null;
+        if (checkValidUsername(username)) {
+            for (User i : allUsers) {
+                if (Objects.equals(i.getName(), username)) {
+                    user = i;
+                }
+            }
+        }
+        return user;
     }
 }
 
