@@ -2,3 +2,5 @@ out
 .idea
 195Final1.iml
 .gradle
+.DS_Store
+src/.DS_Store
