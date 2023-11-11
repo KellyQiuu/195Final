@@ -26,7 +26,7 @@ public class SignupInteractor implements SignupInputBoundary {
     // TODO: 11/10/2023 message is tentative
     public void signup(SignupInputData signupInputData) {
         if (signupInputData == null) {
-            outputBoundary.presentSignupResult(new SignupOutputData(false, "Invalid Input"));
+            outputBoundary.prepareFailView(new SignupOutputData(signupInputData.getUsername(), false, "Invalid Input"));
             return;
         }
 
@@ -39,11 +39,12 @@ public class SignupInteractor implements SignupInputBoundary {
 
         // TODO: 11/10/2023 use api?
         if (!signupDataAccess.checkValidEmail(email)) {
+            outputBoundary.prepareFailView(new SignupOutputData(signupInputData.getUsername(), false, "Please enter a valid email"));
             return;
         }
 
         if(!signupDataAccess.checkValidUsername(username)) {
-            outputBoundary.presentSignupResult(new SignupOutputData(false, "Username already exists."));
+            outputBoundary.prepareFailView(new SignupOutputData(signupInputData.getUsername(),false, "Username already exists."));
             return;
         }
 
@@ -51,14 +52,15 @@ public class SignupInteractor implements SignupInputBoundary {
                 password == null || password.isEmpty() ||
                 email == null || email.isEmpty() ||
                 courses == null || courses.isEmpty()) {
-            outputBoundary.presentSignupResult(new SignupOutputData(false, "Empty Input"));
+            outputBoundary.prepareFailView(new SignupOutputData(signupInputData.getUsername(),false, "Invalid Input"));
             return;
         }
 
         User newUser = UserFactory.creatUser(username, password, id, email, (ArrayList<String>) courses);
+
         signupDataAccess.save(newUser);
 
-        outputBoundary.presentSignupResult(new SignupOutputData(true, "Signup successful"));
+        outputBoundary.prepareSuccessView(new SignupOutputData(signupInputData.getUsername(), true, "Signup successful"));
 
 
     }

@@ -2,24 +2,22 @@ package interface_adapter.signup;
 
 import use_case.signup.SignupOutputBoundary;
 import use_case.signup.SignupOutputData;
-import view.user_signup_login.SignupView;
+import view.user_signup_login.SignupLoginView;
+import view.user_signup_login.SignupLoginViewModel;
 
 public class SignupPresenter implements SignupOutputBoundary {
 
-    private SignupView signupView;
+    private SignupLoginViewModel viewModel;
+    public SignupPresenter(SignupLoginViewModel viewModel) { this.viewModel = viewModel; }
 
-    public SignupPresenter(SignupView signupView) {
-        this.signupView = signupView;
+    @Override
+    public void prepareFailView(SignupOutputData outputData) {
+            viewModel.signupFailure(outputData.getMessage());
     }
 
-    public void presentSignupResult(SignupOutputData outputData) {
-        if (outputData.isSuccessful()) {
-            // Display success message
-            signupView.Success(outputData.getMessage());
-        } else {
-            // Display error message based on the failure reason
-            signupView.showError(outputData.getMessage());
-        }
-    }
 
+    @Override
+    public void prepareSuccessView(SignupOutputData outputData) {
+        viewModel.signupSuccess();
+    }
 }

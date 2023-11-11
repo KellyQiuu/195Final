@@ -13,8 +13,9 @@ import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class UserDataAccessObject implements SignupUserAccessInterface, UserListDataAccessInterface, ProfileDataAccessInterface {
-
     private final String filePath;
+
+    // allow quick authentication.
     private final Map<String, String> usersDataMap;//should we refactor the name to "authentication"? since this is username+password
 
     //TODO:(Kelly)This needs to have String:User map.( For latter extensions and for Usecase Data Access).I would need to
@@ -23,9 +24,8 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     private final ArrayList<User> allUsers = new ArrayList<>();
 
     public UserDataAccessObject() throws IOException {
-        this.filePath = "./src/main/data_access/users.csv";
+        this.filePath = "./src/data_access/users.csv";
         this.usersDataMap = new HashMap<>();
-
         loadUsersFromFile();
     }
 
@@ -40,7 +40,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
         for (String line: lines) {
             String[] p = line.split(",");
-            if (p.length >= 2) {
+            if (p.length >= 5) {
                 usersDataMap.put(p[0], p[1]);
                 //(Kelly): populating also the Account attribute here
                 ArrayList<String> courses = turnCoursesIntoList(p[4]);
@@ -55,16 +55,20 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
     }
 
-    private ArrayList<String> turnCoursesIntoList(String s) {
+    private ArrayList<String> turnCoursesIntoList(String coursesString) {
         //TODO:(ye) please implement this. This should be able to turn the String we get from the file into an ArrayList
         // of Strings. each String is a course name.
-        return null;
+        return new ArrayList<>(Arrays.asList(coursesString.split("\\+")));
+    }
+    private User trunUserIntoUser(String line) {
+        String[] data = line.split(",");
+        return new User(data[0], data[1], data[2], data[3], turnCoursesIntoList(data[4]));
     }
 
     @Override
     // TODO: 11/8/2023 use api?
     public boolean checkValidEmail(String username) {
-        return false;
+        return true;
     }
 
     @Override
@@ -75,9 +79,9 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     @Override
     public void save(User user) {
         usersDataMap.put(user.getName(), user.getPassword());
-        // Step 2: Append the new user's data to the CSV file
-        String userData = user.getName() + "," + user.getPassword()+ "," + user.getId()+ "," + user.storeCourses()+
-                "," + user.getEmail()+ "\n"; // Format the user data for CSV
+        String userData = user + "\n";
+//        String userData = user.getName() + "," + user.getPassword()+ "," + user.getId()+ "," + user.getCoursesString()+
+//                "," + user.getEmail()+ "\n"; // Format the user data for CSV
 
         try {
             Files.write(Paths.get(filePath), userData.getBytes(), StandardOpenOption.APPEND); // Append to the CSV file

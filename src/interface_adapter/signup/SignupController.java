@@ -20,6 +20,5 @@ public class SignupController {
                 email,
                 courses);
         interactor.signup(signupInputData);
-
     }
 }
