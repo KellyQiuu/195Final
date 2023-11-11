@@ -26,7 +26,7 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
 
         JLabel header = new JLabel("Profile Information");
         header.setAlignmentX(Component.CENTER_ALIGNMENT);
-        // TODO: Need to add more details to UI.
+
 
         JPanel buttons = new JPanel();
         update = new JButton(ProfileViewModel.UPDATE_BUTTON_LABEL);
@@ -36,11 +36,6 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(update)) {
-                            ProfileState state = profileViewModel.getState();
-
-                            // profileController.execute();
-                        }
                     }
                 }
         );
