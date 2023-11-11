@@ -12,7 +12,7 @@ public class UserFactory {
                           String password, String id,
                           String email,
                           ArrayList<String> courses){
-        return new User(username, password, id, email, courses);
+        return new User(username, password, null, email, courses);
     }
 }
 
