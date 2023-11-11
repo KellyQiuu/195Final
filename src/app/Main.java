@@ -1,10 +1,11 @@
 package app;
 
+import entity.SessionManager;
 import entity.User;
 import entity.UserFactory;
 
 import java.util.ArrayList;
-import use_case.EmailService;
+import use_case.email_user.EmailService;
 
 
 
@@ -16,6 +17,22 @@ public class Main {
 
 
         EmailService.sendEmail(u);
+        SessionManager sessionManager = new SessionManager();
+        User user = UserFactory.creatUser("Lynnesy", "wenyu.qiu@mail.utoronto.ca","0",
+                "wenyu.qiu@mail.utoronto.ca", new ArrayList<String>());
+        sessionManager.createUserSession(user);
+
+// When you need to retrieve the current user
+        User currentUser = sessionManager.getCurrentUser();
+        if (currentUser != null) {
+            // User is logged in
+            System.out.println("Current user ID: " + currentUser.getId());
+        } else {
+            // No user is currently logged in
+        }
+
+// When the user logs out
+        sessionManager.endUserSession();
 
 
     }
