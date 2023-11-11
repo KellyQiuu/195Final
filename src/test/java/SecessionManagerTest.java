@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-import entity.SessionManager;
+import use_case.SessionManagerInteractor;
 import entity.User;
 import entity.UserFactory;
 import org.junit.Assert;
@@ -10,13 +10,13 @@ import org.junit.Test;
 public class SecessionManagerTest {
     //testing the secession manager.
 
-    private SessionManager sessionManager;
+    private SessionManagerInteractor sessionManager;
     private User testUser;
 
     @Before
     public void setUp() {
         // Set up your test environment before each test
-        sessionManager = new SessionManager();
+        sessionManager = new SessionManagerInteractor();
         testUser = UserFactory.creatUser("Lynnesy", "wenyu.qiu@mail.utoronto.ca", "0",
                 "wenyu.qiu@mail.utoronto.ca", new ArrayList<>());
     }

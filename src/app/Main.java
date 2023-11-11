@@ -1,6 +1,6 @@
 package app;
 
-import entity.SessionManager;
+import use_case.SessionManagerInteractor;
 import entity.User;
 import entity.UserFactory;
 
@@ -17,7 +17,7 @@ public class Main {
 
 
         EmailService.sendEmail(u);
-        SessionManager sessionManager = new SessionManager();
+        SessionManagerInteractor sessionManager = new SessionManagerInteractor();
         User user = UserFactory.creatUser("Lynnesy", "wenyu.qiu@mail.utoronto.ca","0",
                 "wenyu.qiu@mail.utoronto.ca", new ArrayList<String>());
         sessionManager.createUserSession(user);
