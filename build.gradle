@@ -19,4 +19,5 @@ sourceSets {
 dependencies {
     implementation 'junit:junit:4.12'
     implementation 'com.sendgrid:sendgrid-java:4.9.3'
+    implementation 'org.json:json:20210307'
 }
