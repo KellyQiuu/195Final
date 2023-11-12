@@ -38,8 +38,9 @@ public class UserListPresenter implements UserListOutputBoundary {
         userListViewModel.firePropertyChanged();
 
         // Optionally, if you need to switch views or perform additional view logic:
-        viewManagerModel.setActiveView(userListViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
+        // viewManagerModel.setActiveView(userListViewModel.getViewName());
+        // viewManagerModel.firePropertyChanged();
+        System.out.println("Prepare Succees View method called in presenter");
     }
 
 

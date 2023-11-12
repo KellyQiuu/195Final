@@ -14,10 +14,14 @@ public class UserListState {
     }
 
     public ArrayList<String> getUserNames(){
+        System.out.println("user names are "+userNames.toString());
         return this.userNames;
+
     };
 
     public void setUserNames(ArrayList<String> names){
         this.userNames=names;
+        System.out.println("User names set to: "+ userNames.toString());
+
     }
 }
