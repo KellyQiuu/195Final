@@ -1,16 +1,16 @@
 package view;
-import view.ViewModel;
 
 
 import java.beans.PropertyChangeListener;
-import interface_adapter.UserListState;
-import java.beans.PropertyChangeListener;
+import interface_adapter.user_list.UserListState;
+
 import java.beans.PropertyChangeSupport;
 public class UserListViewModel extends ViewModel {
     public final String TITLE_LABEL = "User List View";
     private UserListState state;
-    public UserListViewModel() {
+    public UserListViewModel(UserListState listViewState) {
         super("User List");
+        this.state = listViewState;
     }
 
     public void setState(UserListState state){
