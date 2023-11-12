@@ -2,7 +2,7 @@ package use_case.user_list;
 import java.util.*;
 
 import entity.User;
-import use_case.UserListOutputBoundary;
+import use_case.user_list.*;
 
 
 public class UserListInteractor implements UserListInputBoundary {
