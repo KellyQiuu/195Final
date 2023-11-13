@@ -9,22 +9,24 @@ import java.util.List;
 
 public class SignupInteractor implements SignupInputBoundary {
     private final UserFactory userFactory;
-    private final SignupInputBoundary signupPresenter;
-    private final SignupUserAccessInterface userDataAccess;
+    private final SignupOutputBoundary outputBoundary;
+    private final SignupUserAccessInterface signupDataAccess;
 
-
-
-    public SignupInteractor(SignupInputBoundary signupPresenter,
-                            SignupUserAccessInterface userDataAccess) {
-        this.userFactory = new UserFactory();
-        this.signupPresenter = signupPresenter;
-        this.userDataAccess = userDataAccess;
+    public SignupInteractor(SignupOutputBoundary outputBoundary,
+                            SignupUserAccessInterface signupDataAccess,
+                            UserFactory userFactory) {
+        this.userFactory = userFactory;
+        this.outputBoundary = outputBoundary;
+        this.signupDataAccess = signupDataAccess;
     }
 
+
     @Override
-    public boolean signupSuccess(SignupInputData signupInputData) {
+    // TODO: 11/10/2023 message is tentative
+    public void signup(SignupInputData signupInputData) {
         if (signupInputData == null) {
-            return false;
+            outputBoundary.prepareFailView("Invalid Input");
+            return;
         }
 
         String username = signupInputData.getUsername();
@@ -33,26 +35,30 @@ public class SignupInteractor implements SignupInputBoundary {
         String email = signupInputData.getEmail();
         List<String> courses = signupInputData.getCourses();
 
+
+        // TODO: 11/10/2023 use api?
+        if (!signupDataAccess.checkValidEmail(email)) {
+            outputBoundary.prepareFailView("Please enter a valid email");
+            return;
+        }
+
+        if(!signupDataAccess.checkValidUsername(username)) {
+            outputBoundary.prepareFailView("Username already exists.");
+            return;
+        }
+
         if (username == null || username.isEmpty() ||
                 password == null || password.isEmpty() ||
                 email == null || email.isEmpty() ||
                 courses == null || courses.isEmpty()) {
-            return false;
+            outputBoundary.prepareFailView("Invalid Input");
+            return;
         }
 
-        if (!userDataAccess.checkValidEmail(email)) {
-            return false; // email address is not valid
-        }
+        User newUser = UserFactory.creatUser(username, password, email, (ArrayList<String>) courses);
 
-        if (!userDataAccess.checkValidUsername(username)) {
-            return false; // Username already exists
-        }
+        signupDataAccess.save(newUser);
 
-        User newUser = this.userFactory.creatUser(username, password, id, email, (ArrayList<String>) courses);
-        userDataAccess.save(newUser);
-
-
-        return true;
-        // TODO: 10/23/2023 xie presenter
+        outputBoundary.prepareSuccessView(new SignupOutputData(signupInputData.getUsername(), true));
     }
 }
