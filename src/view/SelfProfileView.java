@@ -1,8 +1,7 @@
 package view;
 
-import interface_adapter.profile.ProfileController;
-import interface_adapter.profile.ProfileViewModel;
-import interface_adapter.profile.ProfileState;
+import interface_adapter.self_profile.SelfProfileController;
+import interface_adapter.self_profile.SelfProfileViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,15 +10,15 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class ProfileView extends JPanel implements ActionListener, PropertyChangeListener {
+public class SelfProfileView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "profile";
 
-    private final ProfileViewModel profileViewModel;
+    private final SelfProfileViewModel profileViewModel;
 
     final JButton update;
-    private final ProfileController profileController;
+    private final SelfProfileController profileController;
 
-    public ProfileView(ProfileViewModel profileViewModel, ProfileController profileController) {
+    public SelfProfileView(SelfProfileViewModel profileViewModel, SelfProfileController profileController) {
         this.profileController = profileController;
         this.profileViewModel = profileViewModel;
         this.profileViewModel.addPropertyChangeListener(this);
@@ -29,7 +28,7 @@ public class ProfileView extends JPanel implements ActionListener, PropertyChang
 
 
         JPanel buttons = new JPanel();
-        update = new JButton(ProfileViewModel.UPDATE_BUTTON_LABEL);
+        update = new JButton(SelfProfileViewModel.UPDATE_BUTTON_LABEL);
         buttons.add(update);
 
         update.addActionListener(

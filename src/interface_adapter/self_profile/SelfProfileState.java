@@ -1,11 +1,11 @@
-package interface_adapter.profile;
+package interface_adapter.self_profile;
 
-public class ProfileState {
+public class SelfProfileState {
 	private boolean modified = false;
-	public ProfileState(ProfileState copy) {
+	public SelfProfileState(SelfProfileState copy) {
 		this.modified = copy.modified;
 	}
-	public ProfileState() {
+	public SelfProfileState() {
 
 	}
 	public boolean getState() {

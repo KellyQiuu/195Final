@@ -1,18 +1,18 @@
-package interface_adapter.profile;
+package interface_adapter.self_profile;
 
 import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-public class ProfileViewModel extends ViewModel {
+public class SelfProfileViewModel extends ViewModel {
     public final String UPDATE_LABEL = "Update";
     public static final String UPDATE_BUTTON_LABEL = "Update";
-    private ProfileState state = new ProfileState();
+    private SelfProfileState state = new SelfProfileState();
 
-    public ProfileViewModel() {
+    public SelfProfileViewModel() {
         super("profile");
     }
 
-    public void setState(ProfileState state) {
+    public void setState(SelfProfileState state) {
         this.state = state;
     }
 
@@ -27,7 +27,7 @@ public class ProfileViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public ProfileState getState() {
+    public SelfProfileState getState() {
         return state;
     }
 }

@@ -1,26 +1,25 @@
-package interface_adapter.profile;
+package interface_adapter.self_profile;
 
 import entity.User;
 import interface_adapter.ViewManagerModel;
-import use_case.profile.ProfileOutputBoundary;
-import use_case.profile.ProfileOutputData;
-import view.ProfileView;
+import use_case.self_profile.SelfProfileOutputBoundary;
+import use_case.self_profile.SelfProfileOutputData;
 
 import javax.swing.*;
 import java.util.List;
 
-public class ProfilePresenter implements ProfileOutputBoundary {
-	private final ProfileViewModel profileViewModel;
+public class SelfProfilePresenter implements SelfProfileOutputBoundary {
+	private final SelfProfileViewModel profileViewModel;
 
 	private ViewManagerModel viewManagerModel;
 
-	public ProfilePresenter(ProfileViewModel profileViewModel, ViewManagerModel viewManagerModel) {
+	public SelfProfilePresenter(SelfProfileViewModel profileViewModel, ViewManagerModel viewManagerModel) {
 		this.profileViewModel = profileViewModel;
 		this.viewManagerModel = viewManagerModel;
 	}
 
 	@Override
-	public void prepareSuccessView(ProfileOutputData userdata) {
+	public void prepareSuccessView(SelfProfileOutputData userdata) {
 		profileViewModel.firePropertyChanged();
 		viewManagerModel.firePropertyChanged();
 		User currentUser = userdata.getCurrentUser();

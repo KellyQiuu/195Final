@@ -1,11 +1,11 @@
-package use_case.profile;
+package use_case.self_profile;
 
 import entity.User;
 
-public class ProfileOutputData {
+public class SelfProfileOutputData {
 	private final User currentUser;
 
-	public ProfileOutputData(User user) {
+	public SelfProfileOutputData(User user) {
 		this.currentUser = user;
 	}
 
