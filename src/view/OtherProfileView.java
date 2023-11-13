@@ -1,7 +1,7 @@
 package view;
 
-import interface_adapter.self_profile.SelfProfileController;
-import interface_adapter.self_profile.SelfProfileViewModel;
+import interface_adapter.other_profile.OtherProfileController;
+import interface_adapter.other_profile.OtherProfileViewModel;
 
 import javax.swing.*;
 import java.awt.*;
