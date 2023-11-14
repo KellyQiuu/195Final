@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import interface_adapter.ViewManagerModel;
-
 public class UserListPresenter implements UserListOutputBoundary {
 
     private final UserListState viewState;
@@ -25,13 +24,11 @@ public class UserListPresenter implements UserListOutputBoundary {
 
     @Override
     public void prepareSuccessView(UserListOutputData data) {
-        // Extract the list of usernames from the output data
-        List<String> userNames = data.getUsers().stream()
-                .map(user -> user.getName())
-                .collect(Collectors.toList());
+        // Directly use the list of User objects from the output data
+        ArrayList<User> users = data.getUsers();
 
-        // Update the state
-        viewState.setUserNames((ArrayList<String>) userNames);
+        // Update the state with the list of User objects
+        viewState.setUsers(users);
 
         // Notify the view model of the state change
         userListViewModel.setState(viewState);
@@ -40,8 +37,6 @@ public class UserListPresenter implements UserListOutputBoundary {
         // Optionally, if you need to switch views or perform additional view logic:
         // viewManagerModel.setActiveView(userListViewModel.getViewName());
         // viewManagerModel.firePropertyChanged();
-        System.out.println("Prepare Succees View method called in presenter");
+        System.out.println("Prepare Success View method called in presenter");
     }
-
-
 }
