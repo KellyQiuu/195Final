@@ -11,7 +11,7 @@ public class SignupController {
 
     public SignupController(SignupInputBoundary interactor) { this.interactor = interactor;}
 
-    public void excute (String username, String password, String id, String email,
+    public void execute (String username, String password, String id, String email,
                         ArrayList<String> courses) {
         SignupInputData signupInputData = new SignupInputData(username,
                 password,
