@@ -12,7 +12,7 @@ public class UserListOutputData {
     public UserListOutputData(ArrayList<User> sortedUsers){
         this.sortedUsers = sortedUsers;
     }
-    
+    //TODO: turn arrayList into a arraylist of hashmap, each hashmap is a user.
 
     public ArrayList<User> getUsers() {
         return this.sortedUsers;
