@@ -2,7 +2,8 @@ package app;
 
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.profile.ProfileViewModel;
+import interface_adapter.other_profile.OtherProfileViewModel;
+import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.user_list.UserListController;
 import interface_adapter.user_list.UserListPresenter;
 import interface_adapter.user_list.UserListState;
@@ -23,7 +24,7 @@ public class UserListUseCaseFactory {
     public static UserListView create(
             ViewManagerModel viewManagerModel,
             UserListViewModel viewModel,
-            ProfileViewModel profileViewModel,
+            OtherProfileViewModel profileViewModel,
             UserListDataAccessInterface userListDataAccessObject
 
     ){
@@ -41,7 +42,7 @@ public class UserListUseCaseFactory {
 
 private static UserListController createUserListUseCase(ViewManagerModel viewManagerModel,
                                              UserListViewModel viewModel,
-                                             ProfileViewModel profileViewModel,
+                                             OtherProfileViewModel profileViewModel,
                                              UserListDataAccessInterface userListDataAccessObject)throws IOException {
 
     UserListOutputBoundary userlistOutputBoundary = new UserListPresenter(viewManagerModel,profileViewModel , viewModel);

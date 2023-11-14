@@ -16,7 +16,7 @@ public class User implements UserInterface{
     private final String email;
     private final List<String> courses;
 
-    User(String name, String password, String id, String Email, ArrayList<String> courses){
+    public User(String name, String password, String id, String Email, ArrayList<String> courses){
         this.name = name;
         this.password = password;
         this.id = id;
@@ -51,5 +51,13 @@ public class User implements UserInterface{
     }
 
 
-}
+    public String getCoursesString() {
+        return String.join("+", courses);
+    }
 
+    @Override
+    public String toString() {
+        return getName() + "," + getPassword() + "," + getId() + "," + getEmail() + "," + getCoursesString();
+    }
+
+}

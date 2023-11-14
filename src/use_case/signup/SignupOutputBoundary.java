@@ -1,4 +1,7 @@
 package use_case.signup;
 
 public interface SignupOutputBoundary {
+    void prepareFailView(String errorMessage);
+
+    void prepareSuccessView(SignupOutputData outputData);
 }

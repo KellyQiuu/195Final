@@ -15,7 +15,7 @@ public class EmailService {
     private static final String YOUR_TEMPLATE_ID = "d-6706faa3bb9543ec9fddfceb21d6d7fb";
     private static final String SENDGRID_API_KEY = "";
 
-    public static void sendEmail(User user) throws Exception {
+    public static void sendEmail(User user, String freeTextMessage) throws Exception {
         JSONObject emailJson = new JSONObject();
         // Create a 'from' object with an email address
         JSONObject fromObject = new JSONObject();

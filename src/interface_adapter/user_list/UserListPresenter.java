@@ -1,7 +1,8 @@
 package interface_adapter.user_list;
 
 import entity.User;
-import interface_adapter.profile.ProfileViewModel;
+import interface_adapter.other_profile.OtherProfileViewModel;
+import interface_adapter.other_profile.OtherProfileViewModel;
 import use_case.user_list.UserListOutputData;
 import use_case.user_list.UserListOutputBoundary;
 import view.UserListViewModel;
@@ -12,12 +13,12 @@ import interface_adapter.ViewManagerModel;
 public class UserListPresenter implements UserListOutputBoundary {
     private UserListState viewState;
 
-    private final ProfileViewModel profileViewModel;
+    private final OtherProfileViewModel profileViewModel;
     private final ViewManagerModel viewManagerModel;
     private final UserListViewModel userListViewModel;
 
     public UserListPresenter(ViewManagerModel viewManagerModel,
-                             ProfileViewModel profileViewModel,
+                             OtherProfileViewModel profileViewModel,
                              UserListViewModel userListViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.profileViewModel = profileViewModel;

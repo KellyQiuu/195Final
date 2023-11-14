@@ -3,7 +3,7 @@ package app;
 import data_access.FileUserDataAccessObject;
 import data_access.UserDataAccessObject;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.profile.ProfileViewModel;
+import interface_adapter.other_profile.OtherProfileViewModel;
 import use_case.SessionManagerInteractor;
 import entity.User;
 import entity.UserFactory;
@@ -21,15 +21,30 @@ import java.io.IOException;
 
 
 public class Main {
-    public static void main(String[] args) {
-        // Build the main program window, the main panel containing the
-        // various cards, and the layout, and stitch them together.
+
+    //Initialization
+    //// This setup code would typically go in your main method or application initialization logic
+    //
+    //// Create the dependencies of the ProfileController
+    //ProfileInputBoundary profileInteractor = new ProfileInteractor(/* dependencies */);
+    //EmailService emailService = new EmailService(/* your SendGrid API key */);
+    //ProfileView profileView = new ProfileView(/* ProfileViewModel */, /* ProfileController */);
+    //
+    //// Create the ProfileController
+    //ProfileController profileController = new ProfileController(profileInteractor, emailService, profileView);
+    //
+    //// Now that ProfileController is created, you must set it in the ProfileView
+    //profileView.setController(profileController);
+    public static void main(String[] args) throws Exception {
+        ArrayList<String> courses = new ArrayList<>();
+
 
         // The main application window.
         JFrame application = new JFrame("User List Example");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
+
 
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);
@@ -41,7 +56,7 @@ public class Main {
 
         // The data for the views are in the ViewModels.
         UserListViewModel userListViewModel = new UserListViewModel();
-        ProfileViewModel profileViewModel = new ProfileViewModel();
+        OtherProfileViewModel profileViewModel = new OtherProfileViewModel();
 
         // DataAccess object for user list
         UserListDataAccessInterface userListDataAccessObject;
