@@ -18,13 +18,9 @@ public class LoginViewModel extends ViewModel {
 
     private LoginState state = new LoginState();
 
-    public LoginViewModel() {
-        super("log in");
-    }
+    public LoginViewModel() { super("log in"); }
 
-    public void setState(LoginState state) {
-        this.state = state;
-    }
+    public void setState(LoginState state) { this.state = state; }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
