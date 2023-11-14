@@ -13,6 +13,7 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+
 public class SignupView extends JPanel implements ActionListener, PropertyChangeListener{
 
     public final String viewName = "sign up";
@@ -37,9 +38,9 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     private final JTextField course5InputField = new JTextField(15);
 
-    private final JButton signUp;
+    private JButton signUp;
 
-    private final JButton cancle;
+    private JButton cancel;
 
     private JFrame jFrame;
 
@@ -52,17 +53,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.signupViewModel = signupViewModel;
         signupViewModel.addPropertyChangeListener(this);
 
-        //add signup and cancle button
-        JPanel buttons = new JPanel();
-        signUp = new JButton(SignupViewModel.SIGNUP_LABEL);
-        buttons.add(signUp);
-        cancle = new JButton(SignupViewModel.CANCEL_BUTTON_LABEL);
-        buttons.add(cancle);
-
         this.infFieldKey(); //for username, password, email
         this.courseFieldKey(); //for all five courses
 
-        this.initialValue();
+        this.defaultValueInitialization();
+        this.defaultComponentsInitialization();
     }
     private void infFieldKey(){
         usernameInputField.addKeyListener(
@@ -216,21 +211,39 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         );
     }
 
-    private void initialValue() {
-        //set app name at the centre
-        JLabel appName = new JLabel("195FinalProjectName");
-        appName.setAlignmentX(Component.CENTER_ALIGNMENT);
+    private void defaultValueInitialization() {
+//        //set app name at the centre
+//        JLabel appName = new JLabel("195FinalProjectName");
+//        appName.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         int WIDTH = 800;
         int HEIGHT = 400;
 
         // use frame?
         this.jFrame = new JFrame("195FinalProjectName");
+        this.jFrame.setSize(WIDTH, HEIGHT);
+        this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    private void defaultComponentsInitialization(){
+        // Use GridBagLayout for arranging components
+        setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(10, 10, 10, 10); // Padding
 
+        //add signup and cancel button
+        JPanel buttons = new JPanel();
+        signUp = new JButton(SignupViewModel.SIGNUP_LABEL);
+        buttons.add(signUp, constraints);
+        constraints.gridx = 1;
 
-
+        cancel = new JButton(SignupViewModel.CANCEL_BUTTON_LABEL);
+        buttons.add(cancel, constraints);
+        constraints.gridx = 1;
+    }
 
 
 
