@@ -2,7 +2,9 @@ package use_case.user_list;
 import java.util.*;
 
 import entity.User;
-import use_case.user_list.*;
+import entity.UserFactory;
+import use_case.SessionManagerInteractor;
+
 
 
 public class UserListInteractor implements UserListInputBoundary {
@@ -16,8 +18,12 @@ public class UserListInteractor implements UserListInputBoundary {
                               UserListOutputBoundary userListPresenter) {
         this.userDataAccessObject = userDataAccessObject;
         this.userListPresenter = userListPresenter;
-        this.currentUser = null;
 
+        // this.currentUser = SessionManagerInteractor.getCurrentUser();
+        ArrayList<String> c = new ArrayList<>(Arrays.asList("CSC207","MAT237","CSC343","MAT246","MAT337"));
+        this.currentUser = UserFactory.creatUser("myself", "123","12829929","randomemail@email.com",c);
+        //TODO: change this to a real secession Manager
+        System.out.println("UFake user is created, "+this.currentUser.toString());
     }
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
@@ -39,13 +45,16 @@ public class UserListInteractor implements UserListInputBoundary {
         // for any two users, define them to be comparable based on simiarlity score, and sort based on way to compare them
         sorted.sort((user1, user2) -> userSimilarityScore.get(user2) - userSimilarityScore.get(user1));
 
+        System.out.println("UFake user is Sorted, "+sorted);
         return sorted;
+        //TODO: change the fakeUser, to use it as input data. UserListInputData
     }
 
     private int calculateSimilarity(User currentUser, User u) {
         // for now define the score as the number of common courses that two users both take.
         Set<String> commonCourses = new HashSet<>(currentUser.getCourses());
-        commonCourses.retainAll(u.getCourses()); // keep only the courses that the other user also take
+        List<String> courses = u.getCourses();
+        commonCourses.retainAll(courses); // keep only the courses that the other user also take
         return commonCourses.size();
 
     }

@@ -1,11 +1,14 @@
 package view;
 import entity.User;
+import interface_adapter.user_list.UserListController;
 import interface_adapter.user_list.UserListState;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -14,9 +17,12 @@ import java.util.Arrays;
 public class UserListView extends JPanel implements ActionListener, PropertyChangeListener {
     private final UserListViewModel userListViewModel;
     private final JPanel userCardsPanel;
+    public final String viewName ="User List";
+    public final UserListController userListController;
 
-    public UserListView(UserListViewModel viewModel) {
+    public UserListView(UserListViewModel viewModel, UserListController controller) {
         this.userListViewModel = viewModel;
+        this.userListController = controller;
         this.userCardsPanel = new JPanel();
         userCardsPanel.setLayout(new BoxLayout(userCardsPanel, BoxLayout.Y_AXIS));
 
@@ -30,6 +36,17 @@ public class UserListView extends JPanel implements ActionListener, PropertyChan
                 updateUserCards();
             }
         });
+
+        // Add a component listener to trigger controller's execute method when this view is shown
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                userListController.execute(); // Call the execute method on the controller
+            }
+        });
+
+        this.setVisible(true);
     }
 
     private void updateUserCards() {
@@ -58,5 +75,9 @@ public class UserListView extends JPanel implements ActionListener, PropertyChan
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         // Property change handling code
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 }

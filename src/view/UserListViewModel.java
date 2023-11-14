@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 public class UserListViewModel extends ViewModel {
     public final String TITLE_LABEL = "User List View";
     private UserListState state;
-    public UserListViewModel(UserListState listViewState) {
+    public UserListViewModel() {
         super("User List");
-        this.state = listViewState;
+
     }
 
     public void setState(UserListState state){

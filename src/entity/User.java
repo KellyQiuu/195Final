@@ -50,9 +50,6 @@ public class User implements UserInterface{
         return courses;
     }
 
-    public String storeCourses() {
-        return null;
-        //TODO: implement this
-    }
+
 }
 

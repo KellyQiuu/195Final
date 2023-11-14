@@ -23,7 +23,8 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     private final ArrayList<User> allUsers = new ArrayList<>();
 
     public UserDataAccessObject() throws IOException {
-        this.filePath = "./src/main/data_access/users.csv";
+        System.out.println("UserDataAccess constructor reached");
+        this.filePath = "src/data_access/users.csv";
         this.usersDataMap = new HashMap<>();
 
         loadUsersFromFile();
@@ -31,6 +32,10 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
     private void loadUsersFromFile() throws IOException {
         List<String> lines;
+        System.out.println("UserLoadFromFile is called");
+
+        // Clear the list before loading users from file
+        allUsers.clear();
 
         try {
             lines = Files.readAllLines(Paths.get(filePath));
@@ -44,15 +49,14 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
                 usersDataMap.put(p[0], p[1]);
                 //(Kelly): populating also the Account attribute here
                 ArrayList<String> courses = turnCoursesIntoList(p[4]);
-                //TODO: Please edit the creation of this courses Arraylist after changing the File format, including
+                //TODO: Please edit the creation of this courses ArrayList after changing the File format, including
                 // email, courses info in the file.
                 //create user object from the information stored in the file, put them in the allUsers list.
                 User user = UserFactory.creatUser(p[0],p[1],p[2],p[3],courses);
                 allUsers.add(user);
             }
-
         }
-
+        System.out.println(allUsers.toString());
     }
 
     private ArrayList<String> turnCoursesIntoList(String s) {
@@ -76,8 +80,8 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     public void save(User user) {
         usersDataMap.put(user.getName(), user.getPassword());
         // Step 2: Append the new user's data to the CSV file
-        String userData = user.getName() + "," + user.getPassword()+ "," + user.getId()+ "," + user.storeCourses()+
-                "," + user.getEmail()+ "\n"; // Format the user data for CSV
+        String userData = user.getName() + "," + user.getPassword()+ "," + user.getId()+ "," + user.getEmail()+ ","+
+                storeCourses(user)+"\n"; // Format the user data for CSV
 
         try {
             Files.write(Paths.get(filePath), userData.getBytes(), StandardOpenOption.APPEND); // Append to the CSV file
@@ -85,7 +89,12 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
             throw new RuntimeException("Error writing to users file", e);
         }
     }
+    public String storeCourses(User u) {
+        List<String> courses = u.getCourses();
+        //complete this method to save the user u's courses, which is an List of 5 Strings into Strings seperated by /
+        return String.join("/", courses);
 
+    }
     // by Kelly: for UserList Interactor.
     @Override
     public ArrayList<User> getAllUsers() {// by Kelly: for UserList Interactor.

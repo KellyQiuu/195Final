@@ -1,6 +1,7 @@
 package interface_adapter.user_list;
 
 import entity.User;
+import interface_adapter.profile.ProfileViewModel;
 import use_case.user_list.UserListOutputData;
 import use_case.user_list.UserListOutputBoundary;
 import view.UserListViewModel;
@@ -9,16 +10,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 import interface_adapter.ViewManagerModel;
 public class UserListPresenter implements UserListOutputBoundary {
+    private UserListState viewState;
 
-    private final UserListState viewState;
+    private final ProfileViewModel profileViewModel;
     private final ViewManagerModel viewManagerModel;
     private final UserListViewModel userListViewModel;
 
     public UserListPresenter(ViewManagerModel viewManagerModel,
-                             UserListState viewState,
+                             ProfileViewModel profileViewModel,
                              UserListViewModel userListViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.viewState = viewState;
+        this.profileViewModel = profileViewModel;
         this.userListViewModel = userListViewModel;
     }
 
