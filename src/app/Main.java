@@ -29,7 +29,7 @@ public class Main {
         User u=UserFactory.creatUser("User1","123","1","qiuwenyu2021@outlook.com",courses);
 
 
-        EmailService.sendEmail(u, freeTextMessage);
+        //EmailService.sendEmail(u, freeTextMessage);
         SessionManagerInteractor sessionManager = new SessionManagerInteractor();
         User user = UserFactory.creatUser("Lynnesy", "wenyu.qiu@mail.utoronto.ca","0",
                 "wenyu.qiu@mail.utoronto.ca", new ArrayList<String>());
