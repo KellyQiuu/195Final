@@ -65,7 +65,7 @@ public class SignupState {
 
     public void setCourse4(String course4) {this.course4 = course4;}
 
-    public void setCourse15(String course5) {this.course5 = course5;}
+    public void setCourse5(String course5) {this.course5 = course5;}
 
     @Override
     public String toString() {

@@ -1,7 +1,6 @@
 package interface_adapter.login;
 
 public class LoginState {
-
     private String username = "";
 
     private String usernameError = null;
