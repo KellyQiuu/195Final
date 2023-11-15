@@ -53,11 +53,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.signupViewModel = signupViewModel;
         signupViewModel.addPropertyChangeListener(this);
 
-        this.infFieldKey(); //for username, password, email
-        this.courseFieldKey(); //for all five courses
-
         this.defaultValueInitialization();
         this.defaultComponentsInitialization();
+
+        this.infFieldKey(); //for username, password, email
+        this.courseFieldKey(); //for all five courses
     }
     private void infFieldKey(){
         usernameInputField.addKeyListener(
