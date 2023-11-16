@@ -15,6 +15,8 @@ import java.beans.PropertyChangeListener;
 public class OtherProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 	public final String viewName = "other_profile";
 
+	public final String message = "Wants to connect";
+
 	private final ConnectController connectController;
 	private final OtherProfileViewModel profileViewModel;
 	private final OtherProfileController profileController;
@@ -31,9 +33,9 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 		this.profileViewModel.addPropertyChangeListener(this);
 
 		// Layout setup
-		setLayout(new BorderLayout());
-		add(createHeader(), BorderLayout.NORTH);
-		add(createUserInfoPanel(), BorderLayout.CENTER);
+		this.setLayout(new BorderLayout());
+		this.add(createHeader(), BorderLayout.NORTH);
+		this.add(createUserInfoPanel(), BorderLayout.CENTER);
 	}
 
 	private JPanel createHeader() {
@@ -84,9 +86,7 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 			public void actionPerformed(ActionEvent e) {
 				// Handle connect button action here
 				if (e.getSource().equals(connect)) {
-					// connectController.execute();
-				} else {
-					//
+					connectController.handleSendEmailClicked(message);
 				}
 			}
 		});
