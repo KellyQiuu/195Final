@@ -2,6 +2,7 @@ package data_access;
 
 import entity.User;
 import entity.UserFactory;
+import use_case.other_profile.OtherProfileDataAccessInterface;
 import use_case.self_profile.SelfProfileDataAccessInterface;
 import use_case.signup.SignupUserAccessInterface;
 import use_case.login.LoginUserAccessInterface;
@@ -13,7 +14,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 
-public class UserDataAccessObject implements SignupUserAccessInterface, UserListDataAccessInterface, SelfProfileDataAccessInterface, LoginUserAccessInterface {
+public class UserDataAccessObject implements SignupUserAccessInterface, UserListDataAccessInterface,
+        SelfProfileDataAccessInterface, LoginUserAccessInterface, OtherProfileDataAccessInterface {
 
     private final String filePath;
     private final Map<String, String> usersDataMap;//should we refactor the name to "authentication"? since this is username+password

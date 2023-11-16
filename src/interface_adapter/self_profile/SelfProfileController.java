@@ -1,6 +1,7 @@
 package interface_adapter.self_profile;
 
 import use_case.self_profile.SelfProfileInputBoundary;
+import use_case.self_profile.SelfProfileInputData;
 
 public class SelfProfileController {
 	final SelfProfileInputBoundary profileInteractor;
@@ -9,6 +10,7 @@ public class SelfProfileController {
 		this.profileInteractor = profileInteractor;
 	}
 	public void execute(String username) {
-		profileInteractor.execute(username);
+		SelfProfileInputData selfProfileInputData = new SelfProfileInputData(username);
+		profileInteractor.execute(selfProfileInputData);
 	}
 }
