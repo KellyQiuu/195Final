@@ -1,7 +1,5 @@
 package use_case.connect;
 
-import entity.User;
-
 public class ConnectInputData {
     private final String senderUsername;
     private final String recipientEmail;
@@ -17,7 +15,7 @@ public class ConnectInputData {
         return senderUsername;
     }
 
-    public User getRecipientEmail() {
+    public String getRecipientEmail() {
         return recipientEmail;
     }
 
