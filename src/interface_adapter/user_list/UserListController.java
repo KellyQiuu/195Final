@@ -8,4 +8,8 @@ public class UserListController {
     public UserListController(UserListInputBoundary userListInteractor) {
         this.userListInteractor = userListInteractor;
     }
+    public void execute(){
+        //TODO;
+        userListInteractor.execute();
+    }
 }

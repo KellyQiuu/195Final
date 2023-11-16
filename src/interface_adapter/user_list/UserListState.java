@@ -1,27 +1,26 @@
 package interface_adapter.user_list;
 
+import entity.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class UserListState {
-    private ArrayList<String> userNames;
+    private ArrayList<User> users;
 
 
-    public UserListState(){
-
-
+    public UserListState() {
+        this.users = new ArrayList<>(); // Initialize the list
     }
 
-    public ArrayList<String> getUserNames(){
-        System.out.println("user names are "+userNames.toString());
-        return this.userNames;
+    public ArrayList<User> getUsers() {
 
-    };
+        return this.users;
+    }
 
-    public void setUserNames(ArrayList<String> names){
-        this.userNames=names;
-        System.out.println("User names set to: "+ userNames.toString());
-
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+        System.out.println("Users set. Total: " + users.size());
     }
 }

@@ -3,31 +3,38 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-public class UserCardPanel extends JPanel{
-    private String userName;
+import java.util.ArrayList;
 
-    public UserCardPanel(String userName) {
-        this.userName = userName;
+public class UserCardPanel extends JPanel {
+    private String userDisplayInfo;
+
+    public UserCardPanel(String userName, ArrayList<String> courses) {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLACK)); // for card-like appearance
-        add(new JLabel(userName), BorderLayout.CENTER);
 
-        // Set the preferred size of the card, for example:
+        // Format the courses as a comma-separated string without brackets
+        String coursesString = String.join("/ ", courses);
+        coursesString =coursesString.substring(1, coursesString.length() - 1);
+
+        // Combine the user's name and their formatted courses into one HTML string
+        userDisplayInfo = "<html>" + userName + "<br>Courses: " + coursesString + "</html>";
+
+        add(new JLabel(userDisplayInfo), BorderLayout.CENTER);
+
         setPreferredSize(new Dimension(200, 100));
 
-        // Add mouse click event handling
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Call your method or functionality to handle user card click
                 userCardClicked(userName);
             }
         });
     }
 
     private void userCardClicked(String userName) {
-        JOptionPane.showMessageDialog(this, "User " + userName + " clicked!");
-        // Implement further navigation or action here
+        JOptionPane.showMessageDialog(this, "Details for " + userName + " clicked!");
     }
-
 }
+
+
+
