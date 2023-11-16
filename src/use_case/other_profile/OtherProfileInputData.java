@@ -5,4 +5,7 @@ public class OtherProfileInputData {
 	public OtherProfileInputData(String username) {
 		this.username=username;
 	}
+	String getUsername() {
+		return username;
+	}
 }

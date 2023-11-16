@@ -17,8 +17,8 @@ public class OtherProfileInteractor implements OtherProfileInputBoundary{
 
 
 	@Override
-	public void execute(String username) {
-		User currentUser = profileDataAccessObject.getUser(username);
+	public void execute(OtherProfileInputData otherProfileInputData) {
+		User currentUser = profileDataAccessObject.getUser(otherProfileInputData.getUsername());
 		OtherProfileOutputData profileOutputData = new OtherProfileOutputData(currentUser);
 		profilePresenter.prepareSuccessView(profileOutputData);
 	}
