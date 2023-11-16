@@ -33,13 +33,16 @@ public class ConnectView extends JFrame {
 
         sendButton.addActionListener(e -> {
             String message = messageTextArea.getText();
+            System.out.println("(ConnectView): message from box is"+message);
             if (!message.trim().isEmpty()) {
                 connectController.handleSendEmailClicked(message);
                 messageTextArea.setText("");
                 messageTextArea.setEnabled(false);
                 sendButton.setEnabled(false);
             } else {
-                JOptionPane.showMessageDialog(this, "Message is empty", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Message is empty,are you sure you have nothing to tell them?", "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
 

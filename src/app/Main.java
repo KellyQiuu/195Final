@@ -93,6 +93,12 @@ public class Main {
             throw new IllegalStateException("UserListView could not be initialized.");
         }
 
+        viewManagerModel.firePropertyChanged();
+
+        application.pack();
+        application.setSize(new Dimension(800, 600)); // Adjust the window size as needed
+        application.setLocationRelativeTo(null); // Center the window
+        application.setVisible(true);
     }
 }
 

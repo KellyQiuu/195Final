@@ -2,6 +2,7 @@ package data_access;
 
 import entity.User;
 import entity.UserFactory;
+import use_case.connect.ConnectDataAccessInterface;
 import use_case.other_profile.OtherProfileDataAccessInterface;
 import use_case.self_profile.SelfProfileDataAccessInterface;
 import use_case.signup.SignupUserAccessInterface;
@@ -15,7 +16,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class UserDataAccessObject implements SignupUserAccessInterface, UserListDataAccessInterface,
-        SelfProfileDataAccessInterface, LoginUserAccessInterface, OtherProfileDataAccessInterface {
+        SelfProfileDataAccessInterface, LoginUserAccessInterface, OtherProfileDataAccessInterface, ConnectDataAccessInterface {
 
     private final String filePath;
     private final Map<String, String> usersDataMap;//should we refactor the name to "authentication"? since this is username+password
@@ -144,5 +145,23 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
         }
         return user;
     }
+
+    @Override
+    public User getUserByUsername(String username) throws NoSuchElementException {
+        ArrayList<User> all = getAllUsers();
+
+        for(User u : all) {
+            if(u.getName().equals(username)) {
+                System.out.println("(DAO) get user by user name: the name is " + u.getName());
+                return u;
+            }
+        }
+
+        System.out.println("(DAO) found no user with this name");
+        throw new NoSuchElementException("NoSuchUser");
+    }
+
+
+
 }
 
