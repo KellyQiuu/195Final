@@ -94,5 +94,5 @@ public class Main {
         application.setSize(new Dimension(800, 600)); // Adjust the window size as needed
         application.setLocationRelativeTo(null); // Center the window
         application.setVisible(true);
-    }
+    }}
 
