@@ -20,16 +20,15 @@ public class OtherProfilePresenter implements OtherProfileOutputBoundary {
 
 	@Override
 	public void prepareSuccessView(OtherProfileOutputData userdata) {
-		otherProfileViewModel.firePropertyChanged();
-		viewManagerModel.firePropertyChanged();
-		User currentUser = userdata.getCurrentUser();
-		if (currentUser == null) {
-			JOptionPane.showMessageDialog(null, "Other User is Null");
+		User otherUser = userdata.getOtherUser();
+		if (otherUser == null) {
+			JOptionPane.showMessageDialog(null, "This User is Null");
 		} else {
-			String name = currentUser.getName();
-			String email = currentUser.getEmail();
-			String password = currentUser.getPassword();
-			List<String> courses = currentUser.getCourses();
+			otherProfileViewModel.setUser(otherUser);
+			otherProfileViewModel.firePropertyChanged();
+
+			viewManagerModel.setActiveView(otherProfileViewModel.getViewName());
+			viewManagerModel.firePropertyChanged();
 		}
 	}
 

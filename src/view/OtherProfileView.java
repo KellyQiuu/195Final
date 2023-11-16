@@ -4,6 +4,7 @@ import interface_adapter.other_profile.OtherProfileController;
 import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.self_profile.SelfProfileController;
 import interface_adapter.self_profile.SelfProfileViewModel;
+import interface_adapter.signup.SignupState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,8 +20,9 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 	private final OtherProfileViewModel profileViewModel;
 	private final OtherProfileController profileController;
 
-	private JLabel nameLabel, emailLabel, coursesLabel, passwordLabel;
-	private JTextField nameField, emailField, coursesField, passwordField;
+	private JLabel nameLabel, emailLabel, coursesLabel;
+	private JTextField nameField, emailField, coursesField;
+	private JButton connect;
 
 
 	public OtherProfileView(OtherProfileViewModel profileViewModel, OtherProfileController profileController) {
@@ -37,7 +39,7 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 	private JPanel createHeader() {
 		JPanel headerPanel = new JPanel();
 		headerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		JLabel header = new JLabel("User Information");
+		JLabel header = new JLabel("User " + profileViewModel.getUser().getName());
 		header.setFont(new Font("Arial", Font.BOLD, 16));
 		headerPanel.add(header);
 		return headerPanel;
@@ -45,22 +47,19 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 
 	private JPanel createUserInfoPanel() {
 		JPanel userInfoPanel = new JPanel();
-		userInfoPanel.setLayout(new GridLayout(4, 2, 10, 10)); // Grid layout with 4 rows and 2 columns
+		userInfoPanel.setLayout(new GridLayout(3, 2, 10, 10)); // Grid layout with 4 rows and 2 columns
 
 		nameLabel = new JLabel("Name:");
 		emailLabel = new JLabel("Email:");
 		coursesLabel = new JLabel("Courses:");
-		passwordLabel = new JLabel("Password:");
 
 		nameField = new JTextField(profileViewModel.getUser().getName());
 		emailField = new JTextField(profileViewModel.getUser().getEmail());
 		coursesField = new JTextField(profileViewModel.getUser().getCourses().toString()); // Assuming getCourses() returns a List or similar
-		passwordField = new JTextField(profileViewModel.getUser().getPassword());
 
 		nameField.setEditable(false);
 		emailField.setEditable(false);
 		coursesField.setEditable(false);
-		passwordField.setEditable(false);
 
 		userInfoPanel.add(nameLabel);
 		userInfoPanel.add(nameField);
@@ -68,19 +67,38 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 		userInfoPanel.add(emailField);
 		userInfoPanel.add(coursesLabel);
 		userInfoPanel.add(coursesField);
-		userInfoPanel.add(passwordLabel);
-		userInfoPanel.add(passwordField);
 
 		return userInfoPanel;
 	}
 
+	private JPanel createButtonsPanel() {
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		connect = new JButton("Connect"); // Create the connect button
+
+		buttonsPanel.add(connect); // Add the connect button to the panel
+
+		connect.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Handle connect button action here
+			}
+		});
+
+		return buttonsPanel;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-
+		SignupState state = (SignupState) evt.getNewValue();
+		if (state.getUsernameError() != null) {
+			JOptionPane.showMessageDialog(this, state.getUsernameError());
+		}
 	}
 }

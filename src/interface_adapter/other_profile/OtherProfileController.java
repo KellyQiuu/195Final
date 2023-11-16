@@ -9,7 +9,8 @@ public class OtherProfileController {
 	public OtherProfileController(OtherProfileInputBoundary otherProfileInteractor) {
 		this.otherProfileInteractor = otherProfileInteractor;
 	}
-	public void execute(OtherProfileInputData otherProfileInputData) {
+	public void execute(String username) {
+		OtherProfileInputData otherProfileInputData = new OtherProfileInputData(username);
 		otherProfileInteractor.execute(otherProfileInputData);
 	}
 }

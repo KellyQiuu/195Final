@@ -2,7 +2,6 @@ package use_case.self_profile;
 
 import entity.User;
 
-
 public class SelfProfileInteractor implements SelfProfileInputBoundary {
 
 	final SelfProfileDataAccessInterface profileDataAccessObject;
