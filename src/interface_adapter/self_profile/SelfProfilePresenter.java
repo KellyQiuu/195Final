@@ -20,17 +20,22 @@ public class SelfProfilePresenter implements SelfProfileOutputBoundary {
 
 	@Override
 	public void prepareSuccessView(SelfProfileOutputData userdata) {
-		profileViewModel.firePropertyChanged();
-		viewManagerModel.firePropertyChanged();
+
 		User currentUser = userdata.getCurrentUser();
 		if (currentUser == null) {
 			JOptionPane.showMessageDialog(null, "Current User is Null");
 		} else {
-			String name = currentUser.getName();
-			String email = currentUser.getEmail();
-			String password = currentUser.getPassword();
-			List<String> courses = currentUser.getCourses();
+//			String name = currentUser.getName();
+//			String email = currentUser.getEmail();
+//			String password = currentUser.getPassword();
+//			List<String> courses = currentUser.getCourses();
+			profileViewModel.setUser(currentUser);
+			profileViewModel.firePropertyChanged();
+
+			viewManagerModel.setActiveView(profileViewModel.getViewName());
+			viewManagerModel.firePropertyChanged();
 		}
+
 	}
 
 }

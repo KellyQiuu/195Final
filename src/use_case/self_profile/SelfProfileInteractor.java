@@ -2,6 +2,7 @@ package use_case.self_profile;
 
 import entity.User;
 
+
 public class SelfProfileInteractor implements SelfProfileInputBoundary {
 
 	final SelfProfileDataAccessInterface profileDataAccessObject;
@@ -15,8 +16,8 @@ public class SelfProfileInteractor implements SelfProfileInputBoundary {
 
 
 	@Override
-	public void execute(String username) {
-		User currentUser = profileDataAccessObject.getUser(username);
+	public void execute(SelfProfileInputData inputData) {
+		User currentUser = profileDataAccessObject.getUser(inputData.getUsername());
 		SelfProfileOutputData profileOutputData = new SelfProfileOutputData(currentUser);
 		profilePresenter.prepareSuccessView(profileOutputData);
 	}

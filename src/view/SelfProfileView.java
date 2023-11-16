@@ -38,6 +38,8 @@ public class SelfProfileView extends JPanel implements ActionListener, PropertyC
                     }
                 }
         );
+
+
     }
 
     @Override
