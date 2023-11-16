@@ -12,10 +12,12 @@ public class ConnectPresenter implements ConnectOutputBoundary {
 
     @Override
     public void onConnectionResult(ConnectOutputData outputData) {
-        if (outputData.isSuccess()) {
-            viewModel.setConnectionStatus("Email sent successfully.");
-        } else {
-            viewModel.setConnectionStatus("Failed to connect: " + outputData.getMessage());
-        }
+        String statusMessage = outputData.isSuccess() ? "Email sent successfully."
+                : "Failed to connect: " + getValidMessage(outputData.getMessage());
+        viewModel.setConnectionStatus(statusMessage);
+    }
+
+    private String getValidMessage(String message) {
+        return (message == null || message.trim().isEmpty()) ? "An unknown error occurred." : message;
     }
 }
