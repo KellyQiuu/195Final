@@ -1,32 +1,98 @@
 package app;
 
+import data_access.FileUserDataAccessObject;
 import data_access.UserDataAccessObject;
-import interface_adapter.connect.ConnectController;
-import view.ConnectView;
-import use_case.connect.ConnectInteractor;
-//import service.EmailService; // Replace with your actual email service implementation
-import use_case.connect.ConnectDataAccessInterface; // Replace with your actual data access implementation
+import interface_adapter.ViewManagerModel;
+import interface_adapter.other_profile.OtherProfileViewModel;
+import use_case.SessionManagerInteractor;
+import entity.User;
+import entity.UserFactory;
 
+import java.util.ArrayList;
+import use_case.email_user.EmailService;
+import use_case.user_list.UserListDataAccessInterface;
+import view.UserListView;
+import view.UserListViewModel;
+import view.ViewManager;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
+
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        // Create an instance of UserDataAccessObject
-        UserDataAccessObject dataAccess = new UserDataAccessObject(); // Replace with your constructor if different
+    //Initialization
+    //// This setup code would typically go in your main method or application initialization logic
+    //
+    //// Create the dependencies of the ProfileController
+    //ProfileInputBoundary profileInteractor = new ProfileInteractor(/* dependencies */);
+    //EmailService emailService = new EmailService(/* your SendGrid API key */);
+    //ProfileView profileView = new ProfileView(/* ProfileViewModel */, /* ProfileController */);
+    //
+    //// Create the ProfileController
+    //ProfileController profileController = new ProfileController(profileInteractor, emailService, profileView);
+    //
+    //// Now that ProfileController is created, you must set it in the ProfileView
+    //profileView.setController(profileController);
+    public static void main(String[] args) {
+        // Build the main program window, the main panel containing the
+        // various cards, and the layout, and stitch them together.
 
-        // Create the ConnectInteractor instance
-        ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess);
+        // The main application window.
+        JFrame application = new JFrame("User List Example");
+        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        // Assuming sender's username and recipient's email are known for demonstration
-        String senderUsername = "sender@example.com"; // Replace with actual username
-        String recipientEmail = "recipient@example.com"; // Replace with actual recipient email
+        CardLayout cardLayout = new CardLayout();
 
-        // Create the ConnectController instance
-        ConnectController connectController = new ConnectController(connectInteractor, senderUsername, recipientEmail);
+        // The various View objects. Only one view is visible at a time.
+        JPanel views = new JPanel(cardLayout);
+        application.add(views);
 
-        // Create and show the ConnectView
-        ConnectView connectView = new ConnectView(connectController);
-        connectView.setVisible(true); // Make sure to set the view visible
+        // This keeps track of and manages which view is currently showing.
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        new ViewManager(views, cardLayout, viewManagerModel);
+
+        // The data for the views are in the ViewModels.
+        UserListViewModel userListViewModel = new UserListViewModel();
+        OtherProfileViewModel profileViewModel = new OtherProfileViewModel();
+
+        // DataAccess object for user list
+        UserListDataAccessInterface userListDataAccessObject;
+        try {
+            userListDataAccessObject = new UserDataAccessObject();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Could not open user data file.");
+            throw new RuntimeException(e);
+        }
+
+        // Create and add the User List view to the views panel
+        UserListView userListView = UserListUseCaseFactory.create(
+                viewManagerModel,
+                userListViewModel,
+                profileViewModel,
+                userListDataAccessObject
+        );
+
+        if (userListView != null) {
+            views.add(userListView, userListView.viewName);
+            System.out.println("Added UserListView with name1: " + userListView.viewName); // Debugging line
+        }
+
+        if (userListView != null) {
+            views.add(userListView, userListView.getViewName()); // Make sure this is correct
+            System.out.println("Added UserListView with name2: " + userListView.viewName);
+            viewManagerModel.setActiveView(userListView.getViewName()); // Set the active view
+            viewManagerModel.firePropertyChanged(); // Notify the view manager
+        } else {
+            throw new IllegalStateException("UserListView could not be initialized.");
+        }
+
+        viewManagerModel.firePropertyChanged();
+
+        application.pack();
+        application.setSize(new Dimension(800, 600)); // Adjust the window size as needed
+        application.setLocationRelativeTo(null); // Center the window
+        application.setVisible(true);
     }
-}
+

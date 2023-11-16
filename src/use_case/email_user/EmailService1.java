@@ -9,11 +9,11 @@ import java.net.http.HttpRequest.BodyPublishers;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-public class EmailService {
+public class EmailService1 {
     private static final String SENDGRID_API_URL = "https://api.sendgrid.com/v3/mail/send";
     private String sendGridApiKey; // The API Key for SendGrid
 
-    public EmailService(String apiKey) {
+    public EmailService1(String apiKey) {
         this.sendGridApiKey = apiKey;
     }
 
