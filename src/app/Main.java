@@ -1,15 +1,27 @@
 package app;
 
+import data_access.FileUserDataAccessObject;
+import data_access.UserDataAccessObject;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.other_profile.OtherProfileViewModel;
 import use_case.SessionManagerInteractor;
 import entity.User;
 import entity.UserFactory;
 
 import java.util.ArrayList;
 import use_case.email_user.EmailService;
+import use_case.user_list.UserListDataAccessInterface;
+import view.UserListView;
+import view.UserListViewModel;
+import view.ViewManager;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 
 public class Main {
+
     //Initialization
     //// This setup code would typically go in your main method or application initialization logic
     //
@@ -23,30 +35,64 @@ public class Main {
     //
     //// Now that ProfileController is created, you must set it in the ProfileView
     //profileView.setController(profileController);
-    public static void main(String[] args) throws Exception {
-        ArrayList<String> courses = new ArrayList<>();
+    public static void main(String[] args) {
+        // Build the main program window, the main panel containing the
+        // various cards, and the layout, and stitch them together.
 
-        User u=UserFactory.creatUser("User1","123","1","qiuwenyu2021@outlook.com",courses);
+        // The main application window.
+        JFrame application = new JFrame("User List Example");
+        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        CardLayout cardLayout = new CardLayout();
 
-        //EmailService.sendEmail(u, freeTextMessage);
-        SessionManagerInteractor sessionManager = new SessionManagerInteractor();
-        User user = UserFactory.creatUser("Lynnesy", "wenyu.qiu@mail.utoronto.ca","0",
-                "wenyu.qiu@mail.utoronto.ca", new ArrayList<String>());
-        sessionManager.createUserSession(user);
+        // The various View objects. Only one view is visible at a time.
+        JPanel views = new JPanel(cardLayout);
+        application.add(views);
 
-// When you need to retrieve the current user
-        User currentUser = sessionManager.getCurrentUser();
-        if (currentUser != null) {
-            // User is logged in
-            System.out.println("Current user ID: " + currentUser.getId());
-        } else {
-            // No user is currently logged in
+        // This keeps track of and manages which view is currently showing.
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        new ViewManager(views, cardLayout, viewManagerModel);
+
+        // The data for the views are in the ViewModels.
+        UserListViewModel userListViewModel = new UserListViewModel();
+        OtherProfileViewModel profileViewModel = new OtherProfileViewModel();
+
+        // DataAccess object for user list
+        UserListDataAccessInterface userListDataAccessObject;
+        try {
+            userListDataAccessObject = new UserDataAccessObject();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Could not open user data file.");
+            throw new RuntimeException(e);
         }
 
-// When the user logs out
-        sessionManager.endUserSession();
+        // Create and add the User List view to the views panel
+        UserListView userListView = UserListUseCaseFactory.create(
+                viewManagerModel,
+                userListViewModel,
+                profileViewModel,
+                userListDataAccessObject
+        );
 
+        if (userListView != null) {
+            views.add(userListView, userListView.viewName);
+            System.out.println("Added UserListView with name1: " + userListView.viewName); // Debugging line
+        }
 
+        if (userListView != null) {
+            views.add(userListView, userListView.getViewName()); // Make sure this is correct
+            System.out.println("Added UserListView with name2: " + userListView.viewName);
+            viewManagerModel.setActiveView(userListView.getViewName()); // Set the active view
+            viewManagerModel.firePropertyChanged(); // Notify the view manager
+        } else {
+            throw new IllegalStateException("UserListView could not be initialized.");
+        }
+
+        viewManagerModel.firePropertyChanged();
+
+        application.pack();
+        application.setSize(new Dimension(800, 600)); // Adjust the window size as needed
+        application.setLocationRelativeTo(null); // Center the window
+        application.setVisible(true);
     }
 }

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SessionManagerInteractor {
-    private Map<String, User> userSessions = new HashMap<>();
-    private String currentUserSessionId;
+    private static Map<String, User> userSessions = new HashMap<>();
+    private static String currentUserSessionId;
 
     public void createUserSession(User user) {
         String sessionId = "local_session_id";
@@ -14,7 +14,7 @@ public class SessionManagerInteractor {
         currentUserSessionId = sessionId;
     }
 
-    public User getCurrentUser() {
+    public static User getCurrentUser() {
         return userSessions.get(currentUserSessionId);
     }
 
