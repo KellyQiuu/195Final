@@ -5,8 +5,6 @@ import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 public class SelfProfileViewModel extends ViewModel {
-    public final String UPDATE_LABEL = "Update";
-    public static final String UPDATE_BUTTON_LABEL = "Update";
     private SelfProfileState state = new SelfProfileState();
     private User user;
 

@@ -3,13 +3,13 @@ package use_case.other_profile;
 import entity.User;
 
 public class OtherProfileOutputData {
-	private final User currentUser;
+	private final User otherUser;
 
 	public OtherProfileOutputData(User user) {
-		this.currentUser = user;
+		this.otherUser = user;
 	}
 
-	public User getCurrentUser() {
-		return this.currentUser;
+	public User getOtherUser() {
+		return this.otherUser;
 	}
 }

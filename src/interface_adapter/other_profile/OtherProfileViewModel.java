@@ -1,5 +1,6 @@
 package interface_adapter.other_profile;
 
+import entity.User;
 import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -7,9 +8,10 @@ public class OtherProfileViewModel extends ViewModel {
 	public final String UPDATE_LABEL = "Connect";
 	public static final String UPDATE_BUTTON_LABEL = "Connect";
 	private OtherProfileState state = new OtherProfileState();
+	private User user;
 
 	public OtherProfileViewModel() {
-		super("profile");
+		super("other_profile");
 	}
 
 	public void setState(OtherProfileState state) {
@@ -29,6 +31,14 @@ public class OtherProfileViewModel extends ViewModel {
 
 	public OtherProfileState getState() {
 		return state;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
 
