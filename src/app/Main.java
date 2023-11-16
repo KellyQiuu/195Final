@@ -95,4 +95,4 @@ public class Main {
         application.setLocationRelativeTo(null); // Center the window
         application.setVisible(true);
     }
-}
+
