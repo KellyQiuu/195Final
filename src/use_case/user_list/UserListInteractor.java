@@ -3,6 +3,7 @@ import java.util.*;
 
 import entity.User;
 import entity.UserFactory;
+import interface_adapter.user_list.UserListPresenter;
 import use_case.SessionManagerInteractor;
 
 
@@ -30,7 +31,7 @@ public class UserListInteractor implements UserListInputBoundary {
     }
 
     @Override
-    public List<User> execute() {
+    public void execute() {
         // I will add to the map everytime the usecase is executed, and I would not store this anywhere
         // this means the map gets updated per login.
 
@@ -46,8 +47,9 @@ public class UserListInteractor implements UserListInputBoundary {
         sorted.sort((user1, user2) -> userSimilarityScore.get(user2) - userSimilarityScore.get(user1));
 
         System.out.println("UFake user is Sorted, "+sorted);
-        return sorted;
+        UserListOutputData output = new UserListOutputData((ArrayList<User>) sorted);
         //TODO: change the fakeUser, to use it as input data. UserListInputData
+        userListPresenter.prepareSuccessView(output);
     }
 
     private int calculateSimilarity(User currentUser, User u) {

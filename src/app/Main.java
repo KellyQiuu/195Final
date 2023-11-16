@@ -35,16 +35,15 @@ public class Main {
     //
     //// Now that ProfileController is created, you must set it in the ProfileView
     //profileView.setController(profileController);
-    public static void main(String[] args) throws Exception {
-        ArrayList<String> courses = new ArrayList<>();
-
+    public static void main(String[] args) {
+        // Build the main program window, the main panel containing the
+        // various cards, and the layout, and stitch them together.
 
         // The main application window.
         JFrame application = new JFrame("User List Example");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
-
 
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);

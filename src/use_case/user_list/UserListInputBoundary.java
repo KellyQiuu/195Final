@@ -5,5 +5,5 @@ import entity.User;
 import java.util.List;
 
 public interface UserListInputBoundary {
-    List<User> execute();
+    void execute();
 }

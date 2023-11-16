@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import interface_adapter.ViewManagerModel;
 public class UserListPresenter implements UserListOutputBoundary {
-    private UserListState viewState;
+
 
     private final OtherProfileViewModel profileViewModel;
     private final ViewManagerModel viewManagerModel;
@@ -29,12 +29,13 @@ public class UserListPresenter implements UserListOutputBoundary {
     public void prepareSuccessView(UserListOutputData data) {
         // Directly use the list of User objects from the output data
         ArrayList<User> users = data.getUsers();
-
+        UserListState state = userListViewModel.getState();
         // Update the state with the list of User objects
-        viewState.setUsers(users);
+        state.setUsers(users);
 
         // Notify the view model of the state change
-        userListViewModel.setState(viewState);
+        userListViewModel.setState(state);
+        System.out.println("(presenter) set state");
         userListViewModel.firePropertyChanged();
 
         // Optionally, if you need to switch views or perform additional view logic:
