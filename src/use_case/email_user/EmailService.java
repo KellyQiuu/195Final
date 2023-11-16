@@ -13,9 +13,9 @@ import entity.User;
 public class EmailService {
     private static final String SENDGRID_API_URL = "https://api.sendgrid.com/v3/mail/send";
     private static final String YOUR_TEMPLATE_ID = "d-6706faa3bb9543ec9fddfceb21d6d7fb";
-    private static final String SENDGRID_API_KEY = "";
+    private static final String SENDGRID_API_KEY = "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";
 
-    public static void sendEmail(User user, String freeTextMessage) throws Exception {
+    public static void sendEmail(User current, String otherEmail, String freeTextMessage) throws Exception {
         JSONObject emailJson = new JSONObject();
         // Create a 'from' object with an email address
         JSONObject fromObject = new JSONObject();
@@ -26,7 +26,7 @@ public class EmailService {
         emailJson.put("template_id", "d-6706faa3bb9543ec9fddfceb21d6d7fb");
 
         JSONObject to = new JSONObject();
-        to.put("email", user.getEmail());
+        to.put("email", otherEmail);
 
         JSONArray tos = new JSONArray();
         tos.put(to);
@@ -34,8 +34,13 @@ public class EmailService {
         JSONObject personalization = new JSONObject();
         personalization.put("to", tos);
         JSONObject dynamicData = new JSONObject();
-        dynamicData.put("name", user.getName());
+        dynamicData.put("name", current.getName());
+        dynamicData.put("email",current.getEmail());
+        dynamicData.put("course", current.getCourses());
+        System.out.println("Free text received is :"+ freeTextMessage);
+        dynamicData.put("freetext", freeTextMessage);
         personalization.put("dynamic_template_data", dynamicData);
+        System.out.println("Dynamic Data is"+dynamicData); //debug line
 
         JSONArray personalizations = new JSONArray();
         personalizations.put(personalization);
@@ -55,6 +60,7 @@ public class EmailService {
         // Check response status code and log the response
         if (response.statusCode() == 202) {
             System.out.println("Email sent successfully.");
+            System.out.println("Response: " + response.body());
         } else {
             System.out.println("Email send failed with status code: " + response.statusCode());
             System.out.println("Response: " + response.body());
