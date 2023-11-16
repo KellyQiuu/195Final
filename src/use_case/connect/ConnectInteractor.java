@@ -7,14 +7,14 @@ public class ConnectInteractor implements ConnectInputBoundary {
 
     private final ConnectOutputBoundary outputBoundary;
     private final ConnectDataAccessInterface connectDataAccess;
-    private final EmailService emailService;
+    private final EmailService emailService; // Instance variable
 
     public ConnectInteractor(ConnectOutputBoundary outputBoundary,
                              ConnectDataAccessInterface connectDataAccess,
                              EmailService emailService) {
         this.outputBoundary = outputBoundary;
         this.connectDataAccess = connectDataAccess;
-        this.emailService = emailService;
+        this.emailService = emailService; // Assign to instance variable
     }
 
     @Override
@@ -28,12 +28,13 @@ public class ConnectInteractor implements ConnectInputBoundary {
         try {
             String personalInfo = constructPersonalInfo(sender);
             String emailContent = inputData.getMessage() + "\n\n" + personalInfo;
-            EmailService.sendEmail(inputData.getRecipientEmail(), "Connection Request", emailContent);
+            emailService.sendEmail(inputData.getRecipientEmail(), "Connection Request", emailContent); // Use instance variable
             outputBoundary.onConnectionResult(new ConnectOutputData(true, "Email sent successfully."));
         } catch (Exception e) {
             outputBoundary.onConnectionResult(new ConnectOutputData(false, "Failed to send email: " + e.getMessage()));
         }
     }
+
     private String constructPersonalInfo(User user) {
         // Construct the personal information part of the email content
         return "Name: " + user.getName() +
