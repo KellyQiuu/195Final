@@ -4,12 +4,17 @@ import data_access.FileUserDataAccessObject;
 import data_access.UserDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.other_profile.OtherProfileViewModel;
+import interface_adapter.self_profile.SelfProfileController;
+import interface_adapter.self_profile.SelfProfileViewModel;
 import use_case.SessionManagerInteractor;
 import entity.User;
 import entity.UserFactory;
 
 import java.util.ArrayList;
 import use_case.email_user.EmailService;
+import use_case.self_profile.SelfProfileDataAccessInterface;
+import use_case.self_profile.SelfProfileInputBoundary;
+import use_case.self_profile.SelfProfileInteractor;
 import use_case.user_list.UserListDataAccessInterface;
 import view.UserListView;
 import view.UserListViewModel;
@@ -94,5 +99,6 @@ public class Main {
         application.setSize(new Dimension(800, 600)); // Adjust the window size as needed
         application.setLocationRelativeTo(null); // Center the window
         application.setVisible(true);
-    }}
+    }
+}
 

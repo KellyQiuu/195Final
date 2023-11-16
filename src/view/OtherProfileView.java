@@ -1,9 +1,8 @@
 package view;
 
+import interface_adapter.connect.ConnectController;
 import interface_adapter.other_profile.OtherProfileController;
 import interface_adapter.other_profile.OtherProfileViewModel;
-import interface_adapter.self_profile.SelfProfileController;
-import interface_adapter.self_profile.SelfProfileViewModel;
 import interface_adapter.signup.SignupState;
 
 import javax.swing.*;
@@ -16,7 +15,7 @@ import java.beans.PropertyChangeListener;
 public class OtherProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 	public final String viewName = "other_profile";
 
-
+	private final ConnectController connectController;
 	private final OtherProfileViewModel profileViewModel;
 	private final OtherProfileController profileController;
 
@@ -25,9 +24,10 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 	private JButton connect;
 
 
-	public OtherProfileView(OtherProfileViewModel profileViewModel, OtherProfileController profileController) {
+	public OtherProfileView(OtherProfileViewModel profileViewModel, OtherProfileController profileController, ConnectController connectController) {
 		this.profileController = profileController;
 		this.profileViewModel = profileViewModel;
+		this.connectController = connectController;
 		this.profileViewModel.addPropertyChangeListener(this);
 
 		// Layout setup
@@ -83,6 +83,11 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Handle connect button action here
+				if (e.getSource().equals(connect)) {
+					// connectController.execute();
+				} else {
+					//
+				}
 			}
 		});
 
