@@ -58,7 +58,8 @@ public class OtherProfile {
         OtherProfileController otherProfileController = new OtherProfileController(otherProfileInteractor);
 
         OtherProfileView view = new OtherProfileView(opViewModel, otherProfileController, connectController);
-        view.setVisible(true);
+        application.pack();
+        application.setVisible(true);
 
     }
 }

@@ -3,7 +3,6 @@ package view;
 import interface_adapter.connect.ConnectController;
 import interface_adapter.other_profile.OtherProfileController;
 import interface_adapter.other_profile.OtherProfileViewModel;
-import interface_adapter.signup.SignupState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,28 +28,42 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 	public OtherProfileView(OtherProfileViewModel profileViewModel, OtherProfileController profileController, ConnectController connectController) {
 		this.profileController = profileController;
 		this.profileViewModel = profileViewModel;
-		this.connectController = connectController;
 		this.profileViewModel.addPropertyChangeListener(this);
+		this.connectController = connectController;
 
-		// Layout setup
-		this.setLayout(new BorderLayout());
-		this.add(createHeader(), BorderLayout.NORTH);
-		this.add(createUserInfoPanel(), BorderLayout.CENTER);
+		JLabel title = new JLabel(OtherProfileViewModel.TITLE_LABEL);
+		title.setAlignmentX(Component.CENTER_ALIGNMENT);
+		createUserInfo();
+
+		LabelTextPanel usernameInfo = new LabelTextPanel(nameLabel, nameField);
+		LabelTextPanel emailInfo = new LabelTextPanel(emailLabel, emailField);
+		LabelTextPanel coursesInfo = new LabelTextPanel(coursesLabel, coursesField);
+
+		JPanel buttons = new JPanel();
+		connect = new JButton(OtherProfileViewModel.CONNECT_BUTTON_LABEL);
+		buttons.add(connect);
+
+		connect.addActionListener(
+				new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// Handle connect button action here
+					if (e.getSource().equals(connect)) {
+						connectController.handleSendEmailClicked(message);  // Where does this message come from?
+					}
+				}
+			}
+		);
+
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(title);
+		this.add(usernameInfo);
+		this.add(emailInfo);
+		this.add(coursesInfo);
+		this.add(buttons);
 	}
 
-	private JPanel createHeader() {
-		JPanel headerPanel = new JPanel();
-		headerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		JLabel header = new JLabel("User " + profileViewModel.getUser().getName());
-		header.setFont(new Font("Arial", Font.BOLD, 16));
-		headerPanel.add(header);
-		return headerPanel;
-	}
-
-	private JPanel createUserInfoPanel() {
-		JPanel userInfoPanel = new JPanel();
-		userInfoPanel.setLayout(new GridLayout(3, 2, 10, 10)); // Grid layout with 4 rows and 2 columns
-
+	private void createUserInfo() {
 		nameLabel = new JLabel("Name:");
 		emailLabel = new JLabel("Email:");
 		coursesLabel = new JLabel("Courses:");
@@ -62,36 +75,6 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 		nameField.setEditable(false);
 		emailField.setEditable(false);
 		coursesField.setEditable(false);
-
-		userInfoPanel.add(nameLabel);
-		userInfoPanel.add(nameField);
-		userInfoPanel.add(emailLabel);
-		userInfoPanel.add(emailField);
-		userInfoPanel.add(coursesLabel);
-		userInfoPanel.add(coursesField);
-
-		return userInfoPanel;
-	}
-
-	private JPanel createButtonsPanel() {
-		JPanel buttonsPanel = new JPanel();
-		buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-		connect = new JButton("Connect"); // Create the connect button
-
-		buttonsPanel.add(connect); // Add the connect button to the panel
-
-		connect.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// Handle connect button action here
-				if (e.getSource().equals(connect)) {
-					connectController.handleSendEmailClicked(message);
-				}
-			}
-		});
-
-		return buttonsPanel;
 	}
 
 	@Override
@@ -101,9 +84,6 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		SignupState state = (SignupState) evt.getNewValue();
-		if (state.getUsernameError() != null) {
-			JOptionPane.showMessageDialog(this, state.getUsernameError());
-		}
+
 	}
 }
