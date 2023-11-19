@@ -41,21 +41,13 @@ public class SignupState {
         return password;
     }
 
-    public String getPasswordError() {
-        return passwordError;
-    }
-
     public void setUsername(String username) {this.username = username;}
 
     public void setUsernameError(String usernameError) {this.usernameError = usernameError;}
 
     public void setPassword(String password) {this.password = password;}
 
-    public void setPasswordError(String passwordError) {this.passwordError = passwordError;}
-
     public void setEmail(String email) {this.email = email;}
-
-    public void setEmailError(String emailError) {this.emailError = emailError;}
 
     public void setCourse1(String course1) {this.course1 = course1;}
 

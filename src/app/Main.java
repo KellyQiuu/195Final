@@ -65,7 +65,7 @@ public class Main {
         // DataAccess object for user list
         UserListDataAccessInterface userListDataAccessObject;
         try {
-            userListDataAccessObject = new UserDataAccessObject();
+            userListDataAccessObject = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);

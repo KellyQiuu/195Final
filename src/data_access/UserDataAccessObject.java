@@ -19,6 +19,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
         SelfProfileDataAccessInterface, LoginUserAccessInterface, OtherProfileDataAccessInterface, ConnectDataAccessInterface {
 
     private final String filePath;
+
     private final Map<String, String> usersDataMap;//should we refactor the name to "authentication"? since this is username+password
 
     //TODO:(Kelly)This needs to have String:User map.( For latter extensions and for Usecase Data Access).I would need to
@@ -29,7 +30,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
     private final ArrayList<User> allUsers = new ArrayList<>();
 
-    public UserDataAccessObject() throws IOException {
+    public UserDataAccessObject(UserFactory userFactory) throws IOException {
 
         System.out.println("UserDataAccess constructor reached");
         this.filePath = "src/data_access/users.csv";
@@ -106,17 +107,16 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     public void save(User user) {
         usersDataMap.put(user.getName(), user.getPassword());
 
-        // Step 2: Append the new user's data to the CSV file
-        String userData = user.getName() + "," + user.getPassword()+ "," + user.getId()+ "," + user.getEmail()+ ","+
-                storeCourses(user)+"\n"; // Format the user data for CSV
-
-
+        String userData = user + "\n";
+//        String userData = user.getName() + "," + user.getPassword()+ "," + user.getId()+ "," + user.getEmail()+ ","+
+//                storeCourses(user)+"\n"; // Format the user data for CSV
         try {
             Files.write(Paths.get(filePath), userData.getBytes(), StandardOpenOption.APPEND); // Append to the CSV file
         } catch (IOException e) {
             throw new RuntimeException("Error writing to users file", e);
         }
     }
+
     public String storeCourses(User u) {
         List<String> courses = u.getCourses();
         //complete this method to save the user u's courses, which is an List of 5 Strings into Strings seperated by /
