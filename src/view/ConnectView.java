@@ -6,8 +6,7 @@ import java.awt.*;
 
 public class ConnectView extends JFrame {
     private JTextArea messageTextArea;
-    private JButton sendButton;
-    private ConnectController connectController;
+    private final ConnectController connectController;
 
     public ConnectView(ConnectController connectController) {
         super("Send Message"); // Set the title of the JFrame
@@ -17,7 +16,7 @@ public class ConnectView extends JFrame {
 
     private void initializeUI() {
         messageTextArea = new JTextArea(10, 40);
-        sendButton = new JButton("Send");
+        JButton sendButton = new JButton("Send");
 
         setLayout(new BorderLayout());
         add(new JScrollPane(messageTextArea), BorderLayout.CENTER); // Add scrollable text area to center
