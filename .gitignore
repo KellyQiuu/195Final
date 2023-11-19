@@ -7,3 +7,5 @@ out
 src/.DS_Store
 
 sendgrid.env
+
+my-first-app.iml
