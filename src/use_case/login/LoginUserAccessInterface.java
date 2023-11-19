@@ -2,6 +2,8 @@ package use_case.login;
 
 import entity.User;
 
+import java.io.IOException;
+
 /**
  * Application Business Rules layer interface for accessing user data.
  */
@@ -20,4 +22,8 @@ public interface LoginUserAccessInterface {
     void save(User user);
 
     User get(String username);
+
+    String getPass(String username);
+
+    User get2(String username) throws IOException;
 }

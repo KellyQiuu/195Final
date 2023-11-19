@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -53,13 +54,19 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
         // buttons
         JButton signUp = createButton("Login in!", constraints);
-        signUp.addActionListener(e -> handleSignUp());
+        signUp.addActionListener(e -> {
+            try {
+                handleLogin();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         JButton cancel = createButton("Cancel", constraints);
         // TODO: 11/19/2023
 
     }
 
-    private void handleSignUp() {
+    private void handleLogin() throws IOException {
         String username = usernameInputField.getText();
 
         LoginState currentState = loginViewModel.getState();
@@ -104,8 +111,10 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     public void propertyChange(PropertyChangeEvent evt) {
         LoginState state = (LoginState) evt.getNewValue();
         setFields(state);
+        if (state.getUsernameError() != null) {
+            JOptionPane.showMessageDialog(this, state.getUsernameError());
+        }
     }
-
     private void setFields(LoginState state) {
         usernameInputField.setText(state.getUsername());
     }

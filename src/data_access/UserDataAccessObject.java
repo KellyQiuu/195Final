@@ -27,7 +27,6 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
     private final Map<String, User> usernameUserMap;
 
-
     private final ArrayList<User> allUsers = new ArrayList<>();
 
     public UserDataAccessObject(UserFactory userFactory) throws IOException {
@@ -63,8 +62,12 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
                 //TODO: Please edit the creation of this courses ArrayList after changing the File format, including
                 // email, courses info in the file.
                 //create user object from the information stored in the file, put them in the allUsers list.
-                User user = UserFactory.creatUser(p[0],p[1],p[2],p[3],courses);
+                User user = UserFactory.createUser(p[0],p[1],p[2],p[3],courses);
                 allUsers.add(user);
+
+                // Update the usernameUserMap with the new user
+                usernameUserMap.put(p[0], user);
+                System.out.println("Loaded user: " + p[0]);
             }
         }
         System.out.println(allUsers.toString());
@@ -102,6 +105,27 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     public User get(String username) {
         return usernameUserMap.get(username);
     }
+
+    @Override
+    public String getPass(String username) {
+        return usersDataMap.get(username);
+    }
+
+    @Override
+    public User get2(String username) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(filePath));
+
+        for (String line : lines) {
+            String[] parts = line.split(",");
+            if (parts.length >= 5 && parts[0].equals(username)) {
+                // Assuming the format is: username,password,email,id,courses
+                ArrayList<String> courses = new ArrayList<>(Arrays.asList(parts[4].split("\\+")));
+                return UserFactory.createUser(parts[0], parts[1], parts[2], parts[3], courses);
+            }
+        }
+        return null;
+    }
+
 
     @Override
     public void save(User user) {

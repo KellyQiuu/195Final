@@ -23,6 +23,9 @@ public class LoginState {
         return username;
     }
 
+    public String getUsernameError() {
+        return usernameError;
+    }
     public String getPassword() {
         return password;
     }
