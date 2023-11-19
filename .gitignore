@@ -1,7 +1,8 @@
 out
 .idea
 195Final1.iml
-.gradle
+.*
+!/.gitignore
 
 .DS_Store
 src/.DS_Store
