@@ -49,7 +49,6 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 				public void actionPerformed(ActionEvent e) {
 					// Handle connect button action here
 					if (e.getSource().equals(connect)) {
-						System.out.println();
 						SwingUtilities.invokeLater(() -> new ConnectView(connectController));  // Invoke the new view.
 					}
 				}
