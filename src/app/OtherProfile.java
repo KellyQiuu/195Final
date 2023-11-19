@@ -30,6 +30,8 @@ public class OtherProfile {
         CardLayout cardLayout = new CardLayout();
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);
+
+
         application.add(views);
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
