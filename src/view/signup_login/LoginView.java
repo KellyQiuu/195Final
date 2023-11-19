@@ -3,8 +3,10 @@ package view.signup_login;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.signup.SignupState;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -28,45 +30,68 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     private JButton cancel;
 
-    private JFrame jFrame;
-
     public LoginView(LoginController controller, LoginViewModel loginViewModel) {
         this.loginController = controller;
         this.loginViewModel = loginViewModel;
         this.loginViewModel.addPropertyChangeListener(this);
 
-
-        this.loginFieldKey(); //for username, password.
+        initializeComponents();
     }
 
-    private void loginFieldKey() {
-        usernameInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        LoginState currentState = loginViewModel.getState();
-                        currentState.setUsername(usernameInputField.getText() + e.getKeyChar());
-                        loginViewModel.setState(currentState);
-                    }
-                    @Override
-                    public void keyPressed(KeyEvent e) {}
-                    @Override
-                    public void keyReleased(KeyEvent e) {}
-                });
+    private void initializeComponents() {
+        setLayout(new GridBagLayout());
+        setBackground(new Color(30, 30, 30));
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(10, 10, 10, 10); // Padding
 
-        passwordInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        LoginState currentState = loginViewModel.getState();
-                        currentState.setPassword(passwordInputField.getText() + e.getKeyChar());
-                        loginViewModel.setState(currentState);
-                    }
-                    @Override
-                    public void keyPressed(KeyEvent e) {}
-                    @Override
-                    public void keyReleased(KeyEvent e) {}
-                });
+        //labels
+        addLabelAndField("Username:", usernameInputField, constraints);
+        addLabelAndField("Password:", passwordInputField, constraints);
+
+        // buttons
+        JButton signUp = createButton("Login in!", constraints);
+        signUp.addActionListener(e -> handleSignUp());
+        JButton cancel = createButton("Cancel", constraints);
+        // TODO: 11/19/2023
+
+    }
+
+    private void handleSignUp() {
+        String username = usernameInputField.getText();
+
+        LoginState currentState = loginViewModel.getState();
+        currentState.setUsername(username);
+        loginViewModel.setState(currentState);
+
+        String password = new String(passwordInputField.getPassword());
+        currentState.setPassword(password);
+        loginViewModel.setState(currentState);
+
+        loginController.execute(username, password);
+    }
+
+    private void addLabelAndField(String labelText, JComponent field, GridBagConstraints constraints) {
+        JLabel label = new JLabel(labelText);
+        label.setForeground(Color.WHITE);
+        label.setFont(new Font("Arial", Font.BOLD, 14));
+        add(label, constraints);
+        constraints.gridy++;
+        field.setBackground(new Color(50, 50, 50));
+        field.setForeground(Color.WHITE);
+        add(field, constraints);
+        constraints.gridy++;
+    }
+
+    private JButton createButton(String text, GridBagConstraints constraints) {
+        JButton button = new JButton(text);
+        button.setBackground(new Color(50, 50, 50));
+        button.setForeground(Color.WHITE);
+        add(button, constraints);
+        constraints.gridy++;
+        return button;
     }
 
 
