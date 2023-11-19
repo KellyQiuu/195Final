@@ -71,12 +71,18 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        LoginState state = (LoginState) evt.getNewValue();
+        setFields(state);
     }
+
+    private void setFields(LoginState state) {
+        usernameInputField.setText(state.getUsername());
+    }
+
 }
