@@ -1,6 +1,7 @@
 package app;
 
 import data_access.UserDataAccessObject;
+import entity.UserFactory;
 import interface_adapter.connect.ConnectController;
 import interface_adapter.connect.ConnectPresenter;
 import interface_adapter.connect.ConnectViewModel;
@@ -18,7 +19,7 @@ public class Connect {
         // Create an instance of UserDataAccessObject
         ConnectViewModel connectViewModel = new ConnectViewModel();
         ConnectOutputBoundary dataAccess = new ConnectPresenter(connectViewModel); // Replace with your constructor if different
-        ConnectDataAccessInterface dao = new UserDataAccessObject();
+        ConnectDataAccessInterface dao = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
         // Create the ConnectInteractor instance
         ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess,dao);
 
