@@ -3,9 +3,6 @@ import java.util.*;
 
 import entity.User;
 import entity.UserFactory;
-import interface_adapter.user_list.UserListPresenter;
-import use_case.SessionManagerInteractor;
-
 
 
 public class UserListInteractor implements UserListInputBoundary {
@@ -22,7 +19,7 @@ public class UserListInteractor implements UserListInputBoundary {
 
         // this.currentUser = SessionManagerInteractor.getCurrentUser();
         ArrayList<String> c = new ArrayList<>(Arrays.asList("CSC207","MAT237","CSC343","MAT246","MAT337"));
-        this.currentUser = UserFactory.creatUser("myself", "123","12829929","randomemail@email.com",c);
+        this.currentUser = UserFactory.createUser("myself", "123","12829929","randomemail@email.com",c);
         //TODO: change this to a real secession Manager
         System.out.println("UFake user is created, "+this.currentUser.toString());
     }

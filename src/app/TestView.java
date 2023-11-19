@@ -5,7 +5,6 @@ import entity.User;
 import entity.UserFactory;
 import interface_adapter.user_list.UserListState;
 
-import view.UserListView;
 import view.UserListViewModel;
 
 
@@ -30,12 +29,12 @@ public class TestView {
             // Here we'll simulate it directly for simplicity
             ArrayList<String> kellycourse = new ArrayList<>(Arrays.asList("CSC207","MAT237","CSC343","MAT246","MAT337"));
 
-            User u1 = UserFactory.creatUser("Kelly", "Qiuwenyu",
+            User u1 = UserFactory.createUser("Kelly", "Qiuwenyu",
                     "1008197602","qiuwenyu@outlook.com",kellycourse);
 
             ArrayList<String> yecourse = new ArrayList<>(Arrays.asList("CSC207","MAT240","CSC331","STA246","PSY137"));
 
-            User u2 = UserFactory.creatUser("Ziyi Ye", "Yeziyi",
+            User u2 = UserFactory.createUser("Ziyi Ye", "Yeziyi",
                     "100238392","ziyi.ye@outlook.com",yecourse);
             ArrayList<User> users = new ArrayList<>(Arrays.asList(u1,u2));
 

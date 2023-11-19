@@ -17,7 +17,7 @@ public class SecessionManagerTest {
     public void setUp() {
         // Set up your test environment before each test
         sessionManager = new SessionManagerInteractor();
-        testUser = UserFactory.creatUser("Lynnesy", "wenyu.qiu@mail.utoronto.ca", "0",
+        testUser = UserFactory.createUser("Lynnesy", "wenyu.qiu@mail.utoronto.ca", "0",
                 "wenyu.qiu@mail.utoronto.ca", new ArrayList<>());
     }
 
