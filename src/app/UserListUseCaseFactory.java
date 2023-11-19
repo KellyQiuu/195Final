@@ -26,7 +26,6 @@ public class UserListUseCaseFactory {
             UserListViewModel viewModel,
             OtherProfileViewModel profileViewModel,
             UserListDataAccessInterface userListDataAccessObject
-
     ){
         try {
             UserListController userListController = createUserListUseCase(viewManagerModel, viewModel,
