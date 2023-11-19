@@ -7,7 +7,3 @@ out
 src/.DS_Store
 
 sendgrid.env
-
-build
-build.gradle
-
