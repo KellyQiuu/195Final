@@ -7,6 +7,7 @@ import java.beans.PropertyChangeSupport;
 public class SelfProfileViewModel extends ViewModel {
     private SelfProfileState state = new SelfProfileState();
     private User user;
+    public static final String TITLE_LABEL = "My Profile";
 
     public SelfProfileViewModel() {
         super("profile");

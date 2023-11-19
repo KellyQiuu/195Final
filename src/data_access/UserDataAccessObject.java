@@ -135,15 +135,14 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     // Get the current user object.
     @Override
     public User getUser(String username) {
-        User user = null;
-        if (checkValidUsername(username)) {
-            for (User i : allUsers) {
+        if (usersDataMap.containsKey(username)) {
+            for (User i : getAllUsers()) {
                 if (Objects.equals(i.getName(), username)) {
-                    user = i;
+                    return i;
                 }
             }
         }
-        return user;
+        return null;
     }
 
     @Override
