@@ -1,6 +1,8 @@
 package view;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -8,7 +10,8 @@ import java.util.ArrayList;
 public class UserCardPanel extends JPanel {
     private String userDisplayInfo;
 
-    public UserCardPanel(String userName, ArrayList<String> courses) {
+
+    public UserCardPanel(String userName, ArrayList<String> courses, ActionListener listener) {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLACK)); // for card-like appearance
 
@@ -26,15 +29,18 @@ public class UserCardPanel extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                userCardClicked(userName);
+                userCardClicked(userName,listener);
             }
         });
     }
 
-    private void userCardClicked(String userName) {
-        JOptionPane.showMessageDialog(this, "Details for " + userName + " clicked!");
+    private void userCardClicked(String userName, ActionListener listener) {
+        System.out.println("Clicked UserCard for"+userName );
+        ActionEvent actionEvent = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "USER_CARD_CLICKED:" + userName);
+        listener.actionPerformed(actionEvent);
     }
-}
+    }
+
 
 
 

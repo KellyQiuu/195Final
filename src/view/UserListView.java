@@ -1,5 +1,7 @@
 package view;
 import entity.User;
+import app.OtherProfileUseCaseFactory;
+import interface_adapter.other_profile.OtherProfileController;
 import interface_adapter.user_list.UserListController;
 import interface_adapter.user_list.UserListState;
 
@@ -14,11 +16,13 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class UserListView extends JPanel implements ActionListener, PropertyChangeListener {
+
+public class UserListView extends JPanel implements PropertyChangeListener,UserCardClickListener {
     private final UserListViewModel userListViewModel;
     private final JPanel userCardsPanel;
-    public final String viewName ="User List";
-    public final UserListController userListController;
+    public final String viewName = "User List";
+    private final UserListController userListController;
+    private ArrayList<UserCardClickListener> listeners = new ArrayList<>();
 
     public UserListView(UserListViewModel viewModel, UserListController controller) {
         this.userListViewModel = viewModel;
@@ -31,22 +35,20 @@ public class UserListView extends JPanel implements ActionListener, PropertyChan
         JScrollPane scrollPane = new JScrollPane(userCardsPanel);
         add(scrollPane, BorderLayout.CENTER);
 
-        viewModel.addPropertyChangeListener(evt -> {
-            if ("state".equals(evt.getPropertyName())) {
-                updateUserCards();
-            }
-        });
+        viewModel.addPropertyChangeListener(this);
 
-        // Add a component listener to trigger controller's execute method when this view is shown
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
                 super.componentShown(e);
-                userListController.execute(); // Call the execute method on the controller
+                userListController.execute();
             }
         });
 
         this.setVisible(true);
+    }
+    public void addUserCardClickedListener(UserCardClickListener listener) {
+        listeners.add(listener);
     }
 
     private void updateUserCards() {
@@ -55,29 +57,36 @@ public class UserListView extends JPanel implements ActionListener, PropertyChan
         for (String userInfo : userDisplayData) {
             String[] parts = userInfo.split("\n");
             String userName = parts[0].trim();
-            // Split the courses string by comma and convert it into an ArrayList
             ArrayList<String> courses = new ArrayList<>(Arrays.asList(parts[2].split(", ")));
 
-            UserCardPanel cardPanel = new UserCardPanel(userName, courses);
+            UserCardPanel cardPanel = new UserCardPanel(userName, courses, e -> notifyUserCardClicked(userName));
             userCardsPanel.add(cardPanel);
         }
         userCardsPanel.revalidate();
         userCardsPanel.repaint();
     }
 
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Action handling code
+    private void notifyUserCardClicked(String userName) {
+        for (UserCardClickListener listener : listeners) {
+            listener.onUserCardClicked(userName);
+        }
     }
+
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        // Property change handling code
+        if ("state".equals(evt.getPropertyName())) {
+            updateUserCards();
+        }
     }
 
     public String getViewName() {
         return viewName;
+    }
+
+    @Override
+    public void onUserCardClicked(String userName) {
+
+
     }
 }
