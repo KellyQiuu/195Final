@@ -8,13 +8,15 @@ import entity.User;
 
 public interface SignupUserAccessInterface {
     /**
+     * @param email string username of the User to check if it has been taken.
+     * @return true if and only if the user typed a valid email address.
+     */
+    boolean checkValidEmail(String email);
+
+    /**
      * @param username string username of the User to check if it has been taken.
      * @return true if and only if the username has not been taken and the user can register with this name.
      */
-
-    boolean checkValidEmail(String username);
-
-
     boolean checkValidUsername(String username);
 
     /**
