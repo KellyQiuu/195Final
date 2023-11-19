@@ -1,20 +1,29 @@
 package app.Test_SignupLogin;
 
+import app.UserListUseCaseFactory;
 import data_access.UserDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.login.LoginUserAccessInterface;
+import use_case.user_list.UserListDataAccessInterface;
 import view.signup_login.LoggedInView;
 import view.signup_login.LoginView;
 import view.signup_login.SignupView;
+
 import view.ViewManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+
+
+import view.UserListViewModel;
+import view.UserListView;
+
 
 public class Test {
     public static void main(String[] args) {
@@ -34,6 +43,9 @@ public class Test {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
 
+        UserListViewModel userListViewModel = new UserListViewModel();  // 111111111111111111
+        OtherProfileViewModel profileViewModel = new OtherProfileViewModel(); /////////////
+
         UserDataAccessObject userDataAccessObject;
 
         try {
@@ -46,11 +58,28 @@ public class Test {
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userListViewModel,userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
-        views.add(loggedInView, loggedInView.viewName);
+//        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+//        views.add(loggedInView, loggedInView.viewName);
+//
+
+        UserListDataAccessInterface userListDataAccessObject;
+        try {
+            userListDataAccessObject = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Could not open user data file.");
+            throw new RuntimeException(e);
+        }
+
+        UserListView userListView = UserListUseCaseFactory.create(
+                viewManagerModel,
+                userListViewModel,
+                profileViewModel,
+                userListDataAccessObject
+        );
+        views.add(userListView, userListView.viewName);
 
         viewManagerModel.setActiveView(signupView.viewName);
         viewManagerModel.firePropertyChanged();

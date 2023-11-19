@@ -18,6 +18,9 @@ public class EmailVerificationService {
 
             String jsonInputString = "{\"email\": \"" + email + "\"}";
 
+            // Debug print
+            System.out.println("Sending JSON: " + jsonInputString);
+
             try(OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes("utf-8");
                 os.write(input, 0, input.length);
@@ -31,6 +34,9 @@ public class EmailVerificationService {
                     response.append(responseLine.trim());
                 }
                 JSONObject jsonResponse = new JSONObject(response.toString());
+
+                // Print the entire JSON response
+                System.out.println("API Response: " + jsonResponse.toString());
 
                 // Check if the response code is 200
                 return jsonResponse.getInt("code") == 200;
