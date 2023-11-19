@@ -14,7 +14,7 @@ import java.beans.PropertyChangeListener;
 public class OtherProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 	public final String viewName = "other_profile";
 
-	public final String message = "Wants to connect";
+	public String message;
 
 	private final ConnectController connectController;
 	private final OtherProfileViewModel profileViewModel;
@@ -49,7 +49,7 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 				public void actionPerformed(ActionEvent e) {
 					// Handle connect button action here
 					if (e.getSource().equals(connect)) {
-						connectController.handleSendEmailClicked(message);  // Where does this message come from?
+						SwingUtilities.invokeLater(() -> new ConnectView(connectController));  // Invoke the new view.
 					}
 				}
 			}
@@ -85,5 +85,9 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 
+	}
+
+	private void setMessage(String message){
+		this.message = message;
 	}
 }
