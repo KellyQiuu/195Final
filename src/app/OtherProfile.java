@@ -1,6 +1,7 @@
 package app;
 
 import data_access.UserDataAccessObject;
+import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.connect.ConnectController;
 import interface_adapter.connect.ConnectPresenter;
@@ -38,14 +39,14 @@ public class OtherProfile {
 
         OtherProfileDataAccessInterface profileDataAccessObject;
         try {
-            profileDataAccessObject = new UserDataAccessObject();
+            profileDataAccessObject = new UserDataAccessObject(new UserFactory());
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
         ConnectViewModel connectViewModel = new ConnectViewModel();
         ConnectOutputBoundary dataAccess = new ConnectPresenter(connectViewModel); // Replace with your constructor if different
-        ConnectDataAccessInterface dao = new UserDataAccessObject();
+        ConnectDataAccessInterface dao = new UserDataAccessObject(new UserFactory());
         // Create the ConnectInteractor instance
         ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess,dao);
         System.out.println("2 Created CONNECT INTERACTOR");
