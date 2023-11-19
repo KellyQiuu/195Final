@@ -88,7 +88,8 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     @Override
     // TODO: 11/8/2023 use api?
     public boolean checkValidEmail(String email) {
-        return EmailVerificationService.verifyEmail(email);
+        return true;
+//        return EmailVerificationService.verifyEmail(email);
     }
 
     @Override

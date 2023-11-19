@@ -1,10 +1,11 @@
 package interface_adapter.login;
 
-import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.user_list.UserListState;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
+import view.UserListViewModel;
 
 
 public class LoginPresenter implements LoginOutputBoundary {
@@ -12,26 +13,42 @@ public class LoginPresenter implements LoginOutputBoundary {
     private final LoginViewModel loginViewModel;
 
     private final LoggedInViewModel loggedInViewModel;
-    private ViewManagerModel viewManagerModel;
+
+    private final UserListViewModel userListViewModel;
+
+    private ViewManagerModel viewManagerModel; // 1111111111
 
 
     public LoginPresenter(ViewManagerModel viewManagerModel,
                           LoggedInViewModel loggedInViewModel,
-                          LoginViewModel loginViewModel) {
+                          LoginViewModel loginViewModel,
+                          UserListViewModel userListViewModel) {  // 111111
         this.viewManagerModel = viewManagerModel;
         this.loginViewModel = loginViewModel;
         this.loggedInViewModel = loggedInViewModel;
+        this.userListViewModel = userListViewModel; // 11111111
     }
+
+//    public void prepareSuccessView(LoginOutputData response) {
+//        LoggedInState loggedInState = loggedInViewModel.getState();
+//        loggedInState.setUsername(response.getUsername());
+//        this.loggedInViewModel.setState(loggedInState);
+//        this.loggedInViewModel.firePropertyChanged();
+//
+//        this.viewManagerModel.setActiveView(loggedInViewModel.getViewName());
+//        this.viewManagerModel.firePropertyChanged();
+//    }
 
     public void prepareSuccessView(LoginOutputData response) {
-        LoggedInState loggedInState = loggedInViewModel.getState();
-        loggedInState.setUsername(response.getUsername());
-        this.loggedInViewModel.setState(loggedInState);
-        this.loggedInViewModel.firePropertyChanged();
+        UserListState userListState = userListViewModel.getState();
+        userListState.setUsername(response.getUsername());
+        this.userListViewModel.setState(userListState);
+        this.userListViewModel.firePropertyChanged();
 
-        this.viewManagerModel.setActiveView(loggedInViewModel.getViewName());
+        this.viewManagerModel.setActiveView(userListViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
+
 
     public void prepareFailView(String errorMessage) {
         LoginState loginState = loginViewModel.getState();
