@@ -6,7 +6,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class EmailVerificationService {
-
     public static boolean verifyEmail(String email) {
         try {
             URL url = new URL("https://api.nbhao.org/v1/email/verify");
@@ -46,4 +45,37 @@ public class EmailVerificationService {
             return false;
         }
     }
+
+    public static boolean verifyEmail2(String email) {
+        String mtb_data = "";
+        try {
+            URL url = new URL( "http(s)://www.maitanbang.com/apis/mtbvemail/");
+            HttpURLConnection  conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+            conn.setDoOutput(true);
+            conn.setRequestProperty("content-type", "application/x-www-form-urlencoded");
+            OutputStream outputStream = conn.getOutputStream();
+            String content = "key=你的APIKEY&word=";
+            outputStream.write(content.getBytes());
+            outputStream.flush();
+            outputStream.close();
+            InputStream inputStream = conn.getInputStream();
+            byte[] data = new byte[1024];
+            StringBuilder mtbapi = new StringBuilder();
+            while (inputStream.read(data) != -1) {
+                String t = new String(data);
+                mtbapi.append(t);
+            }
+            mtb_data = mtbapi.toString();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(mtb_data);
+
+        return mtb_data.equals("200");
+    }
+
 }

@@ -48,6 +48,15 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         constraints.gridy = 0;
         constraints.insets = new Insets(10, 10, 10, 10); // Padding
 
+        //Sign up Title label
+        JLabel titleLabel = new JLabel("Log in!");
+        titleLabel.setForeground(Color.WHITE); // Set text color to white
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Customize font
+        titleLabel.setHorizontalAlignment(JLabel.CENTER); // Center align
+        add(titleLabel, constraints);
+        constraints.gridy++;
+
+
         //labels
         addLabelAndField("Username:", usernameInputField, constraints);
         addLabelAndField("Password:", passwordInputField, constraints);
@@ -62,8 +71,20 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
             }
         });
         JButton cancel = createButton("Cancel", constraints);
-        // TODO: 11/19/2023
+        cancel.addActionListener(e -> {
+            JFrame parentFrame = getParentFrame();
+            if (parentFrame != null) {
+                parentFrame.dispose();
+            }
+        });
+    }
 
+    private JFrame getParentFrame() {
+        Component component = this;
+        while (component != null && !(component instanceof JFrame)) {
+            component = component.getParent();
+        }
+        return (JFrame) component;
     }
 
     private void handleLogin() throws IOException {
