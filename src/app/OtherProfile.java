@@ -65,8 +65,7 @@ public class OtherProfile {
         OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,
                 otherProfileViewModel,
                 profileDataAccessObject,
-                connectController,
-                "username1");
+                connectController);
         System.out.println("4 Created Profile View");
 
         views.add(otherProfileView, otherProfileView.viewName);

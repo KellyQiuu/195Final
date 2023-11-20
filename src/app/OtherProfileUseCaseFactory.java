@@ -23,13 +23,12 @@ public class OtherProfileUseCaseFactory {
             ViewManagerModel viewManagerModel,
             OtherProfileViewModel profileViewModel,
             OtherProfileDataAccessInterface otherProfileDataAccessObject,
-            ConnectController connectController,
-            String username
+            ConnectController connectController
     ){
         try {
             OtherProfileController otherProfileController = createOtherProfileUSeCase(viewManagerModel,
                     profileViewModel, otherProfileDataAccessObject);
-            otherProfileController.execute(username);
+
             return new OtherProfileView(profileViewModel, otherProfileController, connectController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error in creating Profile View");

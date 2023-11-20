@@ -11,6 +11,7 @@ public class OtherProfileController {
 	}
 	public void execute(String username) {
 		OtherProfileInputData otherProfileInputData = new OtherProfileInputData(username);
+		System.out.println("otherProfileInputData:" + username);
 		otherProfileInteractor.execute(otherProfileInputData);
 	}
 }

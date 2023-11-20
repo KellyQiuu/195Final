@@ -12,6 +12,7 @@ import entity.UserFactory;
 
 import java.util.ArrayList;
 import use_case.email_user.EmailService;
+import use_case.other_profile.OtherProfileDataAccessInterface;
 import use_case.self_profile.SelfProfileDataAccessInterface;
 import use_case.self_profile.SelfProfileInputBoundary;
 import use_case.self_profile.SelfProfileInteractor;
@@ -70,13 +71,21 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
+        OtherProfileDataAccessInterface otherProfileDataAccessObject;
+        try {
+            otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Could not open user data file.");
+            throw new RuntimeException(e);
+        }
 
         // Create and add the User List view to the views panel
         UserListView userListView = UserListUseCaseFactory.create(
                 viewManagerModel,
                 userListViewModel,
                 profileViewModel,
-                userListDataAccessObject
+                userListDataAccessObject,
+                otherProfileDataAccessObject
         );
 
         if (userListView != null) {

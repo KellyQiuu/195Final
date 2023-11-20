@@ -9,12 +9,16 @@ import data_access.UserDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.connect.ConnectController;
+import interface_adapter.connect.ConnectPresenter;
 import interface_adapter.connect.ConnectViewModel;
 import interface_adapter.other_profile.OtherProfileController;
 import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.user_list.UserListController;
+import use_case.connect.ConnectDataAccessInterface;
 import use_case.connect.ConnectInputBoundary;
 import use_case.connect.ConnectInteractor;
+import use_case.connect.ConnectOutputBoundary;
+import use_case.other_profile.OtherProfileDataAccessInterface;
 import use_case.user_list.UserListDataAccessInterface;
 
 import view.*;
@@ -44,41 +48,79 @@ public class UserListTesting {
         // ViewModels for the user list and other profile views
         UserListViewModel userListViewModel = new UserListViewModel();
         OtherProfileViewModel otherProfileViewModel = new OtherProfileViewModel();
+        UserListDataAccessInterface userListDataAccessObject;
+        try {
+            userListDataAccessObject = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Could not open user data file.");
+            throw new RuntimeException(e);
+        }
         UserDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new UserDataAccessObject(new UserFactory());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        OtherProfileDataAccessInterface otherProfileDataAccessObject;
+        try {
+            otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Could not open user data file.");
+            throw new RuntimeException(e);
+        }
         System.out.println("DataAccessCreated from Main");
         ConnectViewModel connectViewModel = new ConnectViewModel();
+        ConnectOutputBoundary dataAccess = new ConnectPresenter(connectViewModel); // Replace with your constructor if different
+        ConnectDataAccessInterface dao = new UserDataAccessObject(new UserFactory());
+        ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess,dao);
+        // Create the ConnectInteractor instance
+        String senderUsername = "FakeKelly"; // Replace with actual username
+        String recipientEmail = "qiuwenyu2021@outlook.com"; // Replace with actual recipient email
+        String recipientUsername = "FakeKelly";
 
-        ConnectController connectController = createUserConnectUseCase(viewManagerModel,connectViewModel,userDataAccessObject);
-        //TODO:make this connect controler dealed with (NEW)
+        // Create the ConnectController instance
+        ConnectController connectController = new ConnectController(connectInteractor, senderUsername, recipientEmail);
+        System.out.println("3 Created Connect Controller");
 
         // Creating and adding UserListView
         UserListView userListView = UserListUseCaseFactory.create(
                 viewManagerModel,
                 userListViewModel,
                 otherProfileViewModel,
-                userDataAccessObject
+                userListDataAccessObject,
+                otherProfileDataAccessObject
         );
-        views.add(userListView, userListView.viewName);
-        System.out.println("UserList View Added");
+        if (userListView != null) {
+            views.add(userListView, userListView.viewName);
+            System.out.println("Added UserListView with name1: " + userListView.viewName); // Debugging line
+        }
 
-        // Creating and adding OtherProfileView
-        // OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(
-        //        viewManagerModel, otherProfileViewModel, userDataAccessObject, connectController
-        //);
-        //views.add(otherProfileView, otherProfileView.viewName);
-        //System.out.println("OtherProfile View Added");
+        if (userListView != null) {
+            views.add(userListView, userListView.getViewName()); // Make sure this is correct
+            System.out.println("Added UserListView with name2: " + userListView.viewName);
+            viewManagerModel.setActiveView(userListView.getViewName()); // Set the active view
+            viewManagerModel.firePropertyChanged(); // Notify the view manager
+        } else {
+            throw new IllegalStateException("UserListView could not be initialized.");
+        }
+//        OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,
+//                otherProfileViewModel,
+//                otherProfileDataAccessObject,
+//                connectController);
+//        System.out.println("4 Created Profile View");
+//
+//        views.add(otherProfileView, otherProfileView.viewName);
+//        viewManagerModel.setActiveView(otherProfileView.viewName);
+//        viewManagerModel.firePropertyChanged();
 
-        // Set the initial view to user list view
-        viewManagerModel.setActiveView(userListView.viewName);
-        cardLayout.show(views, userListView.viewName); // Show the UserListView as initial view
 
-        // Finalize and show the application window
         application.pack();
+        application.setSize(new Dimension(800, 600)); // Adjust the window size as needed
+        application.setLocationRelativeTo(null); // Center the window
         application.setVisible(true);
+
+
+
+
     }
 }

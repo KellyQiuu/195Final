@@ -1,34 +1,38 @@
 package view;
-import entity.User;
-import app.OtherProfileUseCaseFactory;
+
 import interface_adapter.other_profile.OtherProfileController;
+
 import interface_adapter.user_list.UserListController;
-import interface_adapter.user_list.UserListState;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class UserListView extends JPanel implements PropertyChangeListener,UserCardClickListener {
+public class UserListView extends JPanel implements PropertyChangeListener {
     private final UserListViewModel userListViewModel;
+
     private final JPanel userCardsPanel;
     public final String viewName = "User List";
+    public OtherProfileView otherProfileView;
     private final UserListController userListController;
-    private ArrayList<UserCardClickListener> listeners = new ArrayList<>();
+    private ArrayList<ActionListener> listeners = new ArrayList<>();
 
-    public UserListView(UserListViewModel viewModel, UserListController controller) {
+    private OtherProfileController otherProfileController;
+
+    public UserListView(UserListViewModel viewModel, UserListController controller, OtherProfileController otherProfileController) {
         this.userListViewModel = viewModel;
         this.userListController = controller;
         this.userCardsPanel = new JPanel();
         userCardsPanel.setLayout(new BoxLayout(userCardsPanel, BoxLayout.Y_AXIS));
+        this.otherProfileController = otherProfileController;
 
         setLayout(new BorderLayout());
 
@@ -47,7 +51,8 @@ public class UserListView extends JPanel implements PropertyChangeListener,UserC
 
         this.setVisible(true);
     }
-    public void addUserCardClickedListener(UserCardClickListener listener) {
+
+    public void addUserCardClickedListener(ActionListener listener) {
         listeners.add(listener);
     }
 
@@ -59,17 +64,25 @@ public class UserListView extends JPanel implements PropertyChangeListener,UserC
             String userName = parts[0].trim();
             ArrayList<String> courses = new ArrayList<>(Arrays.asList(parts[2].split(", ")));
 
-            UserCardPanel cardPanel = new UserCardPanel(userName, courses, e -> notifyUserCardClicked(userName));
+            UserCardPanel cardPanel = new UserCardPanel(userName, courses, e -> {
+                try {
+                    notifyUserCardClicked(userName);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+            addUserCardClickedListener(cardPanel.getListener());
+            System.out.println("Added listener");
             userCardsPanel.add(cardPanel);
         }
         userCardsPanel.revalidate();
         userCardsPanel.repaint();
     }
 
-    private void notifyUserCardClicked(String userName) {
-        for (UserCardClickListener listener : listeners) {
-            listener.onUserCardClicked(userName);
-        }
+    private void notifyUserCardClicked(String userName) throws IOException {
+
+            otherProfileController.execute(userName);
+
     }
 
 
@@ -84,9 +97,10 @@ public class UserListView extends JPanel implements PropertyChangeListener,UserC
         return viewName;
     }
 
-    @Override
-    public void onUserCardClicked(String userName) {
-
-
+    public void setOtherProfileView(OtherProfileView otherProfileView){
+        this.otherProfileView = otherProfileView;
+    }
+    public OtherProfileView getOtherProfileView() {
+        return this.otherProfileView;
     }
 }

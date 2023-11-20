@@ -9,6 +9,7 @@ import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.login.LoginUserAccessInterface;
+import use_case.other_profile.OtherProfileDataAccessInterface;
 import use_case.user_list.UserListDataAccessInterface;
 import view.signup_login.LoggedInView;
 import view.signup_login.LoginView;
@@ -54,6 +55,14 @@ public class Test {
             throw new RuntimeException(e);
         }
 
+        OtherProfileDataAccessInterface otherProfileDataAccessObject;
+        try {
+            otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Could not open user data file.");
+            throw new RuntimeException(e);
+        }
+
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
@@ -77,7 +86,8 @@ public class Test {
                 viewManagerModel,
                 userListViewModel,
                 profileViewModel,
-                userListDataAccessObject
+                userListDataAccessObject,
+                otherProfileDataAccessObject
         );
         views.add(userListView, userListView.viewName);
 

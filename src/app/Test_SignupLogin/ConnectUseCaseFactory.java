@@ -22,10 +22,7 @@ import use_case.signup.SignupUserAccessInterface;
 import java.io.IOException;
 
 public class ConnectUseCaseFactory {
-    public static ConnectController createUserConnectUseCase(ViewManagerModel viewManagerModel,
-                                                             ConnectViewModel connectViewModel,
-
-                                                             UserDataAccessObject userDataAccessObject) throws IOException {
+    public static ConnectController createUserConnectUseCase(ConnectViewModel connectViewModel) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
         ConnectOutputBoundary connectOutputBoundary = new ConnectPresenter( connectViewModel);
