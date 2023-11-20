@@ -186,6 +186,14 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     }
 
 
+    @Override
+    public User getCurrentUser() {
+        return null;
+    }
 
+    @Override
+    public String getRecipientEmail(String identifier) {
+        return null;
+    }
 }
 
