@@ -53,6 +53,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.signupViewModel = signupViewModel;
         signupViewModel.addPropertyChangeListener(this);
 
+
         initializeComponents();
     }
 
@@ -64,6 +65,23 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(10, 10, 10, 10); // Padding
+
+        // Final Project Name.
+        JLabel titleLabel_projectname = new JLabel("195 Final Project");
+        titleLabel_projectname.setForeground(Color.WHITE); // Set text color to white
+        titleLabel_projectname.setFont(new Font("Arial", Font.BOLD, 30)); // Customize font
+        titleLabel_projectname.setHorizontalAlignment(JLabel.CENTER); // Center align
+        add(titleLabel_projectname, constraints);
+        constraints.gridy++;
+
+        //Sign up Title label
+        JLabel titleLabel = new JLabel("Sign Up");
+        titleLabel.setForeground(Color.WHITE); // Set text color to white
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Customize font
+        titleLabel.setHorizontalAlignment(JLabel.CENTER); // Center align
+        add(titleLabel, constraints);
+        constraints.gridy++;
+
 
         //labels
         addLabelAndField("Username:", usernameInputField, constraints);
@@ -98,9 +116,25 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         // buttons
         JButton signUp = createButton("Sign Up", constraints);
         signUp.addActionListener(e -> handleSignUp());
+
         JButton cancel = createButton("Cancel", constraints);
-        // TODO: 11/19/2023
+        cancel.addActionListener(e -> {
+            JFrame parentFrame = getParentFrame();
+            if (parentFrame != null) {
+                parentFrame.dispose();
+            }
+        });
+
     }
+
+    private JFrame getParentFrame() {
+        Component component = this;
+        while (component != null && !(component instanceof JFrame)) {
+            component = component.getParent();
+        }
+        return (JFrame) component;
+    }
+
 
     private void handleSignUp() {
         String username = usernameInputField.getText();
@@ -189,6 +223,8 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         JButton button = new JButton(text);
         button.setBackground(new Color(50, 50, 50));
         button.setForeground(Color.WHITE);
+        button.setBackground(Color.BLACK); // Set background color to black
+        button.setSize(20, 5);
         add(button, constraints);
         constraints.gridy++;
         return button;
