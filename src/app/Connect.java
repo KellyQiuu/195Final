@@ -28,7 +28,7 @@ public class Connect {
         String recipientEmail = "qiuwenyu2021@outlook.com"; // Replace with actual recipient email
 
         // Create the ConnectController instance
-        ConnectController connectController = new ConnectController(connectInteractor, senderUsername, recipientEmail);
+        ConnectController connectController = new ConnectController(connectInteractor, recipientEmail);
 
         // Create and show the ConnectView
         ConnectView connectView = new ConnectView(connectController);

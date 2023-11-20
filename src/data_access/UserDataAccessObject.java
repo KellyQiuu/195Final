@@ -170,7 +170,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
         return null;
     }
 
-    @Override
+    //@Override
     public User getUserByUsername(String username) throws NoSuchElementException {
         ArrayList<User> all = getAllUsers();
 
@@ -186,6 +186,14 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     }
 
 
+    @Override
+    public User getCurrentUser() {
+        return null;
+    }
 
+    @Override
+    public String getRecipientEmail(String identifier) {
+        return null;
+    }
 }
 

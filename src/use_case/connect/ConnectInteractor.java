@@ -4,41 +4,32 @@ import entity.User;
 import use_case.email_user.EmailService;
 
 public class ConnectInteractor implements ConnectInputBoundary {
-
     private final ConnectOutputBoundary outputBoundary;
-    private final ConnectDataAccessInterface connectDataAccess;
+    private final ConnectDataAccessInterface dataAccess;
 
-
-    public ConnectInteractor(ConnectOutputBoundary outputBoundary,
-                             ConnectDataAccessInterface connectDataAccess) {
+    public ConnectInteractor(ConnectOutputBoundary outputBoundary, ConnectDataAccessInterface dataAccess) {
         this.outputBoundary = outputBoundary;
-        this.connectDataAccess = connectDataAccess;
-
+        this.dataAccess = dataAccess;
     }
 
     @Override
-    public void handleConnect(ConnectInputData inputData) {
-        System.out.println("The sender username is "+inputData.getSenderUsername());
-        User sender = connectDataAccess.getUserByUsername(inputData.getSenderUsername());
-        if (sender == null) {
-            outputBoundary.onConnectionResult(new ConnectOutputData(false, "Sender user not found."));
+    public void handleConnect(ConnectInputData inputData, String recipientIdentifier) {
+        User currentUser = dataAccess.getCurrentUser();
+        String recipientEmail = dataAccess.getRecipientEmail(recipientIdentifier);
+
+        if (currentUser == null || recipientEmail == null) {
+            outputBoundary.onConnectionResult(new ConnectOutputData(false, "User information not found."));
             return;
         }
 
         try {
-            String personalInfo = constructPersonalInfo(sender);
+            // Assuming EmailService is correctly implemented and not static
+            EmailService emailService = new EmailService();
             String emailContent = inputData.getMessage();
-            EmailService.sendEmail(sender, inputData.getRecipientEmail(), emailContent); // Use instance variable
+            emailService.sendEmail(currentUser, recipientEmail, emailContent);
             outputBoundary.onConnectionResult(new ConnectOutputData(true, "Email sent successfully."));
         } catch (Exception e) {
             outputBoundary.onConnectionResult(new ConnectOutputData(false, "Failed to send email: " + e.getMessage()));
         }
-    }
-
-    private String constructPersonalInfo(User user) {
-        // Construct the personal information part of the email content
-        return "Name: " + user.getName() +
-                "\nEmail: " + user.getEmail() +
-                "\nCourses: " + String.join(", ", user.getCourses());
     }
 }

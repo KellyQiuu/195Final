@@ -59,7 +59,7 @@ public class OtherProfile {
         String recipientUsername = "FakeKelly";
 
         // Create the ConnectController instance
-        ConnectController connectController = new ConnectController(connectInteractor, senderUsername, recipientEmail);
+        ConnectController connectController = new ConnectController(connectInteractor, recipientEmail);
         System.out.println("3 Created Connect Controller");
 
         OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,
