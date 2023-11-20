@@ -38,6 +38,6 @@ public class ConnectUseCaseFactory {
         //TODO: remove fake data and make Connect Clean
         String senderUserName = "FakeKelly";
         String recepientEmail = "qiuwenyu2021@outlook.com";
-        return new ConnectController(userConnectInteractor,senderUserName, recepientEmail);
+        return new ConnectController(userConnectInteractor,recepientEmail);
     }
 }
