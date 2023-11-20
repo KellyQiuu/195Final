@@ -26,7 +26,7 @@ public class ConnectInteractor implements ConnectInputBoundary {
             // Assuming EmailService is correctly implemented and not static
             EmailService emailService = new EmailService();
             String emailContent = inputData.getMessage();
-            emailService.sendEmail(currentUser.getEmail(), recipientEmail, emailContent);
+            emailService.sendEmail(currentUser, recipientEmail, emailContent);
             outputBoundary.onConnectionResult(new ConnectOutputData(true, "Email sent successfully."));
         } catch (Exception e) {
             outputBoundary.onConnectionResult(new ConnectOutputData(false, "Failed to send email: " + e.getMessage()));
