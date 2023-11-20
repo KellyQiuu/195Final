@@ -5,33 +5,15 @@ import use_case.connect.ConnectInputData;
 
 public class ConnectController {
     private final ConnectInputBoundary connectInputBoundary;
-    private String senderUsername; // Assuming this is known/set elsewhere in the application
-    private String recipientEmail; // Assuming this is known/set elsewhere in the application
+    private final String recipientIdentifier; // Could be an email, ID, etc.
 
-    public ConnectController(ConnectInputBoundary connectInputBoundary, String senderUsername, String recipientEmail) {
+    public ConnectController(ConnectInputBoundary connectInputBoundary, String recipientIdentifier) {
         this.connectInputBoundary = connectInputBoundary;
-        this.senderUsername = senderUsername;
-        this.recipientEmail = recipientEmail;
+        this.recipientIdentifier = recipientIdentifier;
     }
 
-    /**
-     * Handles the event when the "Send Email" button is clicked.
-     * @param message The message to be sent.
-     */
     public void handleSendEmailClicked(String message) {
-        ConnectInputData inputData = new ConnectInputData(senderUsername, recipientEmail, message);
-        connectInputBoundary.handleConnect(inputData);
+        ConnectInputData inputData = new ConnectInputData(message);
+        connectInputBoundary.handleConnect(inputData, recipientIdentifier);
     }
-
-    // Methods to set or update sender and recipient details if needed
-
-    public void setSenderUsername(String senderUsername) {
-        this.senderUsername = senderUsername;
-    }
-
-    public void setRecipientEmail(String recipientEmail) {
-        this.recipientEmail = recipientEmail;
-    }
-
-    // Additional methods or logic as needed...
 }
