@@ -14,8 +14,6 @@ import java.beans.PropertyChangeListener;
 public class OtherProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 	public final String viewName = "other_profile";
 
-	public String message;
-
 	private final ConnectController connectController;
 	private final OtherProfileViewModel profileViewModel;
 	private final OtherProfileController profileController;
@@ -62,7 +60,6 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 		this.add(coursesInfo);
 		this.add(buttons);
 
-
 	}
 
 	private void createUserInfo() {
@@ -86,10 +83,10 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-
+		if ("username".equals(evt.getPropertyName())) {
+			nameField.setText(evt.getNewValue().toString());
+		}
 	}
 
-	private void setMessage(String message){
-		this.message = message;
-	}
+
 }

@@ -24,7 +24,10 @@ public class OtherProfilePresenter implements OtherProfileOutputBoundary {
 		if (otherUser == null) {
 			JOptionPane.showMessageDialog(null, "This User is Null");
 		} else {
+			System.out.println("PrepareSuccessView");
 			otherProfileViewModel.setUser(otherUser);
+
+			System.out.println("ProfileViewModel knows: " + otherProfileViewModel.getUser().getName());
 			otherProfileViewModel.firePropertyChanged();
 
 			viewManagerModel.setActiveView(otherProfileViewModel.getViewName());

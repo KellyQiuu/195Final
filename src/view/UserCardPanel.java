@@ -10,8 +10,10 @@ import java.util.ArrayList;
 public class UserCardPanel extends JPanel {
     private String userDisplayInfo;
 
-
+    private String userName;
+    private ActionListener listener;
     public UserCardPanel(String userName, ArrayList<String> courses, ActionListener listener) {
+
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLACK)); // for card-like appearance
 
@@ -31,15 +33,21 @@ public class UserCardPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 userCardClicked(userName,listener);
             }
-        });
+        }
+        );
     }
 
     private void userCardClicked(String userName, ActionListener listener) {
         System.out.println("Clicked UserCard for"+userName );
         ActionEvent actionEvent = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "USER_CARD_CLICKED:" + userName);
         listener.actionPerformed(actionEvent);
+
     }
+
+    public ActionListener getListener(){
+        return this.listener;
     }
+}
 
 
 
