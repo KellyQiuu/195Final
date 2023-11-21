@@ -11,11 +11,11 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class OtherProfileView extends JPanel implements ActionListener, PropertyChangeListener {
+public class OtherProfileView extends JDialog implements ActionListener, PropertyChangeListener {
 	public final String viewName = "other_profile";
 
 	private final ConnectController connectController;
-	private final OtherProfileViewModel profileViewModel;
+	private OtherProfileViewModel profileViewModel;
 	private final OtherProfileController profileController;
 
 	private JLabel nameLabel, emailLabel, coursesLabel;
@@ -24,6 +24,7 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 
 
 	public OtherProfileView(OtherProfileViewModel profileViewModel, OtherProfileController profileController, ConnectController connectController) {
+
 		this.profileController = profileController;
 		this.profileViewModel = profileViewModel;
 		this.profileViewModel.addPropertyChangeListener(this);
@@ -43,23 +44,26 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 
 		connect.addActionListener(
 				new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// Handle connect button action here
-					if (e.getSource().equals(connect)) {
-						SwingUtilities.invokeLater(() -> new ConnectView(connectController));  // Invoke the new view.
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// Handle connect button action here
+						if (e.getSource().equals(connect)) {
+							SwingUtilities.invokeLater(() -> new ConnectView(connectController));  // Invoke the new view.
+						}
 					}
 				}
-			}
 		);
 
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(title);
-		this.add(usernameInfo);
-		this.add(emailInfo);
-		this.add(coursesInfo);
-		this.add(buttons);
-
+		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+		add(title);
+		add(usernameInfo);
+		add(emailInfo);
+		add(coursesInfo);
+		add(buttons);
+		setSize(400, 300);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Ensure the window closes properly
+		setLocationRelativeTo(null); // Center the window on the screen
+		setVisible(true); // Make the window visible
 	}
 
 	private void createUserInfo() {
@@ -67,9 +71,10 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 		emailLabel = new JLabel("Email:");
 		coursesLabel = new JLabel("Courses:");
 
-		nameField = new JTextField(profileViewModel.getUser().getName());
-		emailField = new JTextField(profileViewModel.getUser().getEmail());
-		coursesField = new JTextField(profileViewModel.getUser().getCourses().toString()); // Assuming getCourses() returns a List or similar
+
+		nameField = new JTextField("");
+		emailField = new JTextField("");
+		coursesField = new JTextField(""); // Assuming getCourses() returns a List or similar
 
 		nameField.setEditable(false);
 		emailField.setEditable(false);
@@ -78,15 +83,15 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");
+		JOptionPane.showConfirmDialog(this, "actionPerformed");
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if ("username".equals(evt.getPropertyName())) {
-			nameField.setText(evt.getNewValue().toString());
+		if ("state".equals(evt.getPropertyName())) {
+			nameField.setText(profileViewModel.getState().getUserName());
+			emailField.setText(profileViewModel.getState().getUserEmail());
+			coursesField.setText(profileViewModel.getState().getUserCourses().toString());
 		}
 	}
-
-
 }

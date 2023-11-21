@@ -42,6 +42,7 @@ public class UserCardPanel extends JPanel {
         ActionEvent actionEvent = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "USER_CARD_CLICKED:" + userName);
         listener.actionPerformed(actionEvent);
 
+
     }
 
     public ActionListener getListener(){

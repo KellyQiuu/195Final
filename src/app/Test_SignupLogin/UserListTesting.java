@@ -79,8 +79,15 @@ public class UserListTesting {
         String recipientUsername = "FakeKelly";
 
         // Create the ConnectController instance
-        ConnectController connectController = new ConnectController(connectInteractor, senderUsername, recipientEmail);
+        ConnectController connectController = new ConnectController(connectInteractor, recipientEmail);
         System.out.println("3 Created Connect Controller");
+
+        OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,
+                otherProfileViewModel,
+                otherProfileDataAccessObject,
+                connectController);
+
+
 
         // Creating and adding UserListView
         UserListView userListView = UserListUseCaseFactory.create(
@@ -90,12 +97,9 @@ public class UserListTesting {
                 userListDataAccessObject,
                 otherProfileDataAccessObject
         );
-        if (userListView != null) {
-            views.add(userListView, userListView.viewName);
-            System.out.println("Added UserListView with name1: " + userListView.viewName); // Debugging line
-        }
 
         if (userListView != null) {
+            views.add(userListView, userListView.viewName);
             views.add(userListView, userListView.getViewName()); // Make sure this is correct
             System.out.println("Added UserListView with name2: " + userListView.viewName);
             viewManagerModel.setActiveView(userListView.getViewName()); // Set the active view
@@ -103,12 +107,8 @@ public class UserListTesting {
         } else {
             throw new IllegalStateException("UserListView could not be initialized.");
         }
-//        OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,
-//                otherProfileViewModel,
-//                otherProfileDataAccessObject,
-//                connectController);
-//        System.out.println("4 Created Profile View");
-//
+
+
 //        views.add(otherProfileView, otherProfileView.viewName);
 //        viewManagerModel.setActiveView(otherProfileView.viewName);
 //        viewManagerModel.firePropertyChanged();
@@ -118,9 +118,5 @@ public class UserListTesting {
         application.setSize(new Dimension(800, 600)); // Adjust the window size as needed
         application.setLocationRelativeTo(null); // Center the window
         application.setVisible(true);
-
-
-
-
     }
 }

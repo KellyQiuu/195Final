@@ -15,14 +15,11 @@ public class OtherProfileViewModel extends ViewModel {
 		super("other_profile");
 	}
 
-	public void setState(OtherProfileState state) {
-		this.state = state;
-	}
-
 	private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 	@Override
 	public void firePropertyChanged() {
-		support.firePropertyChange("username", null, this.user.getName());
+		support.firePropertyChange("state", null, this.state.getUserName());
+		System.out.println("Fire property changed...");
 	}
 
 	@Override
@@ -40,6 +37,9 @@ public class OtherProfileViewModel extends ViewModel {
 
 	public void setUser(User user) {
 		this.user = user;
+		this.state.setUserName(user.getName());
+		this.state.setUserEmail(user.getEmail());
+		this.state.setUserCourses(user.getCourses());
 	}
 }
 

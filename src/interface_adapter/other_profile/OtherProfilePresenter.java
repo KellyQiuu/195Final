@@ -6,9 +6,9 @@ import use_case.other_profile.OtherProfileOutputBoundary;
 import use_case.other_profile.OtherProfileOutputData;
 
 import javax.swing.*;
-import java.util.List;
 
 public class OtherProfilePresenter implements OtherProfileOutputBoundary {
+
 	private final OtherProfileViewModel otherProfileViewModel;
 
 	private ViewManagerModel viewManagerModel;
@@ -21,18 +21,18 @@ public class OtherProfilePresenter implements OtherProfileOutputBoundary {
 	@Override
 	public void prepareSuccessView(OtherProfileOutputData userdata) {
 		User otherUser = userdata.getOtherUser();
-		if (otherUser == null) {
-			JOptionPane.showMessageDialog(null, "This User is Null");
-		} else {
-			System.out.println("PrepareSuccessView");
-			otherProfileViewModel.setUser(otherUser);
+		OtherProfileState otherProfileState = otherProfileViewModel.getState();
+		otherProfileState.setUserName(otherUser.getName());
+		otherProfileState.setUserEmail(otherUser.getEmail());
+		otherProfileState.setUserCourses(otherUser.getCourses());
+		System.out.println("PrepareSuccessView");
+		otherProfileViewModel.setUser(otherUser);
 
-			System.out.println("ProfileViewModel knows: " + otherProfileViewModel.getUser().getName());
-			otherProfileViewModel.firePropertyChanged();
+		System.out.println("ProfileViewModel knows: " + otherProfileViewModel.getUser().getName());
+		otherProfileViewModel.firePropertyChanged();
 
-			viewManagerModel.setActiveView(otherProfileViewModel.getViewName());
-			viewManagerModel.firePropertyChanged();
-		}
+		viewManagerModel.setActiveView(otherProfileViewModel.getViewName());
+		viewManagerModel.firePropertyChanged();
 	}
 
 }
