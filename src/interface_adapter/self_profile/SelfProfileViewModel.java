@@ -13,14 +13,11 @@ public class SelfProfileViewModel extends ViewModel {
         super("profile");
     }
 
-    public void setState(SelfProfileState state) {
-        this.state = state;
-    }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     @Override
     public void firePropertyChanged() {
-        support.firePropertyChange("state", null, this.state);
+        support.firePropertyChange("state", null, this.state.getUserName());
     }
 
     @Override
@@ -38,5 +35,8 @@ public class SelfProfileViewModel extends ViewModel {
 
     public void setUser(User user) {
         this.user = user;
+        this.state.setUserName(user.getName());
+        this.state.setUserEmail(user.getEmail());
+        this.state.setUserCourses(user.getCourses());
     }
 }

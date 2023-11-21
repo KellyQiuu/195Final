@@ -25,13 +25,15 @@ public class SelfProfilePresenter implements SelfProfileOutputBoundary {
 		if (currentUser == null) {
 			JOptionPane.showMessageDialog(null, "Current User is Null");
 		} else {
-//			String name = currentUser.getName();
-//			String email = currentUser.getEmail();
-//			String password = currentUser.getPassword();
-//			List<String> courses = currentUser.getCourses();
+			SelfProfileState selfProfileState = profileViewModel.getState();
+
+			selfProfileState.setUserName(currentUser.getName());
+			selfProfileState.setUserEmail(currentUser.getEmail());
+			selfProfileState.setUserCourses(currentUser.getCourses());
+
 			profileViewModel.setUser(currentUser);
 			profileViewModel.firePropertyChanged();
-
+			
 			viewManagerModel.setActiveView(profileViewModel.getViewName());
 			viewManagerModel.firePropertyChanged();
 		}

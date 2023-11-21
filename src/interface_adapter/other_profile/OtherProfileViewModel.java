@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 public class OtherProfileViewModel extends ViewModel {
 	public static final String CONNECT_BUTTON_LABEL = "Connect";
-	public static final String TITLE_LABEL = "Profile";
+	public static final String TITLE_LABEL = "User Profile";
 	public static final String USERNAME_LABEL = "Username";
 	private OtherProfileState state = new OtherProfileState();
 	private User user;

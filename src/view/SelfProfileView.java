@@ -14,21 +14,18 @@ import java.beans.PropertyChangeListener;
 public class SelfProfileView extends JDialog implements ActionListener, PropertyChangeListener {
     public final String viewName = "self_profile";
 
-    private final ConnectController connectController;
     private SelfProfileViewModel profileViewModel;
     private final SelfProfileController profileController;
 
     private JLabel nameLabel, emailLabel, coursesLabel;
     private JLabel nameField, emailField, coursesField;
-    private JButton connect;
 
 
-    public SelfProfileView(SelfProfileViewModel profileViewModel, SelfProfileController profileController, ConnectController connectController) {
+    public SelfProfileView(SelfProfileViewModel profileViewModel, SelfProfileController profileController) {
 
         this.profileController = profileController;
         this.profileViewModel = profileViewModel;
         this.profileViewModel.addPropertyChangeListener(this);
-        this.connectController = connectController;
 
         JLabel title = new JLabel(SelfProfileViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -75,10 +72,10 @@ public class SelfProfileView extends JDialog implements ActionListener, Property
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-//        if ("state".equals(evt.getPropertyName())) {
-//            nameField.setText(profileViewModel.getState().getUserName());
-//            emailField.setText(profileViewModel.getState().getUserEmail());
-//            coursesField.setText(profileViewModel.getState().getUserCourses().toString());
-//        }
+        if ("state".equals(evt.getPropertyName())) {
+            nameField.setText(profileViewModel.getState().getUserName());
+            emailField.setText(profileViewModel.getState().getUserEmail());
+            coursesField.setText(profileViewModel.getState().getUserCourses().toString());
+        }
     }
 }

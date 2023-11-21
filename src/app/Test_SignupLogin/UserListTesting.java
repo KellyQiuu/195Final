@@ -86,7 +86,7 @@ public class UserListTesting {
                 otherProfileViewModel,
                 otherProfileDataAccessObject,
                 connectController);
-
+        otherProfileView.setVisible(false);
 
 
         // Creating and adding UserListView
@@ -107,6 +107,7 @@ public class UserListTesting {
         } else {
             throw new IllegalStateException("UserListView could not be initialized.");
         }
+        otherProfileView.setVisible(true);
 
 
 //        views.add(otherProfileView, otherProfileView.viewName);
