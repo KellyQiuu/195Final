@@ -1,6 +1,5 @@
 package view;
 
-import interface_adapter.connect.ConnectController;
 import interface_adapter.self_profile.SelfProfileController;
 import interface_adapter.self_profile.SelfProfileViewModel;
 
@@ -11,16 +10,25 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+
+/**
+ * This class represents the self profile view in the GUI.
+ * It extends JPanel and is used to display and interact with the user's own profile.
+ */
 public class SelfProfileView extends JDialog implements ActionListener, PropertyChangeListener {
     public final String viewName = "self_profile";
-
     private SelfProfileViewModel profileViewModel;
     private final SelfProfileController profileController;
-
     private JLabel nameLabel, emailLabel, coursesLabel;
     private JLabel nameField, emailField, coursesField;
 
-
+    /**
+     * Constructor for SelfProfileView.
+     * Initializes the view with necessary components and configurations.
+     *
+     * @param profileController The controller that handles the logic for this view.
+     * @param profileViewModel The self profile view model created for handling the data.
+     */
     public SelfProfileView(SelfProfileViewModel profileViewModel, SelfProfileController profileController) {
 
         this.profileController = profileController;
@@ -36,7 +44,6 @@ public class SelfProfileView extends JDialog implements ActionListener, Property
         LabelTextPanel coursesInfo = new LabelTextPanel(coursesLabel, coursesField);
 
         JPanel buttons = new JPanel();
-
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         add(title);
@@ -64,12 +71,21 @@ public class SelfProfileView extends JDialog implements ActionListener, Property
 //		emailField.setEditable(false);
 //		coursesField.setEditable(false);
     }
-
+    /**
+     * Action handler for events in the self profile view.
+     * This method is triggered when an action is performed on a component in the view.
+     *
+     * @param e The ActionEvent that occurred.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         JOptionPane.showConfirmDialog(this, "actionPerformed");
     }
 
+    /**
+     * Updates the profile information displayed on the view.
+     * This method is typically called when the profile data has changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if ("state".equals(evt.getPropertyName())) {

@@ -11,18 +11,27 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * A dialog window that displays the profile of another user.
+ * It allows interaction and connection with the user's profile.
+ */
 public class OtherProfileView extends JDialog implements ActionListener, PropertyChangeListener {
 	public final String viewName = "other_profile";
-
 	private final ConnectController connectController;
 	private OtherProfileViewModel profileViewModel;
 	private final OtherProfileController profileController;
-
 	private JLabel nameLabel, emailLabel, coursesLabel;
 	private JLabel nameField, emailField, coursesField;
 	private JButton connect;
 
 
+	/**
+	 * Constructs an OtherProfileView dialog.
+	 *
+	 * @param profileViewModel   The ViewModel providing data for the user profile.
+	 * @param profileController  The controller managing interactions with the user profile.
+	 * @param connectController  The controller to manage connections.
+	 */
 	public OtherProfileView(OtherProfileViewModel profileViewModel, OtherProfileController profileController, ConnectController connectController) {
 
 		this.profileController = profileController;
@@ -44,6 +53,11 @@ public class OtherProfileView extends JDialog implements ActionListener, Propert
 
 		connect.addActionListener(
 				new ActionListener() {
+					/**
+					 * Handles action events from the dialog components.
+					 *
+					 * @param e The action event.
+					 */
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// Handle connect button action here
@@ -66,6 +80,9 @@ public class OtherProfileView extends JDialog implements ActionListener, Propert
 		setVisible(true); // Make the window visible
 	}
 
+	/**
+	 * Initializes the UI components for the dialog.
+	 */
 	private void createUserInfo() {
 		nameLabel = new JLabel("Name:");
 		emailLabel = new JLabel("Email:");
@@ -76,16 +93,19 @@ public class OtherProfileView extends JDialog implements ActionListener, Propert
 		emailField = new JLabel("");
 		coursesField = new JLabel(""); // Assuming getCourses() returns a List or similar
 
-//		nameField.setEditable(false);
-//		emailField.setEditable(false);
-//		coursesField.setEditable(false);
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JOptionPane.showConfirmDialog(this, "actionPerformed");
 	}
 
+	/**
+	 * Updates the dialog based on property changes in the ViewModel.
+	 *
+	 * @param evt The property change event.
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if ("state".equals(evt.getPropertyName())) {
