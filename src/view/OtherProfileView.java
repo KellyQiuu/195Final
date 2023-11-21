@@ -19,7 +19,7 @@ public class OtherProfileView extends JDialog implements ActionListener, Propert
 	private final OtherProfileController profileController;
 
 	private JLabel nameLabel, emailLabel, coursesLabel;
-	private JTextField nameField, emailField, coursesField;
+	private JLabel nameField, emailField, coursesField;
 	private JButton connect;
 
 
@@ -72,13 +72,13 @@ public class OtherProfileView extends JDialog implements ActionListener, Propert
 		coursesLabel = new JLabel("Courses:");
 
 
-		nameField = new JTextField("");
-		emailField = new JTextField("");
-		coursesField = new JTextField(""); // Assuming getCourses() returns a List or similar
+		nameField = new JLabel("");
+		emailField = new JLabel("");
+		coursesField = new JLabel(""); // Assuming getCourses() returns a List or similar
 
-		nameField.setEditable(false);
-		emailField.setEditable(false);
-		coursesField.setEditable(false);
+//		nameField.setEditable(false);
+//		emailField.setEditable(false);
+//		coursesField.setEditable(false);
 	}
 
 	@Override

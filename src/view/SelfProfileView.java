@@ -1,9 +1,8 @@
 package view;
 
-import interface_adapter.other_profile.OtherProfileViewModel;
+import interface_adapter.connect.ConnectController;
 import interface_adapter.self_profile.SelfProfileController;
 import interface_adapter.self_profile.SelfProfileViewModel;
-import interface_adapter.signup.SignupState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,20 +11,24 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class SelfProfileView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String viewName = "profile";
+public class SelfProfileView extends JDialog implements ActionListener, PropertyChangeListener {
+    public final String viewName = "self_profile";
 
-    private final SelfProfileViewModel profileViewModel;
+    private final ConnectController connectController;
+    private SelfProfileViewModel profileViewModel;
     private final SelfProfileController profileController;
 
-    private JLabel nameLabel, emailLabel, coursesLabel, passwordLabel;
-    private JTextField nameField, emailField, coursesField, passwordField;
+    private JLabel nameLabel, emailLabel, coursesLabel;
+    private JLabel nameField, emailField, coursesField;
+    private JButton connect;
 
 
-    public SelfProfileView(SelfProfileViewModel profileViewModel, SelfProfileController profileController) {
+    public SelfProfileView(SelfProfileViewModel profileViewModel, SelfProfileController profileController, ConnectController connectController) {
+
         this.profileController = profileController;
         this.profileViewModel = profileViewModel;
         this.profileViewModel.addPropertyChangeListener(this);
+        this.connectController = connectController;
 
         JLabel title = new JLabel(SelfProfileViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -33,45 +36,49 @@ public class SelfProfileView extends JPanel implements ActionListener, PropertyC
 
         LabelTextPanel usernameInfo = new LabelTextPanel(nameLabel, nameField);
         LabelTextPanel emailInfo = new LabelTextPanel(emailLabel, emailField);
-        LabelTextPanel passwordInfo = new LabelTextPanel(passwordLabel, passwordField);
         LabelTextPanel coursesInfo = new LabelTextPanel(coursesLabel, coursesField);
+
+        JPanel buttons = new JPanel();
+
+
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        add(title);
+        add(usernameInfo);
+        add(emailInfo);
+        add(coursesInfo);
+        add(buttons);
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Ensure the window closes properly
+        setLocationRelativeTo(null); // Center the window on the screen
+        setVisible(true); // Make the window visible
     }
 
-//    private JPanel createHeader() {
-//        JPanel headerPanel = new JPanel();
-//        headerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-//        JLabel header = new JLabel("User Information");
-//        header.setFont(new Font("Arial", Font.BOLD, 16));
-//        headerPanel.add(header);
-//        return headerPanel;
-//    }
     private void createUserInfo() {
         nameLabel = new JLabel("Name:");
         emailLabel = new JLabel("Email:");
         coursesLabel = new JLabel("Courses:");
-        passwordLabel = new JLabel("Password");
-
-        nameField = new JTextField(profileViewModel.getUser().getName());
-        emailField = new JTextField(profileViewModel.getUser().getEmail());
-        coursesField = new JTextField(profileViewModel.getUser().getCourses().toString()); // Assuming getCourses() returns a List or similar
-        passwordField = new JTextField(profileViewModel.getUser().getPassword());
 
 
-        nameField.setEditable(false);
-        emailField.setEditable(false);
-        coursesField.setEditable(false);
+        nameField = new JLabel("");
+        emailField = new JLabel("");
+        coursesField = new JLabel(""); // Assuming getCourses() returns a List or similar
+
+//		nameField.setEditable(false);
+//		emailField.setEditable(false);
+//		coursesField.setEditable(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JOptionPane.showConfirmDialog(this, "NOTHING");
+        JOptionPane.showConfirmDialog(this, "actionPerformed");
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        SignupState state = (SignupState) evt.getNewValue();
-        if (state.getUsernameError() != null) {
-            JOptionPane.showMessageDialog(this, state.getUsernameError());
-        }
+//        if ("state".equals(evt.getPropertyName())) {
+//            nameField.setText(profileViewModel.getState().getUserName());
+//            emailField.setText(profileViewModel.getState().getUserEmail());
+//            coursesField.setText(profileViewModel.getState().getUserCourses().toString());
+//        }
     }
 }
