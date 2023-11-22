@@ -2,18 +2,26 @@ package interface_adapter.connect;
 
 import use_case.connect.ConnectInputBoundary;
 import use_case.connect.ConnectInputData;
+import view.ConnectView;
+
+import java.io.IOException;
 
 public class ConnectController {
     private final ConnectInputBoundary connectInputBoundary;
-    private final String recipientIdentifier; // Could be an email, ID, etc.
+    private String recipientEmail; // Could be an email, ID, etc.
 
-    public ConnectController(ConnectInputBoundary connectInputBoundary, String recipientIdentifier) {
+    public ConnectController(ConnectInputBoundary connectInputBoundary) {
         this.connectInputBoundary = connectInputBoundary;
-        this.recipientIdentifier = recipientIdentifier;
     }
 
-    public void handleSendEmailClicked(String message) {
+    public void initiateConnectionProcess(String recipientEmail) {
+        this.recipientEmail = recipientEmail;
+        ConnectView connectView = new ConnectView(this);
+        connectView.setVisible(true);
+    }
+
+    public void handleSendEmailClicked(String message) throws IOException {
         ConnectInputData inputData = new ConnectInputData(message);
-        connectInputBoundary.handleConnect(inputData, recipientIdentifier);
+        connectInputBoundary.handleConnect(inputData, recipientEmail);
     }
 }
