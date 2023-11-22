@@ -81,12 +81,16 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 		JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		topPanel.add(backButton);
 
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+		centerPanel.add(title);
+		centerPanel.add(usernameInfo);
+		centerPanel.add(emailInfo);
+		centerPanel.add(coursesInfo);
+
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(topPanel);
-		add(title);
-		add(usernameInfo);
-		add(emailInfo);
-		add(coursesInfo);
+		add(centerPanel);
 		add(buttons);
 		setSize(400, 300);
 	}
@@ -122,7 +126,8 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 		if ("state".equals(evt.getPropertyName())) {
 			nameField.setText(profileViewModel.getState().getUserName());
 			emailField.setText(profileViewModel.getState().getUserEmail());
-			coursesField.setText(profileViewModel.getState().getUserCourses().toString());
+			String courses = profileViewModel.getState().getUserCourses().toString();
+			coursesField.setText(courses.substring(1, courses.length()-1));
 		}
 	}
 
