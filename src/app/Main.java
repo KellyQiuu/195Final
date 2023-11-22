@@ -50,6 +50,7 @@ public class Main {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
         UserListViewModel userListViewModel = new UserListViewModel();
+
         OtherProfileViewModel otherProfileViewModel = new OtherProfileViewModel();
         ConnectViewModel connectViewModel = new ConnectViewModel();
 

@@ -29,4 +29,5 @@ public class UserListState {
     public void setUsername(String username) {
         this.currentusername = username;
     }
+
 }

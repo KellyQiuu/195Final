@@ -21,7 +21,7 @@ public interface LoginUserAccessInterface {
      */
     void save(User user);
 
-    User get(String username);
+    User get(String username) throws IOException;
 
     String getPass(String username);
 

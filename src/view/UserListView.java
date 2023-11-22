@@ -49,7 +49,11 @@ public class UserListView extends JPanel implements PropertyChangeListener {
             @Override
             public void componentShown(ComponentEvent e) {
                 super.componentShown(e);
-                userListController.execute();
+                try {
+                    userListController.execute();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 

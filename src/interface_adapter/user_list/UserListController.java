@@ -2,6 +2,8 @@ package interface_adapter.user_list;
 
 import use_case.user_list.UserListInputBoundary;
 
+import java.io.IOException;
+
 public class UserListController {
     final UserListInputBoundary userListInteractor;
 
@@ -9,7 +11,7 @@ public class UserListController {
         this.userListInteractor = userListInteractor;
     }
 
-    public void execute(){
+    public void execute() throws IOException {
         //TODO;
         userListInteractor.execute();
     }
