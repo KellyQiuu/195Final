@@ -186,17 +186,5 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
         System.out.println("(DAO) found no user with this name");
         throw new NoSuchElementException("NoSuchUser");
     }
-
-
-    @Override
-    public User getCurrentUser() {
-        String currentUsername = UserSecession.getInstance().getCurrentUserName();
-        return usernameUserMap.get(currentUsername);
-    }
-
-    @Override
-    public String getRecipientEmail(String identifier) {
-        return null;
-    }
 }
 
