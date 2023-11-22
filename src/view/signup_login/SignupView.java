@@ -8,8 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -93,9 +91,10 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 //        add(coursePanel, constraints);
 //        constraints.gridy++;
 
-
         //course field in a single line
-        JPanel coursePanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+//        JPanel coursePanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        JPanel coursePanel2 = new JPanel();
+        coursePanel2.setLayout(new BoxLayout(coursePanel2, BoxLayout.X_AXIS));
 //        coursePanel2.setBackground(new Color(30, 30, 30));
         addCourseField("Course 1:", course1InputField, coursePanel2);
         addCourseField("Course 2:", course2InputField, coursePanel2);
