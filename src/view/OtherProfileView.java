@@ -15,7 +15,7 @@ import java.beans.PropertyChangeListener;
  * A dialog window that displays the profile of another user.
  * It allows interaction and connection with the user's profile.
  */
-public class OtherProfileView extends JDialog implements ActionListener, PropertyChangeListener {
+public class OtherProfileView extends JPanel implements ActionListener, PropertyChangeListener {
 	public final String viewName = "other_profile";
 	private final ConnectController connectController;
 	private OtherProfileViewModel profileViewModel;
@@ -68,16 +68,13 @@ public class OtherProfileView extends JDialog implements ActionListener, Propert
 				}
 		);
 
-		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(title);
 		add(usernameInfo);
 		add(emailInfo);
 		add(coursesInfo);
 		add(buttons);
 		setSize(400, 300);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Ensure the window closes properly
-		setLocationRelativeTo(null); // Center the window on the screen
-		setVisible(true); // Make the window visible
 	}
 
 	/**
