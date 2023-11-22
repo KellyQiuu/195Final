@@ -15,14 +15,13 @@ public class ConnectUseCaseFactory {
 
     private ConnectUseCaseFactory() {}
 
-    public static ConnectController create(ConnectViewModel viewModel, String recipientemail) throws IOException {
+    public static ConnectController create(ConnectViewModel viewModel) throws IOException {
         ConnectDataAccessInterface userDataAccess = new UserDataAccessObject(new UserFactory());
 
         ConnectOutputBoundary presenter = new ConnectPresenter(viewModel);
 
         ConnectInteractor interactor = new ConnectInteractor(presenter, userDataAccess);
 
-        //TODO: Need to get recipient email here.
-        return new ConnectController(interactor, recipientemail);
+        return new ConnectController(interactor);
     }
 }
