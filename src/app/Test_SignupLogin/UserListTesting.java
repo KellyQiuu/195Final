@@ -110,9 +110,9 @@ public class UserListTesting {
         otherProfileView.setVisible(true);
 
 
-//        views.add(otherProfileView, otherProfileView.viewName);
+        views.add(otherProfileView, otherProfileView.viewName);
 //        viewManagerModel.setActiveView(otherProfileView.viewName);
-//        viewManagerModel.firePropertyChanged();
+        viewManagerModel.firePropertyChanged();
 
 
         application.pack();
