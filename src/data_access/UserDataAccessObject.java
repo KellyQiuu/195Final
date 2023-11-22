@@ -103,7 +103,8 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     }
 
     @Override
-    public User get(String username) {
+    public User get(String username) throws IOException {
+        loadUsersFromFile();
         return usernameUserMap.get(username);
     }
 

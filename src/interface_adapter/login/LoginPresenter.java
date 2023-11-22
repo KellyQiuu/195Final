@@ -6,6 +6,7 @@ import interface_adapter.user_list.UserListState;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 import view.UserListViewModel;
+import use_case.UserSecession;
 
 
 public class LoginPresenter implements LoginOutputBoundary {
@@ -41,7 +42,11 @@ public class LoginPresenter implements LoginOutputBoundary {
 
     public void prepareSuccessView(LoginOutputData response) {
         UserListState userListState = userListViewModel.getState();
-        userListState.setUsername(response.getUsername());
+        //userListState.setUsername(response.getUsername());
+        System.out.println("(LoginPresenter): current username fetched, "+response.getUsername());
+        UserSecession.getInstance().setCurrentUserName(response.getUsername());
+
+
         this.userListViewModel.setState(userListState);
         this.userListViewModel.firePropertyChanged();
 

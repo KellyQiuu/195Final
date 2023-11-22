@@ -1,8 +1,10 @@
 package use_case.user_list;
+import java.io.IOException;
 import java.util.*;
 
 import entity.User;
 import entity.UserFactory;
+import use_case.UserSecession;
 
 
 public class UserListInteractor implements UserListInputBoundary {
@@ -17,20 +19,25 @@ public class UserListInteractor implements UserListInputBoundary {
         this.userDataAccessObject = userDataAccessObject;
         this.userListPresenter = userListPresenter;
 
-        // this.currentUser = SessionManagerInteractor.getCurrentUser();
-        ArrayList<String> c = new ArrayList<>(Arrays.asList("CSC207","MAT237","CSC343","MAT246","MAT337"));
-        this.currentUser = UserFactory.createUser("myself", "123","12829929","randomemail@email.com",c);
-        //TODO: change this to a real secession Manager
-        System.out.println("UFake user is created, "+this.currentUser.toString());
     }
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public void setCurrentUser() throws IOException {
+
+
+        String currentUserName = UserSecession.getInstance().getCurrentUserName();
+        System.out.println("(UserList Interactor): current user is retrived, it is "+currentUserName);
+        this.currentUser = userDataAccessObject.get(currentUserName);
+        System.out.println("(UserList Interactor): current user object is got from DAO: "+ this.currentUser);
+
+        //UserFactory.createUser("myself", "123","12829929","randomemail@email.com",c);
+        //TODO: change this to a real secession Manager
+        System.out.println("Real user is created, "+this.currentUser);
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IOException {
         // I will add to the map everytime the usecase is executed, and I would not store this anywhere
         // this means the map gets updated per login.
+        setCurrentUser();
 
         Map<User, Integer> userSimilarityScore = new HashMap<>();
         for(User u:userDataAccessObject.getAllUsers()){

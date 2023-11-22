@@ -42,4 +42,6 @@ public class UserListViewModel extends ViewModel {
     public UserListState getState(){
         return this.state;
     }
+
+
 }
