@@ -45,5 +45,11 @@ public class ViewManager implements PropertyChangeListener {
 			cardLayout.show(views, viewModelName);
 		}
 	}
+	public void goBack() {
+		String previousView = viewManagerModel.getPreviousView();
+		if (previousView != null) {
+			cardLayout.show(views, previousView);
+		}
+	}
 }
 

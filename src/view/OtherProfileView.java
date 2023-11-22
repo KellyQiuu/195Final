@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.connect.ConnectController;
 import interface_adapter.other_profile.OtherProfileController;
 import interface_adapter.other_profile.OtherProfileViewModel;
@@ -22,7 +23,8 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 	private final OtherProfileController profileController;
 	private JLabel nameLabel, emailLabel, coursesLabel;
 	private JLabel nameField, emailField, coursesField;
-	private JButton connect;
+	private JButton connect, backButton;
+	private final ViewManagerModel viewManagerModel;
 
 
 	/**
@@ -32,12 +34,17 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 	 * @param profileController  The controller managing interactions with the user profile.
 	 * @param connectController  The controller to manage connections.
 	 */
-	public OtherProfileView(OtherProfileViewModel profileViewModel, OtherProfileController profileController, ConnectController connectController) {
+	public OtherProfileView(OtherProfileViewModel profileViewModel,
+	                        OtherProfileController profileController,
+	                        ConnectController connectController,
+	                        ViewManagerModel viewManagerModel) {
 
 		this.profileController = profileController;
 		this.profileViewModel = profileViewModel;
 		this.profileViewModel.addPropertyChangeListener(this);
 		this.connectController = connectController;
+		this.viewManagerModel = viewManagerModel;
+
 
 		JLabel title = new JLabel(OtherProfileViewModel.TITLE_LABEL);
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -68,7 +75,14 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 				}
 		);
 
+		backButton = new JButton("Go Back");
+		backButton.addActionListener(e -> goBack());
+
+		JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		topPanel.add(backButton);
+
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		add(topPanel);
 		add(title);
 		add(usernameInfo);
 		add(emailInfo);
@@ -109,6 +123,16 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 			nameField.setText(profileViewModel.getState().getUserName());
 			emailField.setText(profileViewModel.getState().getUserEmail());
 			coursesField.setText(profileViewModel.getState().getUserCourses().toString());
+		}
+	}
+
+	private void goBack() {
+		String previousView = viewManagerModel.getPreviousView();
+		if (previousView != null) {
+			// Assuming that the ViewManagerModel can trigger a view change.
+			// You might need to adjust this based on your implementation.
+			viewManagerModel.setActiveView(previousView);
+			viewManagerModel.firePropertyChanged();
 		}
 	}
 }
