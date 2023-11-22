@@ -111,7 +111,7 @@ public class UserListTesting {
 
 
         views.add(otherProfileView, otherProfileView.viewName);
-//        viewManagerModel.setActiveView(otherProfileView.viewName);
+
         viewManagerModel.firePropertyChanged();
 
 

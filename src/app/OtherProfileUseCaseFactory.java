@@ -29,7 +29,7 @@ public class OtherProfileUseCaseFactory {
             OtherProfileController otherProfileController = createOtherProfileUSeCase(viewManagerModel,
                     profileViewModel, otherProfileDataAccessObject);
 
-            OtherProfileView otherProfileView = new OtherProfileView(profileViewModel, otherProfileController, connectController);
+            OtherProfileView otherProfileView = new OtherProfileView(profileViewModel, otherProfileController, connectController, viewManagerModel);
             return otherProfileView;
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error in creating Profile View");
