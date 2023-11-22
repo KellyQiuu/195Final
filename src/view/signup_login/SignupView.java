@@ -31,7 +31,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     private final JTextField[] courseInputFields = new JTextField[5];
 
-
     private final JTextField course1InputField = new JTextField(8);
 
     private final JTextField course2InputField = new JTextField(8);
@@ -52,14 +51,12 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.signupController = controller;
         this.signupViewModel = signupViewModel;
         signupViewModel.addPropertyChangeListener(this);
-
-
         initializeComponents();
     }
 
     private void initializeComponents() {
         setLayout(new GridBagLayout());
-        setBackground(new Color(30, 30, 30));
+//        setBackground(new Color(30, 30, 30));
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 0;
@@ -67,8 +64,8 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         constraints.insets = new Insets(10, 10, 10, 10); // Padding
 
         // Final Project Name.
-        JLabel titleLabel_projectname = new JLabel("195 Final Project");
-        titleLabel_projectname.setForeground(Color.WHITE); // Set text color to white
+        JLabel titleLabel_projectname = new JLabel("CourseMate Connect");
+        titleLabel_projectname.setForeground(Color.DARK_GRAY); // Set text color to white
         titleLabel_projectname.setFont(new Font("Arial", Font.BOLD, 30)); // Customize font
         titleLabel_projectname.setHorizontalAlignment(JLabel.CENTER); // Center align
         add(titleLabel_projectname, constraints);
@@ -76,12 +73,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
         //Sign up Title label
         JLabel titleLabel = new JLabel("Sign Up");
-        titleLabel.setForeground(Color.WHITE); // Set text color to white
+        titleLabel.setForeground(Color.DARK_GRAY); // Set text color to white
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Customize font
         titleLabel.setHorizontalAlignment(JLabel.CENTER); // Center align
         add(titleLabel, constraints);
         constraints.gridy++;
-
 
         //labels
         addLabelAndField("Username:", usernameInputField, constraints);
@@ -100,7 +96,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
         //course field in a single line
         JPanel coursePanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
-        coursePanel2.setBackground(new Color(30, 30, 30));
+//        coursePanel2.setBackground(new Color(30, 30, 30));
         addCourseField("Course 1:", course1InputField, coursePanel2);
         addCourseField("Course 2:", course2InputField, coursePanel2);
         addCourseField("Course 3:", course3InputField, coursePanel2);
@@ -198,10 +194,10 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     private void addCourseField(String labelText, JTextField field, JPanel panel) {
         JLabel label = new JLabel(labelText);
-        label.setForeground(Color.WHITE);
+        label.setForeground(Color.DARK_GRAY);
         label.setFont(new Font("Arial", Font.BOLD, 14));
-        field.setBackground(new Color(50, 50, 50));
-        field.setForeground(Color.WHITE);
+//        field.setBackground(new Color(50, 50, 50));
+//        field.setForeground(Color.WHITE);
         field.setColumns(8);
         panel.add(label);
         panel.add(field);
@@ -209,20 +205,20 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     private void addLabelAndField(String labelText, JComponent field, GridBagConstraints constraints) {
         JLabel label = new JLabel(labelText);
-        label.setForeground(Color.WHITE);
+        label.setForeground(Color.DARK_GRAY);
         label.setFont(new Font("Arial", Font.BOLD, 14));
         add(label, constraints);
         constraints.gridy++;
-        field.setBackground(new Color(50, 50, 50));
-        field.setForeground(Color.WHITE);
+//        field.setBackground(new Color(50, 50, 50));
+//        field.setForeground(Color.WHITE);
         add(field, constraints);
         constraints.gridy++;
     }
 
     private JButton createButton(String text, GridBagConstraints constraints) {
         JButton button = new JButton(text);
-        button.setBackground(new Color(50, 50, 50));
-        button.setForeground(Color.WHITE);
+        button.setBackground(Color.RED);
+        button.setForeground(Color.DARK_GRAY);
         button.setBackground(Color.BLACK); // Set background color to black
         button.setSize(20, 5);
         add(button, constraints);
