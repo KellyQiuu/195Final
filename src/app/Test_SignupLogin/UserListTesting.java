@@ -1,7 +1,7 @@
 //package app.Test_SignupLogin;
 //
-//import app.OtherProfileUseCaseFactory;
-//import app.UserListUseCaseFactory;
+//import app.UsecaseFactory.OtherProfileUseCaseFactory;
+//import app.UsecaseFactory.UserListUseCaseFactory;
 //import data_access.UserDataAccessObject;
 //import entity.UserFactory;
 //import interface_adapter.ViewManagerModel;
