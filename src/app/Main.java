@@ -1,11 +1,6 @@
 package app;
 
-import app.Test_SignupLogin.ConnectUseCaseFactory;
 import use_case.connect.ConnectDataAccessInterface;
-import use_case.connect.ConnectInteractor;
-import use_case.connect.ConnectOutputBoundary;
-import interface_adapter.connect.ConnectController;
-import interface_adapter.connect.ConnectPresenter;
 import interface_adapter.connect.ConnectViewModel;
 
 import app.Test_SignupLogin.LoginUseCaseFactory;
@@ -79,16 +74,7 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        ConnectDataAccessInterface dao = new UserDataAccessObject(new UserFactory());
-
-        // ???? ========================================================================================================
-        String senderUsername = "FakeKelly"; // Replace with actual username
-        String recipientEmail = "qiuwenyu2021@outlook.com"; // Replace with actual recipient email
-        String recipientUsername = "FakeKelly";
-        //ConnectOutputBoundary dataAccess = new ConnectPresenter(connectViewModel);
-        //ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess,dao);
-        //ConnectController connectController = new ConnectController(connectInteractor);
-        ConnectController connectController = ConnectUseCaseFactory.createUserConnectUseCase(connectViewModel, dao);
+        ConnectDataAccessInterface connectDataAccessObject = new UserDataAccessObject(new UserFactory());
 
         // Views Setup =================================================================================================
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
@@ -105,7 +91,8 @@ public class Main {
         OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,
                 otherProfileViewModel,
                 otherProfileDataAccessObject,
-                connectController);
+                connectViewModel,
+                connectDataAccessObject);
         views.add(otherProfileView, otherProfileView.viewName);
         views.add(userListView, userListView.viewName);
         views.add(signupView, signupView.viewName);
