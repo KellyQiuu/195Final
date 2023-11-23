@@ -1,5 +1,6 @@
 package interface_adapter.connect;
 
+import app.Test_SignupLogin.ConnectUseCaseFactory;
 import use_case.connect.ConnectInputBoundary;
 import use_case.connect.ConnectInputData;
 import view.ConnectView;
@@ -16,7 +17,7 @@ public class ConnectController {
 
     public void initiateConnectionProcess(String recipientEmail) {
         this.recipientEmail = recipientEmail;
-        ConnectView connectView = new ConnectView(this);
+        ConnectView connectView = ConnectUseCaseFactory.create(this);
         connectView.setVisible(true);
     }
 
