@@ -1,11 +1,9 @@
 package view;
 
-import app.Test_SignupLogin.ConnectUseCaseFactory;
+//import app.ConnectUseCaseFactory;
 import interface_adapter.connect.ConnectController;
 import interface_adapter.connect.ConnectViewModel;
 import interface_adapter.other_profile.OtherProfileController;
-
-import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.user_list.UserListController;
 
 import javax.swing.*;
@@ -88,7 +86,7 @@ public class UserListView extends JPanel implements PropertyChangeListener {
     }
 
     private void notifyUserCardClicked(String userName) throws IOException {
-        ConnectController connectController = ConnectUseCaseFactory.createUserConnectUseCase(new ConnectViewModel());
+        //ConnectController connectController = ConnectUseCaseFactory.createUserConnectUseCase(new ConnectViewModel());
 
         otherProfileController.execute(userName);
 

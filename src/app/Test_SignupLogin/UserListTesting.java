@@ -1,34 +1,27 @@
 package app.Test_SignupLogin;
-import javax.swing.*;
-import java.awt.*;
 
 import app.OtherProfileUseCaseFactory;
 import app.UserListUseCaseFactory;
-import data_access.FileUserDataAccessObject;
 import data_access.UserDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.connect.ConnectController;
 import interface_adapter.connect.ConnectPresenter;
 import interface_adapter.connect.ConnectViewModel;
-import interface_adapter.other_profile.OtherProfileController;
 import interface_adapter.other_profile.OtherProfileViewModel;
-import interface_adapter.user_list.UserListController;
 import use_case.connect.ConnectDataAccessInterface;
-import use_case.connect.ConnectInputBoundary;
 import use_case.connect.ConnectInteractor;
 import use_case.connect.ConnectOutputBoundary;
 import use_case.other_profile.OtherProfileDataAccessInterface;
 import use_case.user_list.UserListDataAccessInterface;
+import view.OtherProfileView;
+import view.UserListView;
+import view.UserListViewModel;
+import view.ViewManager;
 
-import view.*;
-
-import java.io.IOException;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-
-import static app.Test_SignupLogin.ConnectUseCaseFactory.createUserConnectUseCase;
 
 public class UserListTesting {
     public static void main(String[] args) throws IOException {
@@ -70,16 +63,17 @@ public class UserListTesting {
         }
         System.out.println("DataAccessCreated from Main");
         ConnectViewModel connectViewModel = new ConnectViewModel();
-        ConnectOutputBoundary dataAccess = new ConnectPresenter(connectViewModel); // Replace with your constructor if different
-        ConnectDataAccessInterface dao = new UserDataAccessObject(new UserFactory());
-        ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess,dao);
+        //ConnectOutputBoundary dataAccess = new ConnectPresenter(connectViewModel); // Replace with your constructor if different
+        //ConnectDataAccessInterface dao = new UserDataAccessObject(new UserFactory());
+        //ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess,dao);
+        ConnectController connectController = ConnectUseCaseFactory.createUserConnectUseCase(connectViewModel, userDataAccessObject);
         // Create the ConnectInteractor instance
         String senderUsername = "FakeKelly"; // Replace with actual username
         String recipientEmail = "qiuwenyu2021@outlook.com"; // Replace with actual recipient email
         String recipientUsername = "FakeKelly";
 
         // Create the ConnectController instance
-        ConnectController connectController = new ConnectController(connectInteractor, recipientEmail);
+        //ConnectController connectController = new ConnectController(connectInteractor);
         System.out.println("3 Created Connect Controller");
 
         OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,

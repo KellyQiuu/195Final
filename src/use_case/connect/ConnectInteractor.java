@@ -2,6 +2,10 @@ package use_case.connect;
 
 import entity.User;
 import use_case.email_user.EmailService;
+import use_case.UserSecession;
+
+import java.io.IOException;
+
 
 public class ConnectInteractor implements ConnectInputBoundary {
     private final ConnectOutputBoundary outputBoundary;
@@ -13,10 +17,9 @@ public class ConnectInteractor implements ConnectInputBoundary {
     }
 
     @Override
-    public void handleConnect(ConnectInputData inputData, String recipientIdentifier) {
-        User currentUser = dataAccess.getCurrentUser();
-        String recipientEmail = dataAccess.getRecipientEmail(recipientIdentifier);
-
+    public void handleConnect(ConnectInputData inputData, String recipientEmail) throws IOException {
+        String currentUsername = UserSecession.getInstance().getCurrentUserName();
+        User currentUser = dataAccess.get(currentUsername);
         if (currentUser == null || recipientEmail == null) {
             outputBoundary.onConnectionResult(new ConnectOutputData(false, "User information not found."));
             return;

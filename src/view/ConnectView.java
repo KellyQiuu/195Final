@@ -3,6 +3,7 @@ package view;
 import interface_adapter.connect.ConnectController;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class ConnectView extends JFrame {
     private JTextArea messageTextArea;
@@ -28,7 +29,11 @@ public class ConnectView extends JFrame {
         sendButton.addActionListener(e -> {
             String message = messageTextArea.getText();
             if (!message.trim().isEmpty()) {
-                connectController.handleSendEmailClicked(message);
+                try {
+                    connectController.handleSendEmailClicked(message);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 messageTextArea.setText("");
                 setVisible(false); // Hide the window after sending the message
                 dispose(); // Dispose of the window resources

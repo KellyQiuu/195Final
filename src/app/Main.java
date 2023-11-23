@@ -1,5 +1,6 @@
 package app;
 
+import app.Test_SignupLogin.ConnectUseCaseFactory;
 import use_case.connect.ConnectDataAccessInterface;
 import use_case.connect.ConnectInteractor;
 import use_case.connect.ConnectOutputBoundary;
@@ -84,9 +85,10 @@ public class Main {
         String senderUsername = "FakeKelly"; // Replace with actual username
         String recipientEmail = "qiuwenyu2021@outlook.com"; // Replace with actual recipient email
         String recipientUsername = "FakeKelly";
-        ConnectOutputBoundary dataAccess = new ConnectPresenter(connectViewModel);
-        ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess,dao);
-        ConnectController connectController = new ConnectController(connectInteractor, recipientEmail);
+        //ConnectOutputBoundary dataAccess = new ConnectPresenter(connectViewModel);
+        //ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess,dao);
+        //ConnectController connectController = new ConnectController(connectInteractor);
+        ConnectController connectController = ConnectUseCaseFactory.createUserConnectUseCase(connectViewModel, dao);
 
         // Views Setup =================================================================================================
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
