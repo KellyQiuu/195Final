@@ -1,10 +1,12 @@
 package app;
 
+import app.UsecaseFactory.OtherProfileUseCaseFactory;
+import app.UsecaseFactory.UserListUseCaseFactory;
 import use_case.connect.ConnectDataAccessInterface;
 import interface_adapter.connect.ConnectViewModel;
 
-import app.Test_SignupLogin.LoginUseCaseFactory;
-import app.Test_SignupLogin.SignupUseCaseFactory;
+import app.UsecaseFactory.LoginUseCaseFactory;
+import app.UsecaseFactory.SignupUseCaseFactory;
 import data_access.UserDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.login.LoginViewModel;
@@ -93,10 +95,14 @@ public class Main {
                 otherProfileDataAccessObject,
                 connectViewModel,
                 connectDataAccessObject);
-        views.add(otherProfileView, otherProfileView.viewName);
-        views.add(userListView, userListView.viewName);
-        views.add(signupView, signupView.viewName);
-        views.add(loginView, loginView.viewName);
+	    assert otherProfileView != null;
+	    views.add(otherProfileView, otherProfileView.viewName);
+	    assert userListView != null;
+	    views.add(userListView, userListView.viewName);
+	    assert signupView != null;
+	    views.add(signupView, signupView.viewName);
+	    assert loginView != null;
+	    views.add(loginView, loginView.viewName);
 
         // Model fire property change ==================================================================================
         viewManagerModel.firePropertyChanged();

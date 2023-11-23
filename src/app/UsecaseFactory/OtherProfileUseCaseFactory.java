@@ -1,8 +1,5 @@
-package app;
+package app.UsecaseFactory;
 
-import app.Test_SignupLogin.ConnectUseCaseFactory;
-import entity.User;
-import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.connect.ConnectController;
 import interface_adapter.connect.ConnectPresenter;

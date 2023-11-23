@@ -1,6 +1,6 @@
 package interface_adapter.connect;
 
-import app.Test_SignupLogin.ConnectUseCaseFactory;
+import app.UsecaseFactory.ConnectUseCaseFactory;
 import use_case.connect.ConnectInputBoundary;
 import use_case.connect.ConnectInputData;
 import view.ConnectView;
