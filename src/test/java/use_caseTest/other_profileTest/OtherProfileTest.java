@@ -11,7 +11,6 @@ import interface_adapter.other_profile.OtherProfileViewModel;
 import use_case.other_profile.*;
 import view.ViewManager;
 
-import javax.print.attribute.standard.MediaSize;
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
@@ -29,7 +28,7 @@ public class OtherProfileTest {
     }
 
     @Test
-    public void testUserCreation() throws IOException {
+    public void testOtherProfile() throws IOException {
         // Create a test user
         ArrayList<String> courses = new ArrayList<>();
         courses.add("STA130");
@@ -79,7 +78,7 @@ public class OtherProfileTest {
             otherProfileViewModel.addPropertyChangeListener(new PropertyChangeListener() {
                 @Override
                 public void propertyChange(PropertyChangeEvent evt) {
-                    
+
                 }
             });
 

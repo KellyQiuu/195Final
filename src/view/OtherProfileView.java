@@ -114,7 +114,7 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showConfirmDialog(this, "actionPerformed");
+		JOptionPane.showConfirmDialog(this, "Test Activated");
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 		}
 	}
 
-	private void goBack() {
+	public void goBack() {
 		String previousView = viewManagerModel.getPreviousView();
 		if (previousView != null) {
 			// Assuming that the ViewManagerModel can trigger a view change.
