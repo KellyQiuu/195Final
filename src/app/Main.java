@@ -31,14 +31,26 @@ import view.UserListView;
 
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        // Initial Frame Setup =========================================================================================
+    // Refactored setup methods
+    public static JFrame createApplicationFrame() {
         JFrame application = new JFrame("CourseMate Connect");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        application.setSize(new Dimension(800, 600)); // Adjust the window size as needed
+        application.setLocationRelativeTo(null); // Center the window
+        return application;
+    }
+
+    public static JPanel createCardLayoutPanel(CardLayout cardLayout) {
+        JPanel views = new JPanel(cardLayout);
+        return views;
+    }
+    public static void main(String[] args) throws IOException {
+        // Initial Frame Setup =========================================================================================
+        JFrame application = createApplicationFrame();
 
         // Card layout setup ===========================================================================================
         CardLayout cardLayout = new CardLayout();
-        JPanel views = new JPanel(cardLayout);
+        JPanel views = createCardLayoutPanel(cardLayout);
         application.add(views);
 
         // ViewModels setup ============================================================================================

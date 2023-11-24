@@ -21,7 +21,7 @@ public class OtherProfileInputData {
 	 *
 	 * @return The username.
 	 */
-	String getUsername() {
+	public String getUsername() {
 		return username;
 	}
 }

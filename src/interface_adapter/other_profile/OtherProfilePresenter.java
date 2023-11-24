@@ -5,8 +5,6 @@ import interface_adapter.ViewManagerModel;
 import use_case.other_profile.OtherProfileOutputBoundary;
 import use_case.other_profile.OtherProfileOutputData;
 
-import javax.swing.*;
-
 /**
  * Presenter class for the other user's profile, implementing the OtherProfileOutputBoundary interface.
  * This class is responsible for presenting the data of other users' profiles to the user interface, handling the view logic.
@@ -40,10 +38,8 @@ public class OtherProfilePresenter implements OtherProfileOutputBoundary {
 		otherProfileState.setUserName(otherUser.getName());
 		otherProfileState.setUserEmail(otherUser.getEmail());
 		otherProfileState.setUserCourses(otherUser.getCourses());
-		System.out.println("PrepareSuccessView");
 
 		otherProfileViewModel.setUser(otherUser);
-		System.out.println("ProfileViewModel knows: " + otherProfileViewModel.getUser().getName());
 
 		otherProfileViewModel.firePropertyChanged();
 		viewManagerModel.setActiveView(otherProfileViewModel.getViewName());
