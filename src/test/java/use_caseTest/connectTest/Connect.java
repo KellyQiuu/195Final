@@ -1,4 +1,4 @@
-package app;
+package use_caseTest.connectTest;
 
 import data_access.UserDataAccessObject;
 import entity.UserFactory;

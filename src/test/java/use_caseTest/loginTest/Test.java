@@ -1,4 +1,4 @@
-package app.Test_SignupLogin;
+package use_caseTest.loginTest;
 
 import app.UsecaseFactory.LoginUseCaseFactory;
 import app.UsecaseFactory.SignupUseCaseFactory;
