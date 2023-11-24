@@ -1,8 +1,5 @@
 package view;
 
-//import app.ConnectUseCaseFactory;
-import interface_adapter.connect.ConnectController;
-import interface_adapter.connect.ConnectViewModel;
 import interface_adapter.other_profile.OtherProfileController;
 import interface_adapter.user_list.UserListController;
 
@@ -23,7 +20,6 @@ public class UserListView extends JPanel implements PropertyChangeListener {
 
     private final JPanel userCardsPanel;
     public final String viewName = "User List";
-    public OtherProfileView otherProfileView;
     private final UserListController userListController;
     private ArrayList<ActionListener> listeners = new ArrayList<>();
 
@@ -86,8 +82,6 @@ public class UserListView extends JPanel implements PropertyChangeListener {
     }
 
     private void notifyUserCardClicked(String userName) throws IOException {
-        //ConnectController connectController = ConnectUseCaseFactory.createUserConnectUseCase(new ConnectViewModel());
-
         otherProfileController.execute(userName);
 
     }
@@ -103,12 +97,4 @@ public class UserListView extends JPanel implements PropertyChangeListener {
     public String getViewName() {
         return viewName;
     }
-
-    public void setOtherProfileView(OtherProfileView otherProfileView){
-        this.otherProfileView = otherProfileView;
-    }
-    public OtherProfileView getOtherProfileView() {
-        return this.otherProfileView;
-    }
-
 }

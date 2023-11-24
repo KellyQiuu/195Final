@@ -135,10 +135,11 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 	public void goBack() {
 		String previousView = viewManagerModel.getPreviousView();
 		if (previousView != null) {
-			// Assuming that the ViewManagerModel can trigger a view change.
-			// You might need to adjust this based on your implementation.
 			viewManagerModel.setActiveView(previousView);
 			viewManagerModel.firePropertyChanged();
 		}
+	}
+	public String getViewName() {
+		return viewName;
 	}
 }
