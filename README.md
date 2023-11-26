@@ -51,10 +51,6 @@ This project is a social platform designed for students to connect based on shar
 
 *https://docs.sendgrid.com/for-developers*
 
-## Contributing
-
-Please read [CONTRIBUTING.md](link-to-your-contributing-file) for details on our code of conduct, and the process for submitting pull requests to us.
-
 ## Support and Troubleshooting
 
 For any issues or support, please file an issue in the repository, detailing the problem and steps to reproduce it.
