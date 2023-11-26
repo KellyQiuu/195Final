@@ -57,8 +57,8 @@ For any issues or support, please file an issue in the repository, detailing the
 
 ## Authors
 
-- **Wenyu Qiu**  UserList usecase, connect to SendGrid API, create html email template
-- **Rogers Yang** Self User Profile Usecase, Other user profile use case
+- **Rogers Yang** Self User Profile Usecase, Other user profile use case, Connected Usecases and wrote up Main.java
+- **Wenyu Qiu**  UserList usecase, connect to SendGrid API, create html email template, UserSecession class
 - **Ziyi Ye** Sign Up usecase, Log in Usecase
 - **YiGe Yan** Connect Usecase 
 
