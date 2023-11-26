@@ -59,18 +59,18 @@ public class UserListView extends JPanel implements PropertyChangeListener {
             }
         });
 
-//        selfProfileButton.addActionListener(
-//                new ActionListener() {
-//                    @Override
-//                    public void actionPerformed(ActionEvent e) {
-//                        if (e.getSource().equals(selfProfileButton)) {
-//                            String currentUserName = UserSecession.getInstance().getCurrentUserName();
-//                            selfProfileController.execute(currentUserName);
-//                        }
-//                    }
-//                }
-//        );
-//        add(selfProfileButton, BorderLayout.PAGE_START);
+        selfProfileButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(selfProfileButton)) {
+                            String currentUserName = UserSecession.getInstance().getCurrentUserName();
+                            selfProfileController.execute(currentUserName);
+                        }
+                    }
+                }
+        );
+        add(selfProfileButton, BorderLayout.PAGE_START);
 
         this.setVisible(true);
 
