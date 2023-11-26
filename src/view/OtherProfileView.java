@@ -93,7 +93,7 @@ public class OtherProfileView extends JPanel implements ActionListener, Property
 		add(topPanel);
 		add(centerPanel);
 		add(buttons);
-		setSize(400, 300);
+		setSize(900, 600);
 	}
 
 	/**

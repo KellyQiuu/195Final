@@ -63,7 +63,7 @@ public class SelfProfileView extends JPanel implements ActionListener, PropertyC
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(topPanel);
         add(centerPanel);
-        setSize(400, 300);
+        setSize(900, 600);
     }
 
     private void createUserInfo() {

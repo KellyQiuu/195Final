@@ -29,7 +29,7 @@ public class Main {
     public static JFrame createApplicationFrame() {
         JFrame application = new JFrame("CourseMate Connect");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        application.setSize(new Dimension(800, 600)); // Adjust the window size as needed
+        application.setSize(new Dimension(900, 600)); // Adjust the window size as needed
         application.setLocationRelativeTo(null); // Center the window
         return application;
     }
