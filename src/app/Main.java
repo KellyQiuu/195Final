@@ -126,7 +126,7 @@ public class Main {
 
         // Final setup for the application =============================================================================
         application.pack();
-        application.setSize(new Dimension(800, 600)); // Adjust the window size as needed
+        application.setSize(new Dimension(900, 600)); // Adjust the window size as needed
         application.setLocationRelativeTo(null); // Center the window
         application.setVisible(true);
     }
