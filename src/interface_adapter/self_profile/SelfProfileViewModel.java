@@ -18,7 +18,7 @@ public class SelfProfileViewModel extends ViewModel {
      * Constructs a SelfProfileViewModel.
      */
     public SelfProfileViewModel() {
-        super("profile");
+        super("self_profile");
     }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);

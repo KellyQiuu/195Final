@@ -42,10 +42,12 @@ public class UserListView extends JPanel implements PropertyChangeListener {
         setLayout(new BorderLayout());
 
         // Initialize selfProfileButton and add its ActionListener
-        selfProfileButton = new JButton("Profile");
+        selfProfileButton = new JButton("My Profile");
         selfProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String currentUser = UserSecession.getInstance().getCurrentUserName();
+                selfProfileController.execute(currentUser);
                 viewManagerModel.setActiveView("self_profile"); // Name of the view to switch to
                 viewManagerModel.firePropertyChanged();
             }
