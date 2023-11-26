@@ -1,6 +1,9 @@
 package use_case.self_profile;
 
 import entity.User;
+import use_case.SessionManagerInteractor;
+
+import java.io.IOException;
 
 /**
  * Interactor class implementing the SelfProfileInputBoundary interface.
@@ -30,7 +33,13 @@ public class SelfProfileInteractor implements SelfProfileInputBoundary {
 	 */
 	@Override
 	public void execute(SelfProfileInputData inputData) {
-		User currentUser = profileDataAccessObject.getUser(inputData.getUsername());
+		User currentUser = null;
+		try {
+			currentUser = profileDataAccessObject.get(inputData.getUsername());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		System.out.println("At Interactor:" + currentUser.getName());
 		SelfProfileOutputData profileOutputData = new SelfProfileOutputData(currentUser);
 		profilePresenter.prepareSuccessView(profileOutputData);
 	}

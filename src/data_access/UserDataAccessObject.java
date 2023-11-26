@@ -2,7 +2,6 @@ package data_access;
 
 import entity.User;
 import entity.UserFactory;
-import use_case.UserSecession;
 import use_case.connect.ConnectDataAccessInterface;
 import use_case.other_profile.OtherProfileDataAccessInterface;
 import use_case.self_profile.SelfProfileDataAccessInterface;
