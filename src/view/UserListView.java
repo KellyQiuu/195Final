@@ -1,7 +1,9 @@
 package view;
 
 import interface_adapter.other_profile.OtherProfileController;
+import interface_adapter.self_profile.SelfProfileController;
 import interface_adapter.user_list.UserListController;
+import use_case.self_profile.SelfProfileInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,19 +15,23 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JButton;
 
 
 public class UserListView extends JPanel implements PropertyChangeListener {
     private final UserListViewModel userListViewModel;
 
     private final JPanel userCardsPanel;
+    private JButton selfProfileButton;
     public final String viewName = "User List";
     private final UserListController userListController;
     private ArrayList<ActionListener> listeners = new ArrayList<>();
 
     private OtherProfileController otherProfileController;
+    private SelfProfileController selfProfileController;
 
-    public UserListView(UserListViewModel viewModel, UserListController controller, OtherProfileController otherProfileController) throws IOException {
+    public UserListView(UserListViewModel viewModel, UserListController controller,
+                        OtherProfileController otherProfileController) throws IOException {
         this.userListViewModel = viewModel;
         this.userListController = controller;
         this.userCardsPanel = new JPanel();
@@ -33,7 +39,7 @@ public class UserListView extends JPanel implements PropertyChangeListener {
         this.otherProfileController = otherProfileController;
 
         setLayout(new BorderLayout());
-
+        selfProfileButton = new JButton("Profile");
         JScrollPane scrollPane = new JScrollPane(userCardsPanel);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -50,8 +56,14 @@ public class UserListView extends JPanel implements PropertyChangeListener {
                 }
             }
         });
+        selfProfileButton.addActionListener(e -> {
+            // TODO: Define what should happen when the button is clicked
+
+        });
+        add(selfProfileButton, BorderLayout.PAGE_START);
 
         this.setVisible(true);
+
     }
 
     public void addUserCardClickedListener(ActionListener listener) {
