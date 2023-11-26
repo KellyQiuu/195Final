@@ -1,12 +1,10 @@
 package app;
 
-import app.UsecaseFactory.OtherProfileUseCaseFactory;
-import app.UsecaseFactory.UserListUseCaseFactory;
+import app.UsecaseFactory.*;
+import interface_adapter.self_profile.SelfProfileViewModel;
 import use_case.connect.ConnectDataAccessInterface;
 import interface_adapter.connect.ConnectViewModel;
 
-import app.UsecaseFactory.LoginUseCaseFactory;
-import app.UsecaseFactory.SignupUseCaseFactory;
 import data_access.UserDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.login.LoginViewModel;
@@ -15,19 +13,15 @@ import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.other_profile.OtherProfileDataAccessInterface;
+import use_case.self_profile.SelfProfileDataAccessInterface;
 import use_case.user_list.UserListDataAccessInterface;
-import view.OtherProfileView;
+import view.*;
 import view.signup_login.LoginView;
 import view.signup_login.SignupView;
-import view.ViewManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-
-
-import view.UserListViewModel;
-import view.UserListView;
 
 
 public class Main {
@@ -62,6 +56,7 @@ public class Main {
         UserListViewModel userListViewModel = new UserListViewModel();
 
         OtherProfileViewModel otherProfileViewModel = new OtherProfileViewModel();
+        SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
         ConnectViewModel connectViewModel = new ConnectViewModel();
 
         // DAO setup ===================================================================================================
@@ -79,6 +74,8 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
+
+        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
 
         UserListDataAccessInterface userListDataAccessObject;
         try {
@@ -100,13 +97,18 @@ public class Main {
                 userListViewModel,
                 otherProfileViewModel,
                 userListDataAccessObject,
-                otherProfileDataAccessObject
+                otherProfileDataAccessObject,
+                selfProfileViewModel,
+                selfProfileDataAccessObject
         );
         OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,
                 otherProfileViewModel,
                 otherProfileDataAccessObject,
                 connectViewModel,
                 connectDataAccessObject);
+        SelfProfileView selfProfileView = SelfProfileUseCaseFactory.create(viewManagerModel,
+                selfProfileViewModel,
+                selfProfileDataAccessObject);
 	    assert otherProfileView != null;
 	    views.add(otherProfileView, otherProfileView.viewName);
 	    assert userListView != null;
@@ -115,6 +117,7 @@ public class Main {
 	    views.add(signupView, signupView.viewName);
 	    assert loginView != null;
 	    views.add(loginView, loginView.viewName);
+        views.add(selfProfileView, selfProfileView.viewName);
 
         // Model fire property change ==================================================================================
         viewManagerModel.firePropertyChanged();

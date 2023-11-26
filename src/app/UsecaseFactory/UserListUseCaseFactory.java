@@ -5,14 +5,19 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.other_profile.OtherProfileController;
 import interface_adapter.other_profile.OtherProfilePresenter;
 import interface_adapter.other_profile.OtherProfileViewModel;
-import interface_adapter.other_profile.OtherProfileViewModel;
+import interface_adapter.self_profile.SelfProfileController;
+import interface_adapter.self_profile.SelfProfilePresenter;
+import interface_adapter.self_profile.SelfProfileViewModel;
 import interface_adapter.user_list.UserListController;
 import interface_adapter.user_list.UserListPresenter;
-import interface_adapter.user_list.UserListState;
 import use_case.other_profile.OtherProfileDataAccessInterface;
 import use_case.other_profile.OtherProfileInputBoundary;
 import use_case.other_profile.OtherProfileInteractor;
 import use_case.other_profile.OtherProfileOutputBoundary;
+import use_case.self_profile.SelfProfileDataAccessInterface;
+import use_case.self_profile.SelfProfileInputBoundary;
+import use_case.self_profile.SelfProfileInteractor;
+import use_case.self_profile.SelfProfileOutputBoundary;
 import use_case.user_list.UserListDataAccessInterface;
 import use_case.user_list.UserListInputBoundary;
 import use_case.user_list.UserListInteractor;
@@ -32,13 +37,16 @@ public class UserListUseCaseFactory {
             UserListViewModel viewModel,
             OtherProfileViewModel profileViewModel,
             UserListDataAccessInterface userListDataAccessObject,
-            OtherProfileDataAccessInterface otherProfileDataAccessObject
+            OtherProfileDataAccessInterface otherProfileDataAccessObject,
+            SelfProfileViewModel selfProfileViewModel,
+            SelfProfileDataAccessInterface selfProfileDataAccessObject
     ){
         try {
             UserListController userListController = createUserListUseCase(viewManagerModel, viewModel,
                     profileViewModel, userListDataAccessObject);
             return new UserListView(viewModel,userListController, createOtherProfileUSeCase(viewManagerModel,
-                    profileViewModel, otherProfileDataAccessObject));
+                    profileViewModel, otherProfileDataAccessObject), createSelfProfileUseCase(viewManagerModel,selfProfileViewModel,
+                    selfProfileDataAccessObject),viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
 
@@ -68,5 +76,14 @@ public class UserListUseCaseFactory {
         OtherProfileInputBoundary otherProfileInteractor = new OtherProfileInteractor(otherProfileDataAccessObject, otherProfileOutputBoundary);
         System.out.println("Reached the otherprofile controller");
         return new OtherProfileController(otherProfileInteractor);
+    }
+
+    private static SelfProfileController createSelfProfileUseCase(ViewManagerModel viewManagerModel,
+                                                                  SelfProfileViewModel selfProfileViewModel,
+                                                                  SelfProfileDataAccessInterface selfProfileDataAccessObject) {
+        SelfProfileOutputBoundary selfProfileOutputBoundary = new SelfProfilePresenter(selfProfileViewModel,
+                viewManagerModel);
+        SelfProfileInputBoundary selfProfileInteractor = new SelfProfileInteractor(selfProfileDataAccessObject, selfProfileOutputBoundary);
+        return new SelfProfileController(selfProfileInteractor);
     }
 }

@@ -38,7 +38,7 @@ public class SelfProfileViewTest {
 			SelfProfileOutputBoundary presenter = new SelfProfilePresenter(selfProfileViewModel, viewManagerModel);
 			SelfProfileInputBoundary interactor = new SelfProfileInteractor(selfProfileDataAccessObject, presenter);
 			SelfProfileController selfProfileController = new SelfProfileController(interactor);
-			SelfProfileView selfProfileView = new SelfProfileView(selfProfileViewModel, selfProfileController);
+			SelfProfileView selfProfileView = new SelfProfileView(viewManagerModel,selfProfileViewModel, selfProfileController);
 			selfProfileView.actionPerformed(new ActionEvent(selfProfileView, 1, "test"));
 
 

@@ -42,8 +42,8 @@ public class SelfProfilePresenter implements SelfProfileOutputBoundary {
 		selfProfileState.setUserCourses(currentUser.getCourses());
 
 		profileViewModel.setUser(currentUser);
-		profileViewModel.firePropertyChanged();
 
+		profileViewModel.firePropertyChanged();
 		viewManagerModel.setActiveView(profileViewModel.getViewName());
 		viewManagerModel.firePropertyChanged();
 

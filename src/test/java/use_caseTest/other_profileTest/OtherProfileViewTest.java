@@ -9,11 +9,13 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.connect.ConnectViewModel;
 import interface_adapter.other_profile.OtherProfileState;
 import interface_adapter.other_profile.OtherProfileViewModel;
+import interface_adapter.self_profile.SelfProfileViewModel;
 import interface_adapter.user_list.UserListState;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.connect.ConnectDataAccessInterface;
 import use_case.other_profile.OtherProfileDataAccessInterface;
+import use_case.self_profile.SelfProfileDataAccessInterface;
 import use_case.user_list.UserListDataAccessInterface;
 import view.OtherProfileView;
 import view.UserListView;
@@ -67,8 +69,10 @@ public class OtherProfileViewTest {
 				throw new RuntimeException(e);
 			}
 			UserListViewModel userListViewModel = new UserListViewModel();
+			SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
 			ConnectViewModel connectViewModel = new ConnectViewModel();
 			ConnectDataAccessInterface connectDataAccessObject = new UserDataAccessObject(new UserFactory());
+			SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
 			UserListDataAccessInterface userListDataAccessObject;
 			try {
 				userListDataAccessObject = new UserDataAccessObject(new UserFactory());
@@ -81,7 +85,9 @@ public class OtherProfileViewTest {
 					userListViewModel,
 					otherProfileViewModel,
 					userListDataAccessObject,
-					otherProfileDataAccessObject
+					otherProfileDataAccessObject,
+					selfProfileViewModel,
+					selfProfileDataAccessObject
 			);
 			assert userListView != null;
 			viewManagerModel.setActiveView(userListView.getViewName());

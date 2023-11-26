@@ -9,7 +9,9 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.connect.ConnectController;
 import interface_adapter.connect.ConnectViewModel;
 import interface_adapter.other_profile.OtherProfileViewModel;
+import interface_adapter.self_profile.SelfProfileViewModel;
 import use_case.other_profile.OtherProfileDataAccessInterface;
+import use_case.self_profile.SelfProfileDataAccessInterface;
 import use_case.user_list.UserListDataAccessInterface;
 import view.OtherProfileView;
 import view.UserListView;
@@ -38,6 +40,7 @@ public class UserListTesting {
         // ViewModels for the user list and other profile views
         UserListViewModel userListViewModel = new UserListViewModel();
         OtherProfileViewModel otherProfileViewModel = new OtherProfileViewModel();
+        SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
         UserListDataAccessInterface userListDataAccessObject;
         try {
             userListDataAccessObject = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
@@ -45,6 +48,7 @@ public class UserListTesting {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
+        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
         UserDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new UserDataAccessObject(new UserFactory());
@@ -86,7 +90,9 @@ public class UserListTesting {
                 userListViewModel,
                 otherProfileViewModel,
                 userListDataAccessObject,
-                otherProfileDataAccessObject
+                otherProfileDataAccessObject,
+                selfProfileViewModel,
+                selfProfileDataAccessObject
         );
 
         if (userListView != null) {

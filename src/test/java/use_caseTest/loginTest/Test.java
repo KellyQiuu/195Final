@@ -8,9 +8,11 @@ import entity.UserFactory;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.other_profile.OtherProfileViewModel;
+import interface_adapter.self_profile.SelfProfileViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.other_profile.OtherProfileDataAccessInterface;
+import use_case.self_profile.SelfProfileDataAccessInterface;
 import use_case.user_list.UserListDataAccessInterface;
 import view.signup_login.LoginView;
 import view.signup_login.SignupView;
@@ -27,7 +29,7 @@ import view.UserListView;
 
 
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         JFrame application = new JFrame("195 final project");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -44,8 +46,9 @@ public class Test {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
 
-        UserListViewModel userListViewModel = new UserListViewModel();  // 111111111111111111
-        OtherProfileViewModel profileViewModel = new OtherProfileViewModel(); /////////////
+        UserListViewModel userListViewModel = new UserListViewModel();
+        OtherProfileViewModel profileViewModel = new OtherProfileViewModel();
+        SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
 
         UserDataAccessObject userDataAccessObject;
 
@@ -54,7 +57,7 @@ public class Test {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
             otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
@@ -87,7 +90,9 @@ public class Test {
                 userListViewModel,
                 profileViewModel,
                 userListDataAccessObject,
-                otherProfileDataAccessObject
+                otherProfileDataAccessObject,
+                selfProfileViewModel,
+                selfProfileDataAccessObject
         );
         views.add(userListView, userListView.viewName);
 

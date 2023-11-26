@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.self_profile.SelfProfileController;
 import interface_adapter.self_profile.SelfProfileViewModel;
 
@@ -15,12 +16,14 @@ import java.beans.PropertyChangeListener;
  * This class represents the self profile view in the GUI.
  * It extends JPanel and is used to display and interact with the user's own profile.
  */
-public class SelfProfileView extends JDialog implements ActionListener, PropertyChangeListener {
+public class SelfProfileView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "self_profile";
     private SelfProfileViewModel profileViewModel;
+    private ViewManagerModel viewManagerModel;
     private final SelfProfileController profileController;
     private JLabel nameLabel, emailLabel, coursesLabel;
     private JLabel nameField, emailField, coursesField;
+    private JButton backButton;
 
     /**
      * Constructor for SelfProfileView.
@@ -29,11 +32,12 @@ public class SelfProfileView extends JDialog implements ActionListener, Property
      * @param profileController The controller that handles the logic for this view.
      * @param profileViewModel The self profile view model created for handling the data.
      */
-    public SelfProfileView(SelfProfileViewModel profileViewModel, SelfProfileController profileController) {
+    public SelfProfileView(ViewManagerModel viewManagerModel, SelfProfileViewModel profileViewModel, SelfProfileController profileController) {
 
         this.profileController = profileController;
         this.profileViewModel = profileViewModel;
         this.profileViewModel.addPropertyChangeListener(this);
+        this.viewManagerModel = viewManagerModel;
 
         JLabel title = new JLabel(SelfProfileViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -43,18 +47,23 @@ public class SelfProfileView extends JDialog implements ActionListener, Property
         LabelTextPanel emailInfo = new LabelTextPanel(emailLabel, emailField);
         LabelTextPanel coursesInfo = new LabelTextPanel(coursesLabel, coursesField);
 
-        JPanel buttons = new JPanel();
+        backButton = new JButton("Go Back");
+        backButton.addActionListener(e -> goBack());
 
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        add(title);
-        add(usernameInfo);
-        add(emailInfo);
-        add(coursesInfo);
-        add(buttons);
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        topPanel.add(backButton);
+
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        centerPanel.add(title);
+        centerPanel.add(usernameInfo);
+        centerPanel.add(emailInfo);
+        centerPanel.add(coursesInfo);
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(topPanel);
+        add(centerPanel);
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Ensure the window closes properly
-        setLocationRelativeTo(null); // Center the window on the screen
-        setVisible(true); // Make the window visible
     }
 
     private void createUserInfo() {
@@ -67,9 +76,6 @@ public class SelfProfileView extends JDialog implements ActionListener, Property
         emailField = new JLabel("");
         coursesField = new JLabel(""); // Assuming getCourses() returns a List or similar
 
-//		nameField.setEditable(false);
-//		emailField.setEditable(false);
-//		coursesField.setEditable(false);
     }
     /**
      * Action handler for events in the self profile view.
@@ -91,7 +97,19 @@ public class SelfProfileView extends JDialog implements ActionListener, Property
         if ("state".equals(evt.getPropertyName())) {
             nameField.setText(profileViewModel.getState().getUserName());
             emailField.setText(profileViewModel.getState().getUserEmail());
-            coursesField.setText(profileViewModel.getState().getUserCourses().toString());
+            String courses = profileViewModel.getState().getUserCourses().toString();
+            coursesField.setText(courses.substring(1, courses.length()-1));
         }
+    }
+
+    public void goBack() {
+        String previousView = viewManagerModel.getPreviousView();
+        if (previousView != null) {
+            viewManagerModel.setActiveView(previousView);
+            viewManagerModel.firePropertyChanged();
+        }
+    }
+    public String getViewName() {
+        return viewName;
     }
 }
