@@ -35,9 +35,9 @@ public class Main {
     }
 
     public static JPanel createCardLayoutPanel(CardLayout cardLayout) {
-        JPanel views = new JPanel(cardLayout);
-        return views;
+	    return new JPanel(cardLayout);
     }
+
     public static void main(String[] args) throws IOException {
         // Initial Frame Setup =========================================================================================
         JFrame application = createApplicationFrame();
