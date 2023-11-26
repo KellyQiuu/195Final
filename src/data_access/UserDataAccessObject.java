@@ -40,7 +40,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
         loadUsersFromFile();
     }
 
-    private void loadUsersFromFile() throws IOException {
+    private void loadUsersFromFile() {
         List<String> lines;
         System.out.println("UserLoadFromFile is called");
 
@@ -70,7 +70,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
                 System.out.println("Loaded user: " + p[0]);
             }
         }
-        System.out.println(allUsers.toString());
+        System.out.println(allUsers);
     }
 
     private ArrayList<String> turnCoursesIntoList(String s) {
@@ -88,8 +88,8 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     @Override
     // TODO: 11/8/2023 use api?
     public boolean checkValidEmail(String email) {
-        return true;
-//        return EmailVerificationService.verifyEmail(email);
+//        return true;
+        return EmailVerificationService.verifyEmail3(email);
     }
 
     @Override
