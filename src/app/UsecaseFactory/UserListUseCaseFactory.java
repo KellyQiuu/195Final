@@ -46,7 +46,7 @@ public class UserListUseCaseFactory {
                     profileViewModel, userListDataAccessObject);
             return new UserListView(viewModel,userListController, createOtherProfileUSeCase(viewManagerModel,
                     profileViewModel, otherProfileDataAccessObject), createSelfProfileUseCase(viewManagerModel,selfProfileViewModel,
-                    selfProfileDataAccessObject));
+                    selfProfileDataAccessObject),viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
 

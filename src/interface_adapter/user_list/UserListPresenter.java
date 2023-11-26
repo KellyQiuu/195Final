@@ -43,4 +43,5 @@ public class UserListPresenter implements UserListOutputBoundary {
         // viewManagerModel.firePropertyChanged();
         System.out.println("Prepare Success View method called in presenter");
     }
+
 }

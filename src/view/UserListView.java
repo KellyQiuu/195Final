@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.other_profile.OtherProfileController;
 import interface_adapter.self_profile.SelfProfileController;
 import interface_adapter.user_list.UserListController;
@@ -16,12 +17,9 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.JButton;
-
 
 public class UserListView extends JPanel implements PropertyChangeListener {
     private final UserListViewModel userListViewModel;
-
     private final JPanel userCardsPanel;
     private JButton selfProfileButton;
     public final String viewName = "User List";
@@ -30,18 +28,32 @@ public class UserListView extends JPanel implements PropertyChangeListener {
 
     private OtherProfileController otherProfileController;
     private SelfProfileController selfProfileController;
+    private final ViewManagerModel viewManagerModel; // Added ViewManagerModel dependency
 
     public UserListView(UserListViewModel viewModel, UserListController controller,
-                        OtherProfileController otherProfileController, SelfProfileController selfProfileController) throws IOException {
+                        OtherProfileController otherProfileController, SelfProfileController selfProfileController,
+                        ViewManagerModel viewManagerModel) throws IOException {
         this.userListViewModel = viewModel;
         this.userListController = controller;
-        this.userCardsPanel = new JPanel();
-        userCardsPanel.setLayout(new BoxLayout(userCardsPanel, BoxLayout.Y_AXIS));
         this.otherProfileController = otherProfileController;
         this.selfProfileController = selfProfileController;
+        this.viewManagerModel = viewManagerModel; // Initialize the ViewManagerModel
 
         setLayout(new BorderLayout());
+
+        // Initialize selfProfileButton and add its ActionListener
         selfProfileButton = new JButton("Profile");
+        selfProfileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewManagerModel.setActiveView("self_profile"); // Name of the view to switch to
+                viewManagerModel.firePropertyChanged();
+            }
+        });
+        add(selfProfileButton, BorderLayout.PAGE_START); // Add the selfProfileButton to the view
+
+        userCardsPanel = new JPanel();
+        userCardsPanel.setLayout(new BoxLayout(userCardsPanel, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(userCardsPanel);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -59,21 +71,7 @@ public class UserListView extends JPanel implements PropertyChangeListener {
             }
         });
 
-//        selfProfileButton.addActionListener(
-//                new ActionListener() {
-//                    @Override
-//                    public void actionPerformed(ActionEvent e) {
-//                        if (e.getSource().equals(selfProfileButton)) {
-//                            String currentUserName = UserSecession.getInstance().getCurrentUserName();
-//                            selfProfileController.execute(currentUserName);
-//                        }
-//                    }
-//                }
-//        );
-//        add(selfProfileButton, BorderLayout.PAGE_START);
-
         this.setVisible(true);
-
     }
 
     public void addUserCardClickedListener(ActionListener listener) {
@@ -96,7 +94,6 @@ public class UserListView extends JPanel implements PropertyChangeListener {
                 }
             });
             addUserCardClickedListener(cardPanel.getListener());
-            System.out.println("Added listener");
             userCardsPanel.add(cardPanel);
         }
         userCardsPanel.revalidate();
@@ -105,9 +102,7 @@ public class UserListView extends JPanel implements PropertyChangeListener {
 
     private void notifyUserCardClicked(String userName) throws IOException {
         otherProfileController.execute(userName);
-
     }
-
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
