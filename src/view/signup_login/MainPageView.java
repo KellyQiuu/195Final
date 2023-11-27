@@ -10,32 +10,67 @@ public class MainPageView extends JPanel {
     private SignupView signupView;
 
     private LoginView loginView;
-    private JButton btnSignup;
-    private JButton btnLogin;
+
+    private JButton Signup;
+
+    private JButton Login;
+
+    private JLabel Title;
 
     public MainPageView(CardLayout cardLayout, JPanel views, SignupView signupView, LoginView loginView) {
         this.signupView = signupView;
         this.loginView = loginView;
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Title label
+        Title = new JLabel("CourseMate Connect", SwingConstants.CENTER);
+        Title.setFont(new Font("Arial", Font.BOLD, 24));
+        Title.setForeground(Color.black);
 
         // Sign Up Button
-        btnSignup = new JButton("Sign Up");
-        btnSignup.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(views, signupView.viewName); // Replace "SignupView" with the correct identifier used in your CardLayout
-            }
-        });
-        add(btnSignup);
+        Signup = new JButton("Sign Up");
+        Signup.setFont(new Font("Arial", Font.BOLD, 14));
+        Signup.setPreferredSize(new Dimension(200, 50));
 
         // Log In Button
-        btnLogin = new JButton("Log In");
-        btnLogin.addActionListener(new ActionListener() {
+        Login = new JButton("Log In");
+        Login.setFont(new Font("Arial", Font.BOLD, 14));
+        Login.setPreferredSize(new Dimension(200, 50));
+
+        Signup.setBackground(Color.LIGHT_GRAY); // Example color
+        Login.setBackground(Color.LIGHT_GRAY); // Example color
+
+        // Add components to the panel
+        add(Title, gbc);
+        gbc.insets = new Insets(20, 0, 5, 0);
+        add(Signup, gbc);
+        gbc.insets = new Insets(5, 0, 20, 0);
+        add(Login, gbc);
+
+
+        // Set background color of the panel
+        setBackground(Color.white); // Example color to match the screenshot
+
+
+        Signup.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(views, loginView.viewName); // Replace "LoginView" with the correct identifier used in your CardLayout
+                cardLayout.show(views, signupView.viewName);
             }
         });
-        add(btnLogin);
+        add(Signup);
+
+
+        Login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(views, loginView.viewName);
+            }
+        });
+        add(Login);
     }
 }
