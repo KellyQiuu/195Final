@@ -28,28 +28,42 @@ public class MainPageView extends JPanel {
 
         // Title label
         Title = new JLabel("CourseMate Connect", SwingConstants.CENTER);
-        Title.setFont(new Font("Arial", Font.BOLD, 24));
+        Title.setFont(new Font("Arial", Font.BOLD, 30));
         Title.setForeground(Color.black);
+        // Title position
+        gbc.insets = new Insets(50, 0, 100, 0);
+        add(Title, gbc);
 
         // Sign Up Button
         Signup = new JButton("Sign Up");
         Signup.setFont(new Font("Arial", Font.BOLD, 14));
-        Signup.setPreferredSize(new Dimension(200, 50));
+        Signup.setPreferredSize(new Dimension(150, 40));
 
         // Log In Button
         Login = new JButton("Log In");
         Login.setFont(new Font("Arial", Font.BOLD, 14));
-        Login.setPreferredSize(new Dimension(200, 50));
+        Login.setPreferredSize(new Dimension(150, 40));
+
+        // Add some space between the buttons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(Signup);
+        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        buttonPanel.add(Login);
+        buttonPanel.setOpaque(false);
 
         Signup.setBackground(Color.LIGHT_GRAY); // Example color
         Login.setBackground(Color.LIGHT_GRAY); // Example color
 
         // Add components to the panel
-        add(Title, gbc);
-        gbc.insets = new Insets(20, 0, 5, 0);
-        add(Signup, gbc);
-        gbc.insets = new Insets(5, 0, 20, 0);
-        add(Login, gbc);
+//        add(Title, gbc);
+//        gbc.insets = new Insets(20, 0, 5, 0);
+//        add(Signup, gbc);
+//        gbc.insets = new Insets(5, 0, 20, 0);
+//        add(Login, gbc);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(20, 0, 20, 0);
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(buttonPanel, gbc);
 
 
         // Set background color of the panel
