@@ -143,14 +143,6 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
         }
     }
 
-    public String storeCourses(User u) {
-        List<String> courses = u.getCourses();
-        //complete this method to save the user u's courses, which is an List of 5 Strings into Strings seperated by /
-        return String.join("/", courses);
-
-
-    }
-
     // by Kelly: for UserList Interactor.
     @Override
     public ArrayList<User> getAllUsers() {// by Kelly: for UserList Interactor.
@@ -169,21 +161,6 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
             }
         }
         return null;
-    }
-
-    //@Override
-    public User getUserByUsername(String username) throws NoSuchElementException {
-        ArrayList<User> all = getAllUsers();
-
-        for(User u : all) {
-            if(u.getName().equals(username)) {
-                System.out.println("(DAO) get user by user name: the name is " + u.getName());
-                return u;
-            }
-        }
-
-        System.out.println("(DAO) found no user with this name");
-        throw new NoSuchElementException("NoSuchUser");
     }
 }
 
