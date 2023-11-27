@@ -17,6 +17,7 @@ import use_case.self_profile.SelfProfileDataAccessInterface;
 import use_case.user_list.UserListDataAccessInterface;
 import view.*;
 import view.signup_login.LoginView;
+import view.signup_login.MainPageView;
 import view.signup_login.SignupView;
 
 import javax.swing.*;
@@ -119,9 +120,13 @@ public class Main {
 	    views.add(loginView, loginView.viewName);
         views.add(selfProfileView, selfProfileView.viewName);
 
+        MainPageView mainPageView = new MainPageView(cardLayout, views, signupView, loginView);
+        views.add(mainPageView, "MainPageView"); // Add MainPageView to CardLayout
+
         // Model fire property change ==================================================================================
         viewManagerModel.firePropertyChanged();
-        viewManagerModel.setActiveView(signupView.viewName);
+//        viewManagerModel.setActiveView(signupView.viewName); ////////////////////
+        viewManagerModel.setActiveView("MainPageView");
         viewManagerModel.firePropertyChanged();
 
         // Final setup for the application =============================================================================
