@@ -27,9 +27,9 @@ public class UserDataAccessObjectTest {
 		};
 
 		// Create a test user with some data
-		testUser = new User("testUser", "password", "test@example.com", "1", new ArrayList<>());
+		testUser = new User("testUser", "password", "test@example.com", "1", new ArrayList<String>());
 		// Assume UserFactory.createUser is a static method that creates a User object.
-		UserFactory.createUser("testUser", "password", "test@example.com", "1", new ArrayList<>());
+		UserFactory.createUser("testUser", "password", "test@example.com", "1", new ArrayList<String>());
 
 		// Write the test user to the test file
 		List<String> lines = new ArrayList<>();
@@ -65,7 +65,7 @@ public class UserDataAccessObjectTest {
 
 	@Test
 	public void testSave() throws IOException {
-		User newUser = new User("newUser", "newPass", "new@example.com", "2", new ArrayList<>());
+		User newUser = new User("newUser", "newPass", "new@example.com", "2", new ArrayList<String>());
 		userDataAccessObject.save(newUser);
 		assertTrue(userDataAccessObject.existsByName("newUser"));
 	}

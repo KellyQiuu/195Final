@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * This entity is the implementation that create Users for the program.
  */
 
-public class UserFactory {
+public class UserFactory extends GeneralUserFactory{
     public static User createUser(String username,
                                   String password, String id,
                                   String email,
