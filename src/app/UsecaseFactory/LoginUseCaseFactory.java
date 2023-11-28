@@ -24,12 +24,13 @@ public class LoginUseCaseFactory {
     public static LoginView create(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
-            LoggedInViewModel loggedInViewModel,
+//            LoggedInViewModel loggedInViewModel,
             UserListViewModel userListViewModel, /////////////////////
             LoginUserAccessInterface userDataAccessObject) {
 
         try {
-            LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel, loggedInViewModel, userListViewModel,userDataAccessObject);
+            LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel, userListViewModel,userDataAccessObject);
+//            LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel, loggedInViewModel, userListViewModel,userDataAccessObject);
             return new LoginView(loginController, loginViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -41,12 +42,13 @@ public class LoginUseCaseFactory {
     private static LoginController createLoginUseCase(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
-            LoggedInViewModel loggedInViewModel,
+//            LoggedInViewModel loggedInViewModel,
             UserListViewModel userListViewModel, /////////////////////
             LoginUserAccessInterface userDataAccessObject) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
-        LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loggedInViewModel, loginViewModel,userListViewModel);
+        LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loginViewModel, userListViewModel);
+//        LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loggedInViewModel, loginViewModel,userListViewModel);
 
         UserFactory userFactory = new UserFactory();
 

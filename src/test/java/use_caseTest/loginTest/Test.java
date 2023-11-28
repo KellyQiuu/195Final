@@ -70,7 +70,8 @@ public class Test {
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userListViewModel,userDataAccessObject);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, userListViewModel,userDataAccessObject);
+//        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userListViewModel,userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
 //        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);

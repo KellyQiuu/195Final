@@ -8,7 +8,7 @@ import interface_adapter.connect.ConnectViewModel;
 import data_access.UserDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.logged_in.LoggedInViewModel;
+//import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
@@ -52,7 +52,7 @@ public class Main {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
         LoginViewModel loginViewModel = new LoginViewModel();
-        LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
+//        LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
         UserListViewModel userListViewModel = new UserListViewModel();
 
@@ -92,7 +92,7 @@ public class Main {
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel,
-                loginViewModel, loggedInViewModel, userListViewModel,userDataAccessObject);
+                loginViewModel, userListViewModel,userDataAccessObject);
         UserListView userListView = UserListUseCaseFactory.create(
                 viewManagerModel,
                 userListViewModel,

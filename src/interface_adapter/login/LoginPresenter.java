@@ -13,7 +13,7 @@ public class LoginPresenter implements LoginOutputBoundary {
 
     private final LoginViewModel loginViewModel;
 
-    private final LoggedInViewModel loggedInViewModel;
+//    private final LoggedInViewModel loggedInViewModel;
 
     private final UserListViewModel userListViewModel;
 
@@ -21,12 +21,12 @@ public class LoginPresenter implements LoginOutputBoundary {
 
 
     public LoginPresenter(ViewManagerModel viewManagerModel,
-                          LoggedInViewModel loggedInViewModel,
+//                          LoggedInViewModel loggedInViewModel,
                           LoginViewModel loginViewModel,
                           UserListViewModel userListViewModel) {  // 111111
         this.viewManagerModel = viewManagerModel;
         this.loginViewModel = loginViewModel;
-        this.loggedInViewModel = loggedInViewModel;
+//        this.loggedInViewModel = loggedInViewModel;
         this.userListViewModel = userListViewModel; // 11111111
     }
 
