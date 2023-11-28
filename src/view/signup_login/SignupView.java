@@ -1,5 +1,6 @@
 package view.signup_login;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
@@ -20,6 +21,8 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     private final SignupViewModel signupViewModel;
 
     private final SignupController signupController;
+
+    private final ViewManagerModel  viewManagerModel;
 
     private final JTextField usernameInputField = new JTextField(15);
 
@@ -45,9 +48,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
 
     public SignupView(SignupController controller,
-                      SignupViewModel signupViewModel) {
+                      SignupViewModel signupViewModel,
+                      ViewManagerModel viewManagerModel) {
         this.signupController = controller;
         this.signupViewModel = signupViewModel;
+        this.viewManagerModel = viewManagerModel;
         signupViewModel.addPropertyChangeListener(this);
         initializeComponents();
     }
@@ -113,10 +118,18 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         signUp.addActionListener(e -> handleSignUp());
 
         JButton cancel = createButton("Cancel", constraints);
-        cancel.addActionListener(e -> {
-            JFrame parentFrame = getParentFrame();
-            if (parentFrame != null) {
-                parentFrame.dispose();
+//        cancel.addActionListener(e -> {
+//            JFrame parentFrame = getParentFrame();
+//            if (parentFrame != null) {
+//                parentFrame.dispose();
+//            }
+//        });
+
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewManagerModel.setActiveView("MainPageView"); // Use the correct identifier for your main page view
+                viewManagerModel.firePropertyChanged(); // Notify the change to update the view
             }
         });
 
