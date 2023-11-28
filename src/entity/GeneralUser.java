@@ -2,7 +2,7 @@ package entity;
 
 import java.util.List;
 
-public interface UserInterface {
+public interface GeneralUser {
     // added this interface to allow later adding different types of users.
     // adhere to Open Clsoed Principle.
     String getName();

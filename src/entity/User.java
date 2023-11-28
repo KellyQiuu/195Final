@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 
 
-public class User implements UserInterface{
+public class User implements GeneralUser {
 
     private final String name;
     private final String password;
