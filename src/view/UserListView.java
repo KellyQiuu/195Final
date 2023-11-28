@@ -22,6 +22,9 @@ public class UserListView extends JPanel implements PropertyChangeListener {
     private final UserListViewModel userListViewModel;
     private final JPanel userCardsPanel;
     private JButton selfProfileButton;
+
+    private JButton logout;
+
     public final String viewName = "User List";
     private final UserListController userListController;
     private ArrayList<ActionListener> listeners = new ArrayList<>();
@@ -53,6 +56,19 @@ public class UserListView extends JPanel implements PropertyChangeListener {
             }
         });
         add(selfProfileButton, BorderLayout.PAGE_START); // Add the selfProfileButton to the view
+
+
+        // Initialize logoutButton and add its ActionListener
+        logout = new JButton("Log Out");
+        logout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showLogoutConfirmation();
+            }
+        });
+
+        add(logout, BorderLayout.PAGE_END);
+
 
         userCardsPanel = new JPanel();
         userCardsPanel.setLayout(new BoxLayout(userCardsPanel, BoxLayout.Y_AXIS));
@@ -116,4 +132,21 @@ public class UserListView extends JPanel implements PropertyChangeListener {
     public String getViewName() {
         return viewName;
     }
+
+    private void showLogoutConfirmation() {
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure to log out?",
+                "Log Out Confirmation",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+
+        // click "Yes" to exit the application
+        if (confirm == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }
+
 }
+
