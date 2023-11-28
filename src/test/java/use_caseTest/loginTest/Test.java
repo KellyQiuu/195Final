@@ -6,7 +6,6 @@ import app.UsecaseFactory.UserListUseCaseFactory;
 import data_access.UserDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.self_profile.SelfProfileViewModel;
 import interface_adapter.signup.SignupViewModel;
@@ -43,7 +42,6 @@ public class Test {
         new ViewManager(views, cardLayout, viewManagerModel);
 
         LoginViewModel loginViewModel = new LoginViewModel();
-        LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
 
         UserListViewModel userListViewModel = new UserListViewModel();
@@ -71,12 +69,8 @@ public class Test {
         views.add(signupView, signupView.viewName);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, userListViewModel,userDataAccessObject);
-//        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userListViewModel,userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
-//        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
-//        views.add(loggedInView, loggedInView.viewName);
-//
 
         UserListDataAccessInterface userListDataAccessObject;
         try {
