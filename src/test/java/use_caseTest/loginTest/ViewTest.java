@@ -27,7 +27,7 @@ import view.UserListViewModel;
 import view.UserListView;
 
 
-public class Test {
+public class ViewTest {
     public static void main(String[] args) throws IOException {
 
         JFrame application = new JFrame("195 final project");
