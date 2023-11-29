@@ -1,6 +1,7 @@
 package use_caseTest.other_profileTest;
 
 import data_access.UserDataAccessObject;
+import entity.GeneralUser;
 import entity.User;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
@@ -37,7 +38,7 @@ public class OtherProfileTest {
         courses.add("STA400");
         courses.add("STA365");
 
-        User testUser = new UserDataAccessObject(new UserFactory()).getUser("testuser");
+        GeneralUser testUser = new UserDataAccessObject(new UserFactory()).getUser("testuser");
 
         assertNotNull(testUser);
         assertEquals("testuser",testUser.getName());

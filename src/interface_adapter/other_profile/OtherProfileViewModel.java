@@ -1,5 +1,6 @@
 package interface_adapter.other_profile;
 
+import entity.GeneralUser;
 import entity.User;
 import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
@@ -15,7 +16,7 @@ public class OtherProfileViewModel extends ViewModel {
 	public static final String USERNAME_LABEL = "Username";
 
 	private OtherProfileState state = new OtherProfileState();
-	private User user;
+	private GeneralUser user;
 
 	/**
 	 * Constructs an OtherProfileViewModel.
@@ -58,7 +59,7 @@ public class OtherProfileViewModel extends ViewModel {
 	 *
 	 * @return The current User.
 	 */
-	public User getUser() {
+	public GeneralUser getUser() {
 		return this.user;
 	}
 
@@ -67,7 +68,7 @@ public class OtherProfileViewModel extends ViewModel {
 	 *
 	 * @param user The User entity to set.
 	 */
-	public void setUser(User user) {
+	public void setUser(GeneralUser user) {
 		this.user = user;
 		this.state.setUserName(user.getName());
 		this.state.setUserEmail(user.getEmail());

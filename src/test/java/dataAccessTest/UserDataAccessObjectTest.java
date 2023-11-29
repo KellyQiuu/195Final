@@ -1,6 +1,7 @@
 package dataAccessTest;
 
 import data_access.UserDataAccessObject;
+import entity.GeneralUser;
 import entity.User;
 import entity.UserFactory;
 import org.junit.Before;
@@ -42,7 +43,7 @@ public class UserDataAccessObjectTest {
 		// TODO: Modify this method to be testable. [NOV.23]
 		//userDataAccessObject.loadUsersFromFile(testFilePath);
 		// Test that the user data was loaded correctly.
-		User loadedUser = userDataAccessObject.get("testUser");
+		GeneralUser loadedUser = userDataAccessObject.get("testUser");
 		assertNotNull(loadedUser);
 		assertEquals("testUser", loadedUser.getName());
 	}

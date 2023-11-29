@@ -1,5 +1,6 @@
 package use_case.other_profile;
 
+import entity.GeneralUser;
 import entity.User;
 
 /**
@@ -29,7 +30,7 @@ public class OtherProfileInteractor implements OtherProfileInputBoundary {
 	 */
 	@Override
 	public void execute(OtherProfileInputData otherProfileInputData) {
-		User currentUser = profileDataAccessObject.getUser(otherProfileInputData.getUsername());
+		GeneralUser currentUser = profileDataAccessObject.getUser(otherProfileInputData.getUsername());
 		OtherProfileOutputData profileOutputData = new OtherProfileOutputData(currentUser);
 		profilePresenter.prepareSuccessView(profileOutputData);
 	}

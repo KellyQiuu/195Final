@@ -1,5 +1,6 @@
 package use_case.self_profile;
 
+import entity.GeneralUser;
 import entity.User;
 
 /**
@@ -7,14 +8,14 @@ import entity.User;
  * This class holds the data necessary for presenting the user profile information.
  */
 public class SelfProfileOutputData {
-	private final User currentUser;
+	private final GeneralUser currentUser;
 
 	/**
 	 * Constructs a SelfProfileOutputData instance with the specified user.
 	 *
 	 * @param user The user whose profile data is to be encapsulated.
 	 */
-	public SelfProfileOutputData(User user) {
+	public SelfProfileOutputData(GeneralUser user) {
 		this.currentUser = user;
 	}
 
@@ -23,7 +24,7 @@ public class SelfProfileOutputData {
 	 *
 	 * @return The current User instance.
 	 */
-	public User getCurrentUser() {
+	public GeneralUser getCurrentUser() {
 		return this.currentUser;
 	}
 }

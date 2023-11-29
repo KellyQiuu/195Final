@@ -1,5 +1,6 @@
 package interface_adapter.self_profile;
 
+import entity.GeneralUser;
 import entity.User;
 import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
@@ -11,7 +12,7 @@ import java.beans.PropertyChangeSupport;
  */
 public class SelfProfileViewModel extends ViewModel {
     private SelfProfileState state = new SelfProfileState();
-    private User user;
+    private GeneralUser user;
     public static final String TITLE_LABEL = "My Profile";
 
     /**
@@ -55,7 +56,7 @@ public class SelfProfileViewModel extends ViewModel {
      *
      * @return The current User.
      */
-    public User getUser() {
+    public GeneralUser getUser() {
         return this.user;
     }
 
@@ -64,7 +65,7 @@ public class SelfProfileViewModel extends ViewModel {
      *
      * @param user The User entity to set.
      */
-    public void setUser(User user) {
+    public void setUser(GeneralUser user) {
         this.user = user;
         this.state.setUserName(user.getName());
         this.state.setUserEmail(user.getEmail());

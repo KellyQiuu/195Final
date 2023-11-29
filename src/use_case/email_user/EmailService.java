@@ -6,16 +6,18 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
+
+import entity.GeneralUser;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import entity.User;
 
 public class EmailService {
     private static final String SENDGRID_API_URL = "https://api.sendgrid.com/v3/mail/send";
-    private static final String YOUR_TEMPLATE_ID = "d-6706faa3bb9543ec9fddfceb21d6d7fb";
+
     private static final String SENDGRID_API_KEY = "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";
 
-    public static void sendEmail(User current, String otherEmail, String freeTextMessage) throws Exception {
+    public static void sendEmail(GeneralUser current, String otherEmail, String freeTextMessage) throws Exception {
         JSONObject emailJson = new JSONObject();
         // Create a 'from' object with an email address
         JSONObject fromObject = new JSONObject();

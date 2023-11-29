@@ -1,5 +1,6 @@
 package use_case.self_profile;
 
+import entity.GeneralUser;
 import entity.User;
 
 import java.io.IOException;
@@ -10,11 +11,11 @@ import java.io.IOException;
  */
 public interface SelfProfileDataAccessInterface {
 	/**
-	 * Retrieves the User entity based on the provided username.
-	 *
-	 * @param username The username of the user whose profile data is to be retrieved.
-	 * @return User The User entity associated with the given username. Returns null if the user is not found.
-	 */
-	public User getUser(String username);
-	User get(String currentUserName) throws IOException;
+     * Retrieves the User entity based on the provided username.
+     *
+     * @param username The username of the user whose profile data is to be retrieved.
+     * @return User The User entity associated with the given username. Returns null if the user is not found.
+     */
+	public GeneralUser getUser(String username);
+	GeneralUser get(String currentUserName) throws IOException;
 }

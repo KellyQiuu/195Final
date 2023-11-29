@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.GeneralUser;
 import entity.User;
 import entity.UserFactory;
 import use_case.connect.ConnectDataAccessInterface;
@@ -25,9 +26,9 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     //TODO:(Kelly)This needs to have String:User map.( For latter extensions and for Usecase Data Access).I would need to
     // Add one for now. Please see if changes needed for this added accounts attribute.
 
-    private final Map<String, User> usernameUserMap;
+    private final Map<String, GeneralUser> usernameUserMap;
 
-    private final ArrayList<User> allUsers = new ArrayList<>();
+    private final ArrayList<GeneralUser> allUsers = new ArrayList<>();
 
     public UserDataAccessObject(UserFactory userFactory) throws IOException {
 
@@ -62,7 +63,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
                 //TODO: Please edit the creation of this courses ArrayList after changing the File format, including
                 // email, courses info in the file.
                 //create user object from the information stored in the file, put them in the allUsers list.
-                User user = UserFactory.createUser(p[0],p[1],p[2],p[3],courses);
+                GeneralUser user = UserFactory.createUser(p[0],p[1],p[2],p[3],courses);
                 allUsers.add(user);
 
                 // Update the usernameUserMap with the new user
@@ -103,7 +104,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     }
 
     @Override
-    public User get(String username) throws IOException {
+    public GeneralUser get(String username) throws IOException {
         loadUsersFromFile();
         return usernameUserMap.get(username);
     }
@@ -114,7 +115,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     }
 
     @Override
-    public User get2(String username) throws IOException {
+    public GeneralUser get2(String username) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filePath));
 
         for (String line : lines) {
@@ -130,7 +131,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
 
     @Override
-    public void save(User user) {
+    public void save(GeneralUser user) {
         usersDataMap.put(user.getName(), user.getPassword());
 
         String userData = user + "\n";
@@ -145,16 +146,16 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
     // by Kelly: for UserList Interactor.
     @Override
-    public ArrayList<User> getAllUsers() {// by Kelly: for UserList Interactor.
+    public ArrayList<GeneralUser> getAllUsers() {// by Kelly: for UserList Interactor.
 
         return allUsers;
     }
 
     // Get the current user object.
     @Override
-    public User getUser(String username) {
+    public GeneralUser getUser(String username) {
         if (usersDataMap.containsKey(username)) {
-            for (User i : getAllUsers()) {
+            for (GeneralUser i : getAllUsers()) {
                 if (Objects.equals(i.getName(), username)) {
                     return i;
                 }

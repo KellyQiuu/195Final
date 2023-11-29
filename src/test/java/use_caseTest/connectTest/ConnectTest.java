@@ -1,9 +1,9 @@
 package use_caseTest.connectTest;
 
+import entity.GeneralUser;
 import entity.User;
 import use_case.UserSecession;
 import use_case.connect.ConnectDataAccessInterface;
-import use_case.connect.ConnectInputBoundary;
 import use_case.connect.ConnectInputData;
 import use_case.connect.ConnectInteractor;
 import use_case.connect.ConnectOutputBoundary;
@@ -57,7 +57,7 @@ public class ConnectTest {
 
     private static class FakeConnectDataAccessInterface implements ConnectDataAccessInterface {
         @Override
-        public User get(String username) {
+        public GeneralUser get(String username) {
             // Return a fake user for testing purposes
             return new User(username, "password", "id", "email@example.com", null);
         }

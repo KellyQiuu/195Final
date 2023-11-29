@@ -1,5 +1,6 @@
 package interface_adapter.user_list;
 
+import entity.GeneralUser;
 import entity.User;
 import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.other_profile.OtherProfileViewModel;
@@ -28,7 +29,7 @@ public class UserListPresenter implements UserListOutputBoundary {
     @Override
     public void prepareSuccessView(UserListOutputData data) {
         // Directly use the list of User objects from the output data
-        ArrayList<User> users = data.getUsers();
+        ArrayList<GeneralUser> users = data.getUsers();
         UserListState state = userListViewModel.getState();
         // Update the state with the list of User objects
         state.setUsers(users);

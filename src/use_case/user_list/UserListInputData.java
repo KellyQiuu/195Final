@@ -1,6 +1,9 @@
 package use_case.user_list;
 
-public class UserListInputData {
+import java.io.IOException;
+
+public class UserListInputData{
     public UserListInputData(){
     }
+
 }

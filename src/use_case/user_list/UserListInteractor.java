@@ -2,6 +2,7 @@ package use_case.user_list;
 import java.io.IOException;
 import java.util.*;
 
+import entity.GeneralUser;
 import entity.User;
 import entity.UserFactory;
 import use_case.UserSecession;
@@ -9,7 +10,7 @@ import use_case.UserSecession;
 
 public class UserListInteractor implements UserListInputBoundary {
 
-    private User currentUser;
+    private GeneralUser currentUser;
     final UserListDataAccessInterface userDataAccessObject;
     final UserListOutputBoundary userListPresenter;
 
@@ -39,24 +40,24 @@ public class UserListInteractor implements UserListInputBoundary {
         // this means the map gets updated per login.
         setCurrentUser();
 
-        Map<User, Integer> userSimilarityScore = new HashMap<>();
-        for(User u:userDataAccessObject.getAllUsers()){
+        Map<GeneralUser, Integer> userSimilarityScore = new HashMap<>();
+        for(GeneralUser u:userDataAccessObject.getAllUsers()){
             if (!u.getId().equals(currentUser.getId())) {
                 int similarity = calculateSimilarity(currentUser, u);
                 userSimilarityScore.put(u, similarity);
         }    }
         // sort the Map based on the scores and output an arrayList of users
-        List<User> sorted = new ArrayList<>(userSimilarityScore.keySet()); // unsorted list
+        List<GeneralUser> sorted = new ArrayList<>(userSimilarityScore.keySet()); // unsorted list
         // for any two users, define them to be comparable based on simiarlity score, and sort based on way to compare them
         sorted.sort((user1, user2) -> userSimilarityScore.get(user2) - userSimilarityScore.get(user1));
 
         System.out.println("UFake user is Sorted, "+sorted);
-        UserListOutputData output = new UserListOutputData((ArrayList<User>) sorted);
+        UserListOutputData output = new UserListOutputData((ArrayList<GeneralUser>) sorted);
         //TODO: change the fakeUser, to use it as input data. UserListInputData
         userListPresenter.prepareSuccessView(output);
     }
 
-    private int calculateSimilarity(User currentUser, User u) {
+    private int calculateSimilarity(GeneralUser currentUser, GeneralUser u) {
         // for now define the score as the number of common courses that two users both take.
         Set<String> commonCourses = new HashSet<>(currentUser.getCourses());
         List<String> courses = u.getCourses();
