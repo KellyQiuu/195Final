@@ -3,14 +3,13 @@ package view.signup_login;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.signup.SignupState;
+import interface_adapter.ViewManagerModel;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -27,13 +26,16 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     private final JPasswordField passwordInputField = new JPasswordField(15);
 
+    private final ViewManagerModel viewManagerModel;
+
     private JButton logIn;
 
     private JButton cancel;
 
-    public LoginView(LoginController controller, LoginViewModel loginViewModel) {
+    public LoginView(LoginController controller, LoginViewModel loginViewModel, ViewManagerModel viewManagerModel) {
         this.loginController = controller;
         this.loginViewModel = loginViewModel;
+        this.viewManagerModel = viewManagerModel;  ///////////////////
         this.loginViewModel.addPropertyChangeListener(this);
 
         initializeComponents();
@@ -71,12 +73,23 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
             }
         });
         JButton cancel = createButton("Cancel", constraints);
-        cancel.addActionListener(e -> {
-            JFrame parentFrame = getParentFrame();
-            if (parentFrame != null) {
-                parentFrame.dispose();
+//        cancel.addActionListener(e -> {
+//            JFrame parentFrame = getParentFrame();
+//            if (parentFrame != null) {
+//                parentFrame.dispose();
+//            }
+//        });
+
+        // Assuming cancel button is named btnCancel in your SignupView
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewManagerModel.setActiveView("MainPageView"); // Use the correct identifier for your main page view
+                viewManagerModel.firePropertyChanged(); // Notify the change to update the view
             }
         });
+
+//
     }
 
     private JFrame getParentFrame() {

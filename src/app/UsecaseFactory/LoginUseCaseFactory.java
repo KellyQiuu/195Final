@@ -28,7 +28,7 @@ public class LoginUseCaseFactory {
 
         try {
             LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel, userListViewModel,userDataAccessObject);
-            return new LoginView(loginController, loginViewModel);
+            return new LoginView(loginController, loginViewModel, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
