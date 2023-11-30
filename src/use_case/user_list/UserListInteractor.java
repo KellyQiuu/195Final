@@ -52,7 +52,8 @@ public class UserListInteractor implements UserListInputBoundary {
 
         System.out.println("UFake user is Sorted, "+sorted);
         UserListOutputData output = new UserListOutputData((ArrayList<User>) sorted);
-        //TODO: change the fakeUser, to use it as input data. UserListInputData
+
+
         userListPresenter.prepareSuccessView(output);
     }
 
