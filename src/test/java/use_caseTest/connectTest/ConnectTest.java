@@ -6,7 +6,6 @@ import org.junit.Assert;
 import interface_adapter.connect.*;
 import use_case.connect.*;
 import entity.User;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
