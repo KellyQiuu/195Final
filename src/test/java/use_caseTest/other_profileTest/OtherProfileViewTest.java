@@ -63,7 +63,7 @@ public class OtherProfileViewTest {
 			OtherProfileDataAccessInterface otherProfileDataAccessObject;
 
 			try {
-				otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+				otherProfileDataAccessObject = new UserDataAccessObject();
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Could not open user data file.");
 				throw new RuntimeException(e);
@@ -71,11 +71,11 @@ public class OtherProfileViewTest {
 			UserListViewModel userListViewModel = new UserListViewModel();
 			SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
 			ConnectViewModel connectViewModel = new ConnectViewModel();
-			ConnectDataAccessInterface connectDataAccessObject = new UserDataAccessObject(new UserFactory());
-			SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+			ConnectDataAccessInterface connectDataAccessObject = new UserDataAccessObject();
+			SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject();
 			UserListDataAccessInterface userListDataAccessObject;
 			try {
-				userListDataAccessObject = new UserDataAccessObject(new UserFactory());
+				userListDataAccessObject = new UserDataAccessObject();
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Could not open user data file.");
 				throw new RuntimeException(e);

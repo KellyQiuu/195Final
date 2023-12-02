@@ -39,7 +39,7 @@ public class SelfProfileTest {
 		courses.add("STA400");
 		courses.add("STA365");
 
-		GeneralUser testUser = new UserDataAccessObject(new UserFactory()).getUser("testuser");
+		GeneralUser testUser = new UserDataAccessObject().getUser("testuser");
 
 		assertNotNull(testUser);
 		assertEquals("testuser",testUser.getName());
@@ -60,7 +60,7 @@ public class SelfProfileTest {
 
 			SelfProfileInputData inputData = new SelfProfileInputData(testUser.getName());
 
-			SelfProfileInputBoundary interactor = new SelfProfileInteractor(new UserDataAccessObject(new UserFactory()),
+			SelfProfileInputBoundary interactor = new SelfProfileInteractor(new UserDataAccessObject(),
 					presenter);
 
 			SelfProfileController controller = new SelfProfileController(interactor);

@@ -2,6 +2,7 @@ package dataAccessTest;
 
 import data_access.UserDataAccessObject;
 import entity.GeneralUser;
+import entity.GeneralUserFactory;
 import entity.User;
 import entity.UserFactory;
 import org.junit.Before;
@@ -24,13 +25,13 @@ public class UserDataAccessObjectTest {
 	@Before
 	public void setUp() throws IOException {
 		// Set up a test file path and create a user for testing
-		userDataAccessObject = new UserDataAccessObject(new UserFactory()) {
+		userDataAccessObject = new UserDataAccessObject() {
 		};
 
 		// Create a test user with some data
 		testUser = new User("testUser", "password", "test@example.com", "1", new ArrayList<String>());
 		// Assume UserFactory.createUser is a static method that creates a User object.
-		UserFactory.createUser("testUser", "password", "test@example.com", "1", new ArrayList<String>());
+		GeneralUserFactory.createUser("testUser", "password", "test@example.com", "1", new ArrayList<String>());
 
 		// Write the test user to the test file
 		List<String> lines = new ArrayList<>();

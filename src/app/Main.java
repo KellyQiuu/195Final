@@ -63,30 +63,30 @@ public class Main {
         // DAO setup ===================================================================================================
         UserDataAccessObject userDataAccessObject;
         try {
-            userDataAccessObject = new UserDataAccessObject(new UserFactory());
+            userDataAccessObject = new UserDataAccessObject();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
-            otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+            otherProfileDataAccessObject = new UserDataAccessObject();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
 
-        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject();
 
         UserListDataAccessInterface userListDataAccessObject;
         try {
-            userListDataAccessObject = new UserDataAccessObject(new UserFactory());
+            userListDataAccessObject = new UserDataAccessObject();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
 
-        ConnectDataAccessInterface connectDataAccessObject = new UserDataAccessObject(new UserFactory());
+        ConnectDataAccessInterface connectDataAccessObject = new UserDataAccessObject();
 
         // Views Setup =================================================================================================
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,

@@ -1,8 +1,6 @@
 package use_case.self_profile;
 
 import entity.GeneralUser;
-import entity.User;
-import use_case.SessionManagerInteractor;
 
 import java.io.IOException;
 

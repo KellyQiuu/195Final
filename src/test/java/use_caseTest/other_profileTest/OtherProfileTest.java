@@ -38,7 +38,7 @@ public class OtherProfileTest {
         courses.add("STA400");
         courses.add("STA365");
 
-        GeneralUser testUser = new UserDataAccessObject(new UserFactory()).getUser("testuser");
+        GeneralUser testUser = new UserDataAccessObject().getUser("testuser");
 
         assertNotNull(testUser);
         assertEquals("testuser",testUser.getName());
@@ -58,7 +58,7 @@ public class OtherProfileTest {
 
             OtherProfileInputData inputData = new OtherProfileInputData(testUser.getName());
 
-            OtherProfileInputBoundary interactor = new OtherProfileInteractor(new UserDataAccessObject(new UserFactory()),
+            OtherProfileInputBoundary interactor = new OtherProfileInteractor(new UserDataAccessObject(),
                     presenter);
 
             OtherProfileController controller = new OtherProfileController(interactor);

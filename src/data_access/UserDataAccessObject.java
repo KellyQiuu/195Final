@@ -1,6 +1,7 @@
 package data_access;
 
 import entity.GeneralUser;
+import entity.GeneralUserFactory;
 import entity.User;
 import entity.UserFactory;
 import use_case.connect.ConnectDataAccessInterface;
@@ -30,7 +31,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
     private final ArrayList<GeneralUser> allUsers = new ArrayList<>();
 
-    public UserDataAccessObject(UserFactory userFactory) throws IOException {
+    public UserDataAccessObject() throws IOException {
 
         System.out.println("UserDataAccess constructor reached");
         this.filePath = "src/data_access/users.csv";
@@ -63,7 +64,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
                 //TODO: Please edit the creation of this courses ArrayList after changing the File format, including
                 // email, courses info in the file.
                 //create user object from the information stored in the file, put them in the allUsers list.
-                GeneralUser user = UserFactory.createUser(p[0],p[1],p[2],p[3],courses);
+                GeneralUser user = GeneralUserFactory.createUser(p[0],p[1],p[2],p[3],courses);
                 allUsers.add(user);
 
                 // Update the usernameUserMap with the new user
@@ -123,7 +124,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
             if (parts.length >= 5 && parts[0].equals(username)) {
                 // Assuming the format is: username,password,email,id,courses
                 ArrayList<String> courses = new ArrayList<>(Arrays.asList(parts[4].split("\\+")));
-                return UserFactory.createUser(parts[0], parts[1], parts[2], parts[3], courses);
+                return GeneralUserFactory.createUser(parts[0], parts[1], parts[2], parts[3], courses);
             }
         }
         return null;

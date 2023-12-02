@@ -53,14 +53,14 @@ public class Test {
         UserDataAccessObject userDataAccessObject;
 
         try {
-            userDataAccessObject = new UserDataAccessObject(new UserFactory());
+            userDataAccessObject = new UserDataAccessObject();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject();
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
-            otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+            otherProfileDataAccessObject = new UserDataAccessObject();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
@@ -80,7 +80,7 @@ public class Test {
 
         UserListDataAccessInterface userListDataAccessObject;
         try {
-            userListDataAccessObject = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
+            userListDataAccessObject = new UserDataAccessObject(); // TODO: 11/18/2023 delete the argument
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);

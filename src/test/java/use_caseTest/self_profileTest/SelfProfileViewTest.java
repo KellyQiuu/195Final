@@ -30,7 +30,7 @@ public class SelfProfileViewTest {
 			SelfProfileDataAccessInterface selfProfileDataAccessObject;
 
 			try {
-				selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+				selfProfileDataAccessObject = new UserDataAccessObject();
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Could not open user data file.");
 				throw new RuntimeException(e);

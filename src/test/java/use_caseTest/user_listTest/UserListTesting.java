@@ -43,21 +43,21 @@ public class UserListTesting {
         SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
         UserListDataAccessInterface userListDataAccessObject;
         try {
-            userListDataAccessObject = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
+            userListDataAccessObject = new UserDataAccessObject(); // TODO: 11/18/2023 delete the argument
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
-        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject();
         UserDataAccessObject userDataAccessObject;
         try {
-            userDataAccessObject = new UserDataAccessObject(new UserFactory());
+            userDataAccessObject = new UserDataAccessObject();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
-            otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
+            otherProfileDataAccessObject = new UserDataAccessObject(); // TODO: 11/18/2023 delete the argument
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
@@ -80,7 +80,7 @@ public class UserListTesting {
         OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,
                 otherProfileViewModel,
                 otherProfileDataAccessObject,
-                connectViewModel, new UserDataAccessObject(new UserFactory()));
+                connectViewModel, new UserDataAccessObject());
         otherProfileView.setVisible(false);
 
 
