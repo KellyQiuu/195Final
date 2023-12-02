@@ -17,7 +17,7 @@ public class ConnectInteractor implements ConnectInputBoundary {
     }
 
     @Override
-    public void handleConnect(ConnectInputData inputData, String recipientEmail) throws IOException {
+    public void handleConnect(ConnectInputData inputData, String recipientEmail) throws Exception {
         String currentUsername = UserSecession.getInstance().getCurrentUserName();
         User currentUser = dataAccess.get(currentUsername);
         if (currentUser == null || recipientEmail == null) {
@@ -25,14 +25,10 @@ public class ConnectInteractor implements ConnectInputBoundary {
             return;
         }
 
-        try {
             // Assuming EmailService is correctly implemented and not static
-            EmailService emailService = new EmailService();
-            String emailContent = inputData.getMessage();
-            emailService.sendEmail(currentUser, recipientEmail, emailContent);
-            outputBoundary.onConnectionResult(new ConnectOutputData(true, "Email sent successfully."));
-        } catch (Exception e) {
-            outputBoundary.onConnectionResult(new ConnectOutputData(false, "Failed to send email: " + e.getMessage()));
-        }
+        EmailService emailService = new EmailService();
+        String emailContent = inputData.getMessage();
+        emailService.sendEmail(currentUser, recipientEmail, emailContent);
+        outputBoundary.onConnectionResult(new ConnectOutputData(true, "Email sent successfully."));
     }
 }

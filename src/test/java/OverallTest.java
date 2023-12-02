@@ -24,12 +24,15 @@ public class OverallTest {
 	}
 
 	@Test
-	public void testMain() throws IOException {
+	public void testMain() throws IOException, InterruptedException {
 		// Prepare the arguments if any
 		String[] args = {/* arguments to pass to main */};
 
 		// Call the main method
 		Main.main(args);
+		Thread.sleep(20000);
+		Main.main(args);
+		Thread.sleep(20000);
 
 		// Verify the output or side effects
 

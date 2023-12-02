@@ -43,7 +43,7 @@ public class ConnectTest {
     }
 
     @Test
-    public void testConnectionProcess() throws IOException {
+    public void testConnectionProcess() throws Exception {
         connectState.setConnectionInProgress(true);
         connectController.initiateConnectionProcess("recipient@example.com");
 

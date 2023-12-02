@@ -33,6 +33,8 @@ public class ConnectView extends JFrame {
                     connectController.handleSendEmailClicked(message);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
                 }
                 messageTextArea.setText("");
                 setVisible(false); // Hide the window after sending the message
