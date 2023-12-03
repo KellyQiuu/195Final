@@ -6,6 +6,8 @@ import interface_adapter.other_profile.OtherProfileViewModel;
 import use_case.user_list.UserListOutputData;
 import use_case.user_list.UserListOutputBoundary;
 import view.UserListViewModel;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +28,7 @@ public class UserListPresenter implements UserListOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(UserListOutputData data) {
+    public void prepareSuccessView(UserListOutputData data) throws IOException {
         // Directly use the list of User objects from the output data
         ArrayList<User> users = data.getUsers();
         UserListState state = userListViewModel.getState();

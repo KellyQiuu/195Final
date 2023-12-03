@@ -146,7 +146,9 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     // by Kelly: for UserList Interactor.
     @Override
     public ArrayList<User> getAllUsers() {// by Kelly: for UserList Interactor.
-
+        System.out.println("Before: "+ allUsers.size());
+        loadUsersFromFile();
+        System.out.println("Load user from file: "+ allUsers.size());
         return allUsers;
     }
 
