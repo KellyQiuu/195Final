@@ -87,28 +87,16 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         addLabelAndField("Password:", passwordInputField, constraints);
         addLabelAndField("Email:", emailInputField, constraints);
 
-//        //course field in a single line
-//        JPanel coursePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
-//        coursePanel.setBackground(new Color(30, 30, 30));
-//        for (int i = 1; i <= 5; i++) {
-//            addCourseField("Course " + i + ":", coursePanel);
-//        }
-//        add(coursePanel, constraints);
-//        constraints.gridy++;
+
 
         //course field in a single line
-//        JPanel coursePanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         JPanel coursePanel2 = new JPanel();
         coursePanel2.setLayout(new BoxLayout(coursePanel2, BoxLayout.X_AXIS));
-//        coursePanel2.setBackground(new Color(30, 30, 30));
         addCourseField("Course 1:", course1InputField, coursePanel2);
         addCourseField("Course 2:", course2InputField, coursePanel2);
         addCourseField("Course 3:", course3InputField, coursePanel2);
         addCourseField("Course 4:", course4InputField, coursePanel2);
         addCourseField("Course 5:", course5InputField, coursePanel2);
-//        for (int i = 1; i <= 5; i++) {
-//            addCourseField("Course " + i + ":", coursePanel2);
-//        }
         add(coursePanel2, constraints);
         constraints.gridy++;
 
@@ -118,17 +106,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         signUp.addActionListener(e -> handleSignUp());
 
         JButton cancel = createButton("Cancel", constraints);
-//        cancel.addActionListener(e -> {
-//            JFrame parentFrame = getParentFrame();
-//            if (parentFrame != null) {
-//                parentFrame.dispose();
-//            }
-//        });
 
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                viewManagerModel.setActiveView("MainPageView"); // Use the correct identifier for your main page view
+                viewManagerModel.setActiveView("MainPageView");
                 viewManagerModel.firePropertyChanged(); // Notify the change to update the view
             }
         });
