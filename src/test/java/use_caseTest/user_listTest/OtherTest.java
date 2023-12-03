@@ -8,6 +8,7 @@ import use_case.user_list.UserListOutputData;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -47,7 +48,7 @@ public class OtherTest {
     }
 
     @Test
-    public void testUserListOutputData() {
+    public void testUserListOutputData() throws IOException {
         // Initialize test inputs.
         String username1 = "username1";
         String username2 = "username2";
