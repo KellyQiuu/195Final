@@ -21,7 +21,7 @@ public class ConnectController {
         connectView.setVisible(true);
     }
 
-    public void handleSendEmailClicked(String message) throws IOException {
+    public void handleSendEmailClicked(String message) throws Exception {
         ConnectInputData inputData = new ConnectInputData(message);
         connectInputBoundary.handleConnect(inputData, recipientEmail);
     }

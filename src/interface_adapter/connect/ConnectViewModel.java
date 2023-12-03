@@ -22,15 +22,5 @@ public class ConnectViewModel {
      */
     public void setConnectionStatus(String connectionStatus) {
         this.connectionStatus = connectionStatus;
-        notifyView(); // Notify the view of the status change
-    }
-
-    /**
-     * Notifies the view about a change in the connection status.
-     * This method should be implemented to use the appropriate mechanism
-     * for updating the view, such as data binding or the observer pattern.
-     */
-    private void notifyView() {
-        // Implement the notification mechanism here
     }
 }

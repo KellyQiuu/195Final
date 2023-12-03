@@ -28,8 +28,6 @@ public class UserListInteractor implements UserListInputBoundary {
         this.currentUser = userDataAccessObject.get(currentUserName);
         System.out.println("(UserList Interactor): current user object is got from DAO: "+ this.currentUser);
 
-        //UserFactory.createUser("myself", "123","12829929","randomemail@email.com",c);
-        //TODO: change this to a real secession Manager
         System.out.println("Real user is created, "+this.currentUser);
     }
 
@@ -38,9 +36,9 @@ public class UserListInteractor implements UserListInputBoundary {
         // I will add to the map everytime the usecase is executed, and I would not store this anywhere
         // this means the map gets updated per login.
         setCurrentUser();
-
+        ArrayList<User> all = userDataAccessObject.getAllUsers();
         Map<User, Integer> userSimilarityScore = new HashMap<>();
-        for(User u:userDataAccessObject.getAllUsers()){
+        for(User u:all){
             if (!u.getId().equals(currentUser.getId())) {
                 int similarity = calculateSimilarity(currentUser, u);
                 userSimilarityScore.put(u, similarity);
