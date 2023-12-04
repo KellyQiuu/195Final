@@ -5,7 +5,8 @@ import interface_adapter.self_profile.SelfProfileViewModel;
 import use_case.connect.ConnectDataAccessInterface;
 import interface_adapter.connect.ConnectViewModel;
 
-import data_access.UserDataAccessObject;
+//import data_access.UserDataAccessObject;
+import data_access.PSQLDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.other_profile.OtherProfileViewModel;
@@ -59,32 +60,37 @@ public class Main {
         ConnectViewModel connectViewModel = new ConnectViewModel();
 
         // DAO setup ===================================================================================================
-        UserDataAccessObject userDataAccessObject;
+//        UserDataAccessObject userDataAccessObject;
+        PSQLDataAccessObject userDataAccessObject;
         try {
-            userDataAccessObject = new UserDataAccessObject(new UserFactory());
+            userDataAccessObject = new PSQLDataAccessObject();
+//            userDataAccessObject = new UserDataAccessObject(new UserFactory());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
-            otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+//            otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+            otherProfileDataAccessObject = new PSQLDataAccessObject();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
 
-        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
-
+//        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+        SelfProfileDataAccessInterface selfProfileDataAccessObject = new PSQLDataAccessObject();
         UserListDataAccessInterface userListDataAccessObject;
         try {
-            userListDataAccessObject = new UserDataAccessObject(new UserFactory());
+//            userListDataAccessObject = new UserDataAccessObject(new UserFactory());
+            userListDataAccessObject = new PSQLDataAccessObject();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
 
-        ConnectDataAccessInterface connectDataAccessObject = new UserDataAccessObject(new UserFactory());
+//        ConnectDataAccessInterface connectDataAccessObject = new UserDataAccessObject(new UserFactory());
+        ConnectDataAccessInterface connectDataAccessObject = new PSQLDataAccessObject();
 
         // Views Setup =================================================================================================
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,

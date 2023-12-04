@@ -25,7 +25,8 @@ public class User implements GeneralUser {
         // we can expect Ye Ziyi to pass in the ArrayList when cosntructing users
     }
 
-    @Override
+
+	@Override
     public String getName() {
         return name;
     }
