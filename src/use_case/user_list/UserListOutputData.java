@@ -2,7 +2,8 @@
 package use_case.user_list;
 
 
-import data_access.UserDataAccessObject;
+import data_access.PSQLDataAccessObject;
+//import data_access.UserDataAccessObject;
 import entity.User;
 import entity.UserFactory;
 
@@ -18,7 +19,9 @@ public class UserListOutputData {
     //TODO: turn arrayList into a arraylist of hashmap, each hashmap is a user.
 
     public ArrayList<User> getUsers() throws IOException {
-        UserDataAccessObject dao = new UserDataAccessObject(new UserFactory());
+//        UserDataAccessObject dao = new UserDataAccessObject(new UserFactory());
+        PSQLDataAccessObject dao = new PSQLDataAccessObject();
+
         return dao.getAllUsers();
     }
 }
