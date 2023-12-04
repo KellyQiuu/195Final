@@ -5,9 +5,7 @@ import interface_adapter.self_profile.SelfProfileViewModel;
 import use_case.connect.ConnectDataAccessInterface;
 import interface_adapter.connect.ConnectViewModel;
 
-//import data_access.UserDataAccessObject;
 import data_access.PSQLDataAccessObject;
-import entity.UserFactory;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.signup.SignupViewModel;

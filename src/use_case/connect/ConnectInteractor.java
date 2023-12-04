@@ -4,8 +4,6 @@ import entity.User;
 import use_case.email_user.EmailService;
 import use_case.UserSecession;
 
-import java.io.IOException;
-
 
 public class ConnectInteractor implements ConnectInputBoundary {
     private final ConnectOutputBoundary outputBoundary;
