@@ -22,6 +22,6 @@ public class UserListOutputData {
 //        UserDataAccessObject dao = new UserDataAccessObject(new UserFactory());
         PSQLDataAccessObject dao = new PSQLDataAccessObject();
 
-        return dao.getAllUsers();
+        return sortedUsers;
     }
 }
