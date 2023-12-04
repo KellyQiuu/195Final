@@ -2,9 +2,8 @@ package use_caseTest.user_listTest;
 
 import app.UsecaseFactory.OtherProfileUseCaseFactory;
 import app.UsecaseFactory.UserListUseCaseFactory;
-import data_access.UserDataAccessObject;
+import data_access.PSQLDataAccessObject;
 import entity.User;
-import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.connect.ConnectViewModel;
 import interface_adapter.other_profile.OtherProfileState;
@@ -20,9 +19,7 @@ import use_case.user_list.UserListDataAccessInterface;
 import view.OtherProfileView;
 import view.UserListView;
 import view.UserListViewModel;
-import javax.swing.JTextField;
-import java.awt.*;
-import java.beans.PropertyChangeEvent;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -70,7 +67,7 @@ public class UserListViewTest {
             OtherProfileDataAccessInterface otherProfileDataAccessObject;
 
             try {
-                otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+                otherProfileDataAccessObject = new PSQLDataAccessObject();
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Could not open user data file.");
                 throw new RuntimeException(e);
@@ -78,11 +75,11 @@ public class UserListViewTest {
             UserListViewModel userListViewModel = new UserListViewModel();
             SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
             ConnectViewModel connectViewModel = new ConnectViewModel();
-            ConnectDataAccessInterface connectDataAccessObject = new UserDataAccessObject(new UserFactory());
-            SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+            ConnectDataAccessInterface connectDataAccessObject = new PSQLDataAccessObject();
+            SelfProfileDataAccessInterface selfProfileDataAccessObject = new PSQLDataAccessObject();
             UserListDataAccessInterface userListDataAccessObject;
             try {
-                userListDataAccessObject = new UserDataAccessObject(new UserFactory());
+                userListDataAccessObject = new PSQLDataAccessObject();
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Could not open user data file.");
                 throw new RuntimeException(e);

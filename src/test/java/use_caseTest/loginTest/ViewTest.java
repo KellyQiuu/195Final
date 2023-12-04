@@ -3,8 +3,7 @@ package use_caseTest.loginTest;
 import app.UsecaseFactory.LoginUseCaseFactory;
 import app.UsecaseFactory.SignupUseCaseFactory;
 import app.UsecaseFactory.UserListUseCaseFactory;
-import data_access.UserDataAccessObject;
-import entity.UserFactory;
+import data_access.PSQLDataAccessObject;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.self_profile.SelfProfileViewModel;
@@ -48,17 +47,17 @@ public class ViewTest {
         OtherProfileViewModel profileViewModel = new OtherProfileViewModel();
         SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
 
-        UserDataAccessObject userDataAccessObject;
+        PSQLDataAccessObject userDataAccessObject;
 
         try {
-            userDataAccessObject = new UserDataAccessObject(new UserFactory());
+            userDataAccessObject = new PSQLDataAccessObject();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+        SelfProfileDataAccessInterface selfProfileDataAccessObject = new PSQLDataAccessObject();
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
-            otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
+            otherProfileDataAccessObject = new PSQLDataAccessObject();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
@@ -74,7 +73,7 @@ public class ViewTest {
 
         UserListDataAccessInterface userListDataAccessObject;
         try {
-            userListDataAccessObject = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
+            userListDataAccessObject = new PSQLDataAccessObject();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);

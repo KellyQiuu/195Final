@@ -1,6 +1,6 @@
 package dataAccessTest;
 
-import data_access.UserDataAccessObject;
+import data_access.PSQLDataAccessObject;
 import entity.User;
 import entity.UserFactory;
 import org.junit.Before;
@@ -16,14 +16,14 @@ import static org.junit.Assert.*;
 
 public class UserDataAccessObjectTest {
 
-	private UserDataAccessObject userDataAccessObject;
+	private PSQLDataAccessObject userDataAccessObject;
 	private final String testFilePath = "test_users.csv";
 	private User testUser;
 
 	@Before
 	public void setUp() throws IOException {
 		// Set up a test file path and create a user for testing
-		userDataAccessObject = new UserDataAccessObject(new UserFactory()) {
+		userDataAccessObject = new PSQLDataAccessObject() {
 		};
 
 		// Create a test user with some data
