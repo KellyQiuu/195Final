@@ -25,9 +25,6 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
     private final Map<String, String> usersDataMap;//should we refactor the name to "authentication"? since this is username+password
 
-    //TODO:(Kelly)This needs to have String:User map.( For latter extensions and for Usecase Data Access).I would need to
-    // Add one for now. Please see if changes needed for this added accounts attribute.
-
     private final Map<String, User> usernameUserMap;
 
     private final ArrayList<User> allUsers = new ArrayList<>();

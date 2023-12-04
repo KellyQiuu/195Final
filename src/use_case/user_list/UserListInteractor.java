@@ -39,10 +39,16 @@ public class UserListInteractor implements UserListInputBoundary {
         ArrayList<User> all = userDataAccessObject.getAllUsers();
         Map<User, Integer> userSimilarityScore = new HashMap<>();
         for(User u:all){
-            if (!u.getId().equals(currentUser.getId())) {
+            if (!u.getId().equals(currentUser.getId()) ||
+            !u.getName().equals(currentUser.getName()) ||
+            !u.getEmail().equals(currentUser.getEmail())) {
                 int similarity = calculateSimilarity(currentUser, u);
                 userSimilarityScore.put(u, similarity);
-        }    }
+
+        }
+
+        }
+
         // sort the Map based on the scores and output an arrayList of users
         List<User> sorted = new ArrayList<>(userSimilarityScore.keySet()); // unsorted list
         // for any two users, define them to be comparable based on simiarlity score, and sort based on way to compare them
