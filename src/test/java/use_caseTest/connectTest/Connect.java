@@ -1,6 +1,6 @@
 package use_caseTest.connectTest;
 
-import data_access.UserDataAccessObject;
+import data_access.PSQLDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.connect.ConnectController;
 import interface_adapter.connect.ConnectPresenter;
@@ -19,7 +19,7 @@ public class Connect {
         // Create an instance of UserDataAccessObject
         ConnectViewModel connectViewModel = new ConnectViewModel();
         ConnectOutputBoundary dataAccess = new ConnectPresenter(connectViewModel); // Replace with your constructor if different
-        ConnectDataAccessInterface dao = new UserDataAccessObject(new UserFactory()); // TODO: 11/18/2023 delete the argument
+        ConnectDataAccessInterface dao = new PSQLDataAccessObject();
         // Create the ConnectInteractor instance
         ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess,dao);
 

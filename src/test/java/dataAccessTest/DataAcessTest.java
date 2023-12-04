@@ -1,8 +1,7 @@
 package dataAccessTest;
 
 import static org.junit.Assert.*;
-
-import data_access.UserDataAccessObject;
+import data_access.PSQLDataAccessObject;
 import entity.User;
 import entity.UserFactory;
 import org.junit.After;
@@ -10,21 +9,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DataAcessTest {
 
-    private UserDataAccessObject userDataAccessObject;
+    private PSQLDataAccessObject userDataAccessObject;
     private User testUser;
 
     @Before
     public void setUp() throws IOException {
         // Assuming UserFactory and User classes are properly defined
-        UserFactory userFactory = new UserFactory();
-        userDataAccessObject = new UserDataAccessObject(userFactory);
+        userDataAccessObject = new PSQLDataAccessObject();
         testUser = UserFactory.createUser("testUser", "password", "test@email.com", "12345", new ArrayList<>(Arrays.asList("Course1", "Course2")));
     }
 
