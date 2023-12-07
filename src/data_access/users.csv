@@ -1,22 +1,12 @@
 username1,password123,1,user1@example.com,CSC207+MAT237+CSC343+MAT246+MAT337
 Open To Work,password456,2,user2@example.com,CSC108+MAT135+CSC148+MAT224+STA247
 FakeKelly,password789,3,kellyqiu2025@gmail.com,CSC209+MAT136+CSC258+MAT223+STA256
-testuser,123456,123,123@gmail.com,STA130+STA347+STA457+STA400+STA365
-A Smart Guy,password444,4,user4@example.com,STA288+STA302+STA198+CSC302+STA399
-Sandy Yu,password555,5,user5@example.com,STA299+CSC309+STA220+STA414+STA355
-Eva Dei,password666,6,user6@example.com,STA314+STA304+CSC110+CSC196+STA201
-Sophia Shu,password777,7,user7@example.com,STA304+CSC300+STA130+STA199+CSC197
-Boddy Yan,password888,8,user8@example.com,STA314+STA237+STA303+CSC165+STA304
-Ruihuan He,password999,9,user9@example.com,STA255+CSC310+STA447+STA313+STA248
-Jonathan Calever,password1110,10,qiuwenyu2021@outlook.com,STA130+STA465+STA237+STA347+CSC310
-Kellyyy,1,123,qiuwenyu60@gmail.com,CSC207+MAT246+MAT237+MAT337+STA347
-Ye Ziyi,1,123,qiuwenyu60@gmail.com,CSC207+MAT237+CSC148+APM348+MAT301
-A lonely Person,1,123,qiuwenyu60@gmail.com,CSC207+MAT237+CSC148+JSC270+STA457
-newUser,newPass,new@example.com,2,
-newUser,newPass,new@example.com,2,
-newUser,newPass,new@example.com,2,
-newUser,newPass,new@example.com,2,
-newUser,newPass,new@example.com,2,
-newUser,newPass,new@example.com,2,
-newUser,newPass,new@example.com,2,
-newUser,newPass,new@example.com,2,
+testuser,123456,4,123@gmail.com,STA130+STA347+STA457+STA400+STA365
+A Smart Guy,password444,5,user4@example.com,STA288+STA302+STA198+CSC302+STA399
+Sandy Yu,password555,6,user5@example.com,STA299+CSC309+STA220+STA414+STA355
+Eva Dei,password666,7,user6@example.com,STA314+STA304+CSC110+CSC196+STA201
+Sophia Shu,password777,8,user7@example.com,STA304+CSC300+STA130+STA199+CSC197
+Boddy Yan,password888,9,user8@example.com,STA314+STA237+STA303+CSC165+STA304
+Ruihuan He,password999,10,user9@example.com,STA255+CSC310+STA447+STA313+STA248
+Jonathan Calever,password1110,11,qiuwenyu2021@outlook.com,STA130+STA465+STA237+STA347+CSC310
+Kellyyy,1,12,qiuwenyu60@gmail.com,CSC207+MAT246+MAT237+MAT337+STA347

@@ -6,9 +6,6 @@ import interface_adapter.ViewManagerModel;
 import use_case.self_profile.SelfProfileOutputBoundary;
 import use_case.self_profile.SelfProfileOutputData;
 
-import javax.swing.*;
-import java.util.List;
-
 /**
  * Presenter class for the self profile, implementing the SelfProfileOutputBoundary interface.
  * This class is responsible for presenting the self profile data to the user interface, handling the view logic.

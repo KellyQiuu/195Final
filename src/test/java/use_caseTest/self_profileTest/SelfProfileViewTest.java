@@ -1,6 +1,6 @@
 package use_caseTest.self_profileTest;
 
-import data_access.UserDataAccessObject;
+import data_access.PSQLDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.self_profile.SelfProfileController;
@@ -30,7 +30,9 @@ public class SelfProfileViewTest {
 			SelfProfileDataAccessInterface selfProfileDataAccessObject;
 
 			try {
-				selfProfileDataAccessObject = new UserDataAccessObject();
+
+				selfProfileDataAccessObject = new PSQLDataAccessObject();
+
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Could not open user data file.");
 				throw new RuntimeException(e);

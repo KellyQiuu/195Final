@@ -3,14 +3,13 @@ package view.signup_login;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.signup.SignupState;
+import interface_adapter.ViewManagerModel;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -27,13 +26,16 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     private final JPasswordField passwordInputField = new JPasswordField(15);
 
+    private final ViewManagerModel viewManagerModel;
+
     private JButton logIn;
 
     private JButton cancel;
 
-    public LoginView(LoginController controller, LoginViewModel loginViewModel) {
+    public LoginView(LoginController controller, LoginViewModel loginViewModel, ViewManagerModel viewManagerModel) {
         this.loginController = controller;
         this.loginViewModel = loginViewModel;
+        this.viewManagerModel = viewManagerModel;  ///////////////////
         this.loginViewModel.addPropertyChangeListener(this);
 
         initializeComponents();
@@ -50,7 +52,6 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
         //Sign up Title label
         JLabel titleLabel = new JLabel("Login");
-//        titleLabel.setForeground(Color.DARK_GRAY); // Set text color to white
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Customize font
         titleLabel.setHorizontalAlignment(JLabel.CENTER); // Center align
         add(titleLabel, constraints);
@@ -71,12 +72,15 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
             }
         });
         JButton cancel = createButton("Cancel", constraints);
-        cancel.addActionListener(e -> {
-            JFrame parentFrame = getParentFrame();
-            if (parentFrame != null) {
-                parentFrame.dispose();
+
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewManagerModel.setActiveView("MainPageView");
+                viewManagerModel.firePropertyChanged();
             }
         });
+
     }
 
     private JFrame getParentFrame() {
@@ -103,20 +107,15 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     private void addLabelAndField(String labelText, JComponent field, GridBagConstraints constraints) {
         JLabel label = new JLabel(labelText);
-//        label.setForeground(Color.WHITE);
         label.setFont(new Font("Arial", Font.BOLD, 14));
         add(label, constraints);
         constraints.gridy++;
-//        field.setBackground(new Color(50, 50, 50));
-//        field.setForeground(Color.WHITE);
         add(field, constraints);
         constraints.gridy++;
     }
 
     private JButton createButton(String text, GridBagConstraints constraints) {
         JButton button = new JButton(text);
-//        button.setBackground(new Color(50, 50, 50));
-//        button.setForeground(Color.WHITE);
         add(button, constraints);
         constraints.gridy++;
         return button;

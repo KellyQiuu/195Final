@@ -1,8 +1,12 @@
 package dataAccessTest;
 
+
 import data_access.UserDataAccessObject;
 import entity.GeneralUser;
 import entity.GeneralUserFactory;
+
+import data_access.PSQLDataAccessObject;
+
 import entity.User;
 import entity.UserFactory;
 import org.junit.Before;
@@ -18,14 +22,16 @@ import static org.junit.Assert.*;
 
 public class UserDataAccessObjectTest {
 
-	private UserDataAccessObject userDataAccessObject;
+	private PSQLDataAccessObject userDataAccessObject;
 	private final String testFilePath = "test_users.csv";
-	private User testUser;
+	private GeneralUser testUser;
 
 	@Before
 	public void setUp() throws IOException {
 		// Set up a test file path and create a user for testing
-		userDataAccessObject = new UserDataAccessObject() {
+
+		userDataAccessObject = new PSQLDataAccessObject() {
+
 		};
 
 		// Create a test user with some data
@@ -67,7 +73,7 @@ public class UserDataAccessObjectTest {
 
 	@Test
 	public void testSave() throws IOException {
-		User newUser = new User("newUser", "newPass", "new@example.com", "2", new ArrayList<String>());
+		GeneralUser newUser = new User("newUser", "newPass", "new@example.com", "2", new ArrayList<String>());
 		userDataAccessObject.save(newUser);
 		assertTrue(userDataAccessObject.existsByName("newUser"));
 	}

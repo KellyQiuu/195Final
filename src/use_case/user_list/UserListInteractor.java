@@ -29,8 +29,6 @@ public class UserListInteractor implements UserListInputBoundary {
         this.currentUser = userDataAccessObject.get(currentUserName);
         System.out.println("(UserList Interactor): current user object is got from DAO: "+ this.currentUser);
 
-        //UserFactory.createUser("myself", "123","12829929","randomemail@email.com",c);
-        //TODO: change this to a real secession Manager
         System.out.println("Real user is created, "+this.currentUser);
     }
 
@@ -40,20 +38,29 @@ public class UserListInteractor implements UserListInputBoundary {
         // this means the map gets updated per login.
         setCurrentUser();
 
+        ArrayList<GeneralUser> all = userDataAccessObject.getAllUsers();
         Map<GeneralUser, Integer> userSimilarityScore = new HashMap<>();
-        for(GeneralUser u:userDataAccessObject.getAllUsers()){
-            if (!u.getId().equals(currentUser.getId())) {
+        for(GeneralUser u:all){
+            if (!u.getId().equals(currentUser.getId()) ||
+            !u.getName().equals(currentUser.getName()) ||
+            !u.getEmail().equals(currentUser.getEmail())) {
+
                 int similarity = calculateSimilarity(currentUser, u);
                 userSimilarityScore.put(u, similarity);
-        }    }
+
+        }
+
+        }
+
         // sort the Map based on the scores and output an arrayList of users
         List<GeneralUser> sorted = new ArrayList<>(userSimilarityScore.keySet()); // unsorted list
         // for any two users, define them to be comparable based on simiarlity score, and sort based on way to compare them
         sorted.sort((user1, user2) -> userSimilarityScore.get(user2) - userSimilarityScore.get(user1));
 
         System.out.println("UFake user is Sorted, "+sorted);
+
         UserListOutputData output = new UserListOutputData((ArrayList<GeneralUser>) sorted);
-        //TODO: change the fakeUser, to use it as input data. UserListInputData
+
         userListPresenter.prepareSuccessView(output);
     }
 

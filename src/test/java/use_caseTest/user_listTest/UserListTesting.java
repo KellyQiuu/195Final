@@ -3,7 +3,7 @@ package use_caseTest.user_listTest;
 import app.UsecaseFactory.ConnectUseCaseFactory;
 import app.UsecaseFactory.OtherProfileUseCaseFactory;
 import app.UsecaseFactory.UserListUseCaseFactory;
-import data_access.UserDataAccessObject;
+import data_access.PSQLDataAccessObject;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.connect.ConnectController;
@@ -43,21 +43,28 @@ public class UserListTesting {
         SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
         UserListDataAccessInterface userListDataAccessObject;
         try {
-            userListDataAccessObject = new UserDataAccessObject(); // TODO: 11/18/2023 delete the argument
+
+            userListDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
-        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject();
-        UserDataAccessObject userDataAccessObject;
+
+
+        SelfProfileDataAccessInterface selfProfileDataAccessObject = new PSQLDataAccessObject();
+        PSQLDataAccessObject userDataAccessObject;
         try {
-            userDataAccessObject = new UserDataAccessObject();
+            userDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
-            otherProfileDataAccessObject = new UserDataAccessObject(); // TODO: 11/18/2023 delete the argument
+
+            otherProfileDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
@@ -80,7 +87,9 @@ public class UserListTesting {
         OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,
                 otherProfileViewModel,
                 otherProfileDataAccessObject,
-                connectViewModel, new UserDataAccessObject());
+
+                connectViewModel, new PSQLDataAccessObject());
+
         otherProfileView.setVisible(false);
 
 

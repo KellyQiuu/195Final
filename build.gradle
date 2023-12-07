@@ -25,6 +25,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:4.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'org.postgresql:postgresql:42.3.1' // Use the latest version available
 }
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8

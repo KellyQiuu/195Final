@@ -3,13 +3,12 @@ package interface_adapter.user_list;
 import entity.GeneralUser;
 import entity.User;
 import interface_adapter.other_profile.OtherProfileViewModel;
-import interface_adapter.other_profile.OtherProfileViewModel;
 import use_case.user_list.UserListOutputData;
 import use_case.user_list.UserListOutputBoundary;
 import view.UserListViewModel;
+
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import interface_adapter.ViewManagerModel;
 public class UserListPresenter implements UserListOutputBoundary {
 
@@ -27,7 +26,7 @@ public class UserListPresenter implements UserListOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(UserListOutputData data) {
+    public void prepareSuccessView(UserListOutputData data) throws IOException {
         // Directly use the list of User objects from the output data
         ArrayList<GeneralUser> users = data.getUsers();
         UserListState state = userListViewModel.getState();

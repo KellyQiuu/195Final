@@ -5,8 +5,6 @@ import use_case.connect.ConnectInputBoundary;
 import use_case.connect.ConnectInputData;
 import view.ConnectView;
 
-import java.io.IOException;
-
 public class ConnectController {
     private final ConnectInputBoundary connectInputBoundary;
     private String recipientEmail; // Could be an email, ID, etc.
@@ -21,7 +19,7 @@ public class ConnectController {
         connectView.setVisible(true);
     }
 
-    public void handleSendEmailClicked(String message) throws IOException {
+    public void handleSendEmailClicked(String message) throws Exception {
         ConnectInputData inputData = new ConnectInputData(message);
         connectInputBoundary.handleConnect(inputData, recipientEmail);
     }

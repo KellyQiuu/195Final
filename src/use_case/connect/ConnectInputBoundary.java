@@ -9,5 +9,5 @@ public interface ConnectInputBoundary {
      * @param inputData The data required to perform the connect operation,
      *                  including sender's information and the message.
      */
-    void handleConnect(ConnectInputData inputData, String recipientEmail) throws IOException;
+    void handleConnect(ConnectInputData inputData, String recipientEmail) throws Exception;
 }

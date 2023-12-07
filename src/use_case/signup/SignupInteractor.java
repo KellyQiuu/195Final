@@ -38,7 +38,6 @@ public class SignupInteractor implements SignupInputBoundary {
         List<String> courses = signupInputData.getCourses();
 
 
-        // TODO: 11/10/2023 use api?
         if (!signupDataAccess.checkValidEmail(email)) {
             outputBoundary.prepareFailView("Please enter a valid email");
             return;

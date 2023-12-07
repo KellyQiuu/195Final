@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 public class EmailVerificationService {
     public static boolean verifyEmail3(String email){

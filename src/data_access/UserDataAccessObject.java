@@ -1,3 +1,6 @@
+// This class is commented out because it's being replaced by the PSQLDataAccessObject class
+
+
 package data_access;
 
 import entity.GeneralUser;
@@ -24,10 +27,8 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
     private final Map<String, String> usersDataMap;//should we refactor the name to "authentication"? since this is username+password
 
-    //TODO:(Kelly)This needs to have String:User map.( For latter extensions and for Usecase Data Access).I would need to
-    // Add one for now. Please see if changes needed for this added accounts attribute.
-
     private final Map<String, GeneralUser> usernameUserMap;
+
 
     private final ArrayList<GeneralUser> allUsers = new ArrayList<>();
 
@@ -148,6 +149,9 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     // by Kelly: for UserList Interactor.
     @Override
     public ArrayList<GeneralUser> getAllUsers() {// by Kelly: for UserList Interactor.
+        System.out.println("Before: "+ allUsers.size());
+        loadUsersFromFile();
+        System.out.println("Load user from file: "+ allUsers.size());
 
         return allUsers;
     }

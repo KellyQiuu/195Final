@@ -15,7 +15,9 @@ import entity.User;
 public class EmailService {
     private static final String SENDGRID_API_URL = "https://api.sendgrid.com/v3/mail/send";
 
-    private static final String SENDGRID_API_KEY = "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";
+    private static final String YOUR_TEMPLATE_ID = "d-6706faa3bb9543ec9fddfceb21d6d7fb";
+    private static final String SENDGRID_API_KEY = "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";
+
 
     public static void sendEmail(GeneralUser current, String otherEmail, String freeTextMessage) throws Exception {
         JSONObject emailJson = new JSONObject();

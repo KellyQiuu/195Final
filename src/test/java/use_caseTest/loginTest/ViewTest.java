@@ -3,10 +3,8 @@ package use_caseTest.loginTest;
 import app.UsecaseFactory.LoginUseCaseFactory;
 import app.UsecaseFactory.SignupUseCaseFactory;
 import app.UsecaseFactory.UserListUseCaseFactory;
-import data_access.UserDataAccessObject;
-import entity.UserFactory;
+import data_access.PSQLDataAccessObject;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.other_profile.OtherProfileViewModel;
 import interface_adapter.self_profile.SelfProfileViewModel;
 import interface_adapter.signup.SignupViewModel;
@@ -28,7 +26,7 @@ import view.UserListViewModel;
 import view.UserListView;
 
 
-public class Test {
+public class ViewTest {
     public static void main(String[] args) throws IOException {
 
         JFrame application = new JFrame("195 final project");
@@ -43,24 +41,25 @@ public class Test {
         new ViewManager(views, cardLayout, viewManagerModel);
 
         LoginViewModel loginViewModel = new LoginViewModel();
-        LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
 
         UserListViewModel userListViewModel = new UserListViewModel();
         OtherProfileViewModel profileViewModel = new OtherProfileViewModel();
         SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
 
-        UserDataAccessObject userDataAccessObject;
+        PSQLDataAccessObject userDataAccessObject;
 
         try {
-            userDataAccessObject = new UserDataAccessObject();
+
+            userDataAccessObject = new PSQLDataAccessObject();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject();
+        SelfProfileDataAccessInterface selfProfileDataAccessObject = new PSQLDataAccessObject();
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
-            otherProfileDataAccessObject = new UserDataAccessObject();
+            otherProfileDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
@@ -71,16 +70,14 @@ public class Test {
         views.add(signupView, signupView.viewName);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, userListViewModel,userDataAccessObject);
-//        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userListViewModel,userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
-//        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
-//        views.add(loggedInView, loggedInView.viewName);
-//
 
         UserListDataAccessInterface userListDataAccessObject;
         try {
-            userListDataAccessObject = new UserDataAccessObject(); // TODO: 11/18/2023 delete the argument
+
+            userListDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);

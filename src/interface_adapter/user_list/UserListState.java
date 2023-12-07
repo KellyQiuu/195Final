@@ -1,10 +1,10 @@
 package interface_adapter.user_list;
 
+
+
 import entity.GeneralUser;
-import entity.User;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class UserListState {
