@@ -178,6 +178,7 @@ public class PSQLDataAccessObject implements SignupUserAccessInterface, UserList
 
 	@Override
 	public void save(GeneralUser user) {
+		System.out.println("User received by save(), it is"+ user);
 		String insertSQL = "INSERT INTO users (Username, Password, Email, Courses) VALUES (?, ?, ?, ?)";
 
 		try (Connection connection = DriverManager.getConnection(url, this.user, password);

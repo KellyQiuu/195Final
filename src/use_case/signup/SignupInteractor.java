@@ -57,7 +57,7 @@ public class SignupInteractor implements SignupInputBoundary {
         }
 
         GeneralUser newUser = GeneralUserFactory.createUser(username, password,"123", email, (ArrayList<String>) courses);
-
+        System.out.println("New user created by Signup Interactor, it is"+ newUser);
 
         signupDataAccess.save(newUser);
 
