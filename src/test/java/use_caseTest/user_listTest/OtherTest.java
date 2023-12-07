@@ -1,5 +1,6 @@
 package use_caseTest.user_listTest;
 
+import entity.GeneralUser;
 import entity.User;
 import interface_adapter.user_list.UserState;
 import interface_adapter.user_list.UserViewModel;
@@ -71,7 +72,7 @@ public class OtherTest {
         User user1 = new User(username1, password1, "id1", e1, courses1);
         User user2 = new User(username2, password2, "2", e2, courses2);
 
-        ArrayList<User> userList = new ArrayList<>();
+        ArrayList<GeneralUser> userList = new ArrayList<>();
         userList.add(user1);
         userList.add(user2);
 

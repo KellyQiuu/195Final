@@ -1,5 +1,6 @@
 package use_case.login;
 
+import entity.GeneralUser;
 import entity.User;
 
 import java.io.IOException;
@@ -19,11 +20,11 @@ public interface LoginUserAccessInterface {
      * Saves a new user to the database.
      * @param user newly created User object
      */
-    void save(User user);
+    void save(GeneralUser user);
 
-    User get(String username) throws IOException;
+    GeneralUser get(String username) throws IOException;
 
     String getPass(String username);
 
-    User get2(String username) throws IOException;
+    GeneralUser get2(String username) throws IOException;
 }

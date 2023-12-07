@@ -30,7 +30,9 @@ public class SelfProfileViewTest {
 			SelfProfileDataAccessInterface selfProfileDataAccessObject;
 
 			try {
+
 				selfProfileDataAccessObject = new PSQLDataAccessObject();
+
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Could not open user data file.");
 				throw new RuntimeException(e);

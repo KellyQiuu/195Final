@@ -1,6 +1,8 @@
 package use_case.signup;
 
-import entity.User;
+import entity.GeneralUser;
+
+import entity.GeneralUserFactory;
 import entity.UserFactory;
 
 import java.util.ArrayList;
@@ -54,7 +56,7 @@ public class SignupInteractor implements SignupInputBoundary {
             return;
         }
 
-        User newUser = UserFactory.createUser(username, password,"123", email, (ArrayList<String>) courses);
+        GeneralUser newUser = GeneralUserFactory.createUser(username, password,"123", email, (ArrayList<String>) courses);
 
 
         signupDataAccess.save(newUser);

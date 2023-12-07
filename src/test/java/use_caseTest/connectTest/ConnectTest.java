@@ -1,5 +1,14 @@
 package use_caseTest.connectTest;
 
+
+import entity.GeneralUser;
+import entity.User;
+import use_case.UserSecession;
+import use_case.connect.ConnectDataAccessInterface;
+import use_case.connect.ConnectInputData;
+import use_case.connect.ConnectInteractor;
+import use_case.connect.ConnectOutputBoundary;
+import use_case.connect.ConnectOutputData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
@@ -65,5 +74,7 @@ public class ConnectTest {
         Assert.assertTrue(connectViewModel.getConnectionStatus().contains("Failed to connect"));
     }
 
+
     // Additional tests can be added here to cover more scenarios.
+
 }

@@ -15,4 +15,5 @@ public interface GeneralUser {
 
     List<String> getCourses();
 
+    String getCoursesString();
 }

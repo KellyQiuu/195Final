@@ -4,6 +4,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.user_list.UserListState;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
+import use_case.user_list.UserSecessionInterface;
 import view.UserListViewModel;
 import use_case.UserSecession;
 

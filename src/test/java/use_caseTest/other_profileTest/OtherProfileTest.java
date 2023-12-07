@@ -1,6 +1,9 @@
 package use_caseTest.other_profileTest;
 
+import entity.GeneralUser;
+
 import data_access.PSQLDataAccessObject;
+
 import entity.User;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.other_profile.OtherProfileController;
@@ -36,7 +39,7 @@ public class OtherProfileTest {
         courses.add("STA400");
         courses.add("STA365");
 
-        User testUser = new PSQLDataAccessObject().getUser("testuser");
+        GeneralUser testUser = new PSQLDataAccessObject().getUser("testuser");
 
         assertNotNull(testUser);
         assertEquals("testuser",testUser.getName());
@@ -56,7 +59,9 @@ public class OtherProfileTest {
 
             OtherProfileInputData inputData = new OtherProfileInputData(testUser.getName());
 
+
             OtherProfileInputBoundary interactor = new OtherProfileInteractor(new PSQLDataAccessObject(),
+
                     presenter);
 
             OtherProfileController controller = new OtherProfileController(interactor);

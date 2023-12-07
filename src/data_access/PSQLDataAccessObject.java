@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.GeneralUser;
 import entity.User;
 import entity.UserFactory;
 import use_case.connect.ConnectDataAccessInterface;
@@ -136,7 +137,7 @@ public class PSQLDataAccessObject implements SignupUserAccessInterface, UserList
 	}
 
 	@Override
-	public User getUser(String username) {
+	public GeneralUser getUser(String username) {
 		try (Connection connection = DriverManager.getConnection(url, user, password)) {
 			System.out.println("Connected to PostgreSQL database!");
 
@@ -174,8 +175,9 @@ public class PSQLDataAccessObject implements SignupUserAccessInterface, UserList
 		return !existsByName(username);
 	}
 
+
 	@Override
-	public void save(User user) {
+	public void save(GeneralUser user) {
 		String insertSQL = "INSERT INTO users (Username, Password, Email, Courses) VALUES (?, ?, ?, ?)";
 
 		try (Connection connection = DriverManager.getConnection(url, this.user, password);
@@ -197,8 +199,8 @@ public class PSQLDataAccessObject implements SignupUserAccessInterface, UserList
 	}
 
 	@Override
-	public ArrayList<User> getAllUsers() {
-		ArrayList<User> users = new ArrayList<>();
+	public ArrayList<GeneralUser> getAllUsers() {
+		ArrayList<GeneralUser> users = new ArrayList<>();
 
 		try (Connection connection = DriverManager.getConnection(url, user, password)) {
 			System.out.println("Connected to PostgreSQL database!");
@@ -216,7 +218,7 @@ public class PSQLDataAccessObject implements SignupUserAccessInterface, UserList
 					ArrayList<String> courses = new ArrayList<>(
 							Arrays.asList(resultSet.getString("Courses").split("\\+")));
 
-					User user = new User(username, password, Integer.toString(id), email, courses);
+					GeneralUser user = new User(username, password, Integer.toString(id), email, courses);
 					users.add(user);
 				}
 			}
@@ -232,7 +234,7 @@ public class PSQLDataAccessObject implements SignupUserAccessInterface, UserList
 	}
 
 	@Override
-	public User get(String currentUserName) throws IOException {
+	public GeneralUser get(String currentUserName) throws IOException {
 		return getUser(currentUserName);
 	}
 }

@@ -19,7 +19,9 @@ public class Connect {
         // Create an instance of UserDataAccessObject
         ConnectViewModel connectViewModel = new ConnectViewModel();
         ConnectOutputBoundary dataAccess = new ConnectPresenter(connectViewModel); // Replace with your constructor if different
+
         ConnectDataAccessInterface dao = new PSQLDataAccessObject();
+
         // Create the ConnectInteractor instance
         ConnectInteractor connectInteractor = new ConnectInteractor(dataAccess,dao);
 

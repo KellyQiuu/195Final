@@ -1,5 +1,6 @@
 package use_case.other_profile;
 
+import entity.GeneralUser;
 import entity.User;
 
 /**
@@ -7,14 +8,14 @@ import entity.User;
  * This class holds the data necessary for presenting other users' profile information.
  */
 public class OtherProfileOutputData {
-	private final User otherUser;
+	private final GeneralUser otherUser;
 
 	/**
 	 * Constructs an OtherProfileOutputData instance with the specified user.
 	 *
 	 * @param user The user whose profile data is to be encapsulated. This is typically the profile of another user.
 	 */
-	public OtherProfileOutputData(User user) {
+	public OtherProfileOutputData(GeneralUser user) {
 		this.otherUser = user;
 	}
 
@@ -23,7 +24,7 @@ public class OtherProfileOutputData {
 	 *
 	 * @return The other User instance.
 	 */
-	public User getOtherUser() {
+	public GeneralUser getOtherUser() {
 		return this.otherUser;
 	}
 }

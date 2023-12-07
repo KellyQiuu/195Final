@@ -1,5 +1,6 @@
 package interface_adapter.other_profile;
 
+import entity.GeneralUser;
 import entity.User;
 import interface_adapter.ViewManagerModel;
 import use_case.other_profile.OtherProfileOutputBoundary;
@@ -33,7 +34,7 @@ public class OtherProfilePresenter implements OtherProfileOutputBoundary {
 	 */
 	@Override
 	public void prepareSuccessView(OtherProfileOutputData userdata) {
-		User otherUser = userdata.getOtherUser();
+		GeneralUser otherUser = userdata.getOtherUser();
 		OtherProfileState otherProfileState = otherProfileViewModel.getState();
 		otherProfileState.setUserName(otherUser.getName());
 		otherProfileState.setUserEmail(otherUser.getEmail());

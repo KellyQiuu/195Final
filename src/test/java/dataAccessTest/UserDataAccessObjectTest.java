@@ -1,6 +1,12 @@
 package dataAccessTest;
 
+
+import data_access.UserDataAccessObject;
+import entity.GeneralUser;
+import entity.GeneralUserFactory;
+
 import data_access.PSQLDataAccessObject;
+
 import entity.User;
 import entity.UserFactory;
 import org.junit.Before;
@@ -18,18 +24,20 @@ public class UserDataAccessObjectTest {
 
 	private PSQLDataAccessObject userDataAccessObject;
 	private final String testFilePath = "test_users.csv";
-	private User testUser;
+	private GeneralUser testUser;
 
 	@Before
 	public void setUp() throws IOException {
 		// Set up a test file path and create a user for testing
+
 		userDataAccessObject = new PSQLDataAccessObject() {
+
 		};
 
 		// Create a test user with some data
 		testUser = new User("testUser", "password", "test@example.com", "1", new ArrayList<String>());
 		// Assume UserFactory.createUser is a static method that creates a User object.
-		UserFactory.createUser("testUser", "password", "test@example.com", "1", new ArrayList<String>());
+		GeneralUserFactory.createUser("testUser", "password", "test@example.com", "1", new ArrayList<String>());
 
 		// Write the test user to the test file
 		List<String> lines = new ArrayList<>();
@@ -42,7 +50,7 @@ public class UserDataAccessObjectTest {
 		// TODO: Modify this method to be testable. [NOV.23]
 		//userDataAccessObject.loadUsersFromFile(testFilePath);
 		// Test that the user data was loaded correctly.
-		User loadedUser = userDataAccessObject.get("testUser");
+		GeneralUser loadedUser = userDataAccessObject.get("testUser");
 		assertNotNull(loadedUser);
 		assertEquals("testUser", loadedUser.getName());
 	}
@@ -65,7 +73,7 @@ public class UserDataAccessObjectTest {
 
 	@Test
 	public void testSave() throws IOException {
-		User newUser = new User("newUser", "newPass", "new@example.com", "2", new ArrayList<String>());
+		GeneralUser newUser = new User("newUser", "newPass", "new@example.com", "2", new ArrayList<String>());
 		userDataAccessObject.save(newUser);
 		assertTrue(userDataAccessObject.existsByName("newUser"));
 	}

@@ -43,21 +43,28 @@ public class UserListTesting {
         SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
         UserListDataAccessInterface userListDataAccessObject;
         try {
+
             userListDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
+
+
         SelfProfileDataAccessInterface selfProfileDataAccessObject = new PSQLDataAccessObject();
         PSQLDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
+
             otherProfileDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
@@ -80,7 +87,9 @@ public class UserListTesting {
         OtherProfileView otherProfileView = OtherProfileUseCaseFactory.create(viewManagerModel,
                 otherProfileViewModel,
                 otherProfileDataAccessObject,
+
                 connectViewModel, new PSQLDataAccessObject());
+
         otherProfileView.setVisible(false);
 
 

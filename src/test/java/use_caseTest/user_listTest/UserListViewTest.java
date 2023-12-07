@@ -3,6 +3,7 @@ package use_caseTest.user_listTest;
 import app.UsecaseFactory.OtherProfileUseCaseFactory;
 import app.UsecaseFactory.UserListUseCaseFactory;
 import data_access.PSQLDataAccessObject;
+import entity.GeneralUser;
 import entity.User;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.connect.ConnectViewModel;
@@ -54,7 +55,7 @@ public class UserListViewTest {
     @Test
     public void TestUserListState(){
         UserListState state = new UserListState();
-        state.setUsers(new ArrayList<User>());
+        state.setUsers(new ArrayList<GeneralUser>());
         state.setUsername("Kelly");
         state.getUsers();
 

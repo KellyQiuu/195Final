@@ -53,7 +53,9 @@ public class OtherProfileViewTest {
 			OtherProfileDataAccessInterface otherProfileDataAccessObject;
 
 			try {
+
 				otherProfileDataAccessObject = new PSQLDataAccessObject();
+
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Could not open user data file.");
 				throw new RuntimeException(e);
@@ -61,11 +63,13 @@ public class OtherProfileViewTest {
 			UserListViewModel userListViewModel = new UserListViewModel();
 			SelfProfileViewModel selfProfileViewModel = new SelfProfileViewModel();
 			ConnectViewModel connectViewModel = new ConnectViewModel();
+
 			ConnectDataAccessInterface connectDataAccessObject = new PSQLDataAccessObject();
 			SelfProfileDataAccessInterface selfProfileDataAccessObject = new PSQLDataAccessObject();
 			UserListDataAccessInterface userListDataAccessObject;
 			try {
 				userListDataAccessObject = new PSQLDataAccessObject();
+
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Could not open user data file.");
 				throw new RuntimeException(e);

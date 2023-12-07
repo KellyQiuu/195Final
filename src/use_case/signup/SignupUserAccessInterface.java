@@ -1,5 +1,6 @@
 package use_case.signup;
 
+import entity.GeneralUser;
 import entity.User;
 
 /**
@@ -23,5 +24,5 @@ public interface SignupUserAccessInterface {
      * Saves a new user to the database.
      * @param user newly created User object
      */
-    void save(User user);
+    void save(GeneralUser user);
 }

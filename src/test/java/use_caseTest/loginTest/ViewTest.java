@@ -50,6 +50,7 @@ public class ViewTest {
         PSQLDataAccessObject userDataAccessObject;
 
         try {
+
             userDataAccessObject = new PSQLDataAccessObject();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -58,6 +59,7 @@ public class ViewTest {
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
             otherProfileDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
@@ -73,7 +75,9 @@ public class ViewTest {
 
         UserListDataAccessInterface userListDataAccessObject;
         try {
+
             userListDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);

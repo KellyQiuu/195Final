@@ -1,6 +1,9 @@
 package use_caseTest.self_profileTest;
 
+
 import data_access.PSQLDataAccessObject;
+
+import entity.GeneralUser;
 import entity.User;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
@@ -38,7 +41,9 @@ public class SelfProfileTest {
 		courses.add("STA400");
 		courses.add("STA365");
 
-		User testUser = new PSQLDataAccessObject().getUser("testuser");
+
+		GeneralUser testUser = new PSQLDataAccessObject().getUser("testuser");
+
 
 		assertNotNull(testUser);
 		assertEquals("testuser",testUser.getName());
@@ -60,6 +65,7 @@ public class SelfProfileTest {
 			SelfProfileInputData inputData = new SelfProfileInputData(testUser.getName());
 
 			SelfProfileInputBoundary interactor = new SelfProfileInteractor(new PSQLDataAccessObject(),
+
 					presenter);
 
 			SelfProfileController controller = new SelfProfileController(interactor);

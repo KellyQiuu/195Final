@@ -61,20 +61,25 @@ public class Main {
 //        UserDataAccessObject userDataAccessObject;
         PSQLDataAccessObject userDataAccessObject;
         try {
+
             userDataAccessObject = new PSQLDataAccessObject();
 //            userDataAccessObject = new UserDataAccessObject(new UserFactory());
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         OtherProfileDataAccessInterface otherProfileDataAccessObject;
         try {
+
 //            otherProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
             otherProfileDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
         }
+
 
 //        SelfProfileDataAccessInterface selfProfileDataAccessObject = new UserDataAccessObject(new UserFactory());
         SelfProfileDataAccessInterface selfProfileDataAccessObject = new PSQLDataAccessObject();
@@ -82,6 +87,7 @@ public class Main {
         try {
 //            userListDataAccessObject = new UserDataAccessObject(new UserFactory());
             userListDataAccessObject = new PSQLDataAccessObject();
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
             throw new RuntimeException(e);
@@ -89,6 +95,7 @@ public class Main {
 
 //        ConnectDataAccessInterface connectDataAccessObject = new UserDataAccessObject(new UserFactory());
         ConnectDataAccessInterface connectDataAccessObject = new PSQLDataAccessObject();
+
 
         // Views Setup =================================================================================================
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,

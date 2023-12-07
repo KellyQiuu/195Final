@@ -3,6 +3,8 @@
 
 package data_access;
 
+import entity.GeneralUser;
+import entity.GeneralUserFactory;
 import entity.User;
 import entity.UserFactory;
 import use_case.connect.ConnectDataAccessInterface;
@@ -25,11 +27,12 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
     private final Map<String, String> usersDataMap;//should we refactor the name to "authentication"? since this is username+password
 
-    private final Map<String, User> usernameUserMap;
+    private final Map<String, GeneralUser> usernameUserMap;
 
-    private final ArrayList<User> allUsers = new ArrayList<>();
 
-    public UserDataAccessObject(UserFactory userFactory) throws IOException {
+    private final ArrayList<GeneralUser> allUsers = new ArrayList<>();
+
+    public UserDataAccessObject() throws IOException {
 
         System.out.println("UserDataAccess constructor reached");
         this.filePath = "src/data_access/users.csv";
@@ -62,7 +65,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
                 //TODO: Please edit the creation of this courses ArrayList after changing the File format, including
                 // email, courses info in the file.
                 //create user object from the information stored in the file, put them in the allUsers list.
-                User user = UserFactory.createUser(p[0],p[1],p[2],p[3],courses);
+                GeneralUser user = GeneralUserFactory.createUser(p[0],p[1],p[2],p[3],courses);
                 allUsers.add(user);
 
                 // Update the usernameUserMap with the new user
@@ -103,7 +106,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     }
 
     @Override
-    public User get(String username) throws IOException {
+    public GeneralUser get(String username) throws IOException {
         loadUsersFromFile();
         return usernameUserMap.get(username);
     }
@@ -114,7 +117,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
     }
 
     @Override
-    public User get2(String username) throws IOException {
+    public GeneralUser get2(String username) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filePath));
 
         for (String line : lines) {
@@ -122,7 +125,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
             if (parts.length >= 5 && parts[0].equals(username)) {
                 // Assuming the format is: username,password,email,id,courses
                 ArrayList<String> courses = new ArrayList<>(Arrays.asList(parts[4].split("\\+")));
-                return UserFactory.createUser(parts[0], parts[1], parts[2], parts[3], courses);
+                return GeneralUserFactory.createUser(parts[0], parts[1], parts[2], parts[3], courses);
             }
         }
         return null;
@@ -130,7 +133,7 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
 
     @Override
-    public void save(User user) {
+    public void save(GeneralUser user) {
         usersDataMap.put(user.getName(), user.getPassword());
 
         String userData = user + "\n";
@@ -145,18 +148,19 @@ public class UserDataAccessObject implements SignupUserAccessInterface, UserList
 
     // by Kelly: for UserList Interactor.
     @Override
-    public ArrayList<User> getAllUsers() {// by Kelly: for UserList Interactor.
+    public ArrayList<GeneralUser> getAllUsers() {// by Kelly: for UserList Interactor.
         System.out.println("Before: "+ allUsers.size());
         loadUsersFromFile();
         System.out.println("Load user from file: "+ allUsers.size());
+
         return allUsers;
     }
 
     // Get the current user object.
     @Override
-    public User getUser(String username) {
+    public GeneralUser getUser(String username) {
         if (usersDataMap.containsKey(username)) {
-            for (User i : getAllUsers()) {
+            for (GeneralUser i : getAllUsers()) {
                 if (Objects.equals(i.getName(), username)) {
                     return i;
                 }

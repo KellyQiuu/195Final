@@ -2,6 +2,7 @@ package dataAccessTest;
 
 import static org.junit.Assert.*;
 import data_access.PSQLDataAccessObject;
+import entity.GeneralUser;
 import entity.User;
 import entity.UserFactory;
 import org.junit.After;
@@ -27,7 +28,7 @@ public class DataAcessTest {
     @Test
     public void testSaveAndGetUser() throws IOException {
         userDataAccessObject.save(testUser);
-        User retrievedUser = userDataAccessObject.get("testUser");
+        GeneralUser retrievedUser = userDataAccessObject.get("testUser");
         assertNotNull(retrievedUser);
         assertEquals("testUser", retrievedUser.getName());
     }

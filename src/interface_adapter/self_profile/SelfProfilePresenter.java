@@ -1,5 +1,6 @@
 package interface_adapter.self_profile;
 
+import entity.GeneralUser;
 import entity.User;
 import interface_adapter.ViewManagerModel;
 import use_case.self_profile.SelfProfileOutputBoundary;
@@ -32,7 +33,7 @@ public class SelfProfilePresenter implements SelfProfileOutputBoundary {
 	 */
 	@Override
 	public void prepareSuccessView(SelfProfileOutputData userdata) {
-		User currentUser = userdata.getCurrentUser();
+		GeneralUser currentUser = userdata.getCurrentUser();
 		SelfProfileState selfProfileState = profileViewModel.getState();
 		selfProfileState.setUserName(currentUser.getName());
 		selfProfileState.setUserEmail(currentUser.getEmail());

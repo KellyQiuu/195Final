@@ -1,8 +1,9 @@
 package use_case.connect;
 
-import entity.User;
+import entity.GeneralUser;
+
 import java.io.IOException;
 
 public interface ConnectDataAccessInterface {
-    User get(String username) throws IOException;
+    GeneralUser get(String username) throws IOException;
 }
